@@ -1,14 +1,14 @@
 export const profile = {
   name: "Andry Ridwan",
   title: "Business Development & SME Growth Mentor",
-  location: "Makassar · South Sulawesi, Indonesia",
+  location: "Maros · South Sulawesi, Indonesia",
   email: "ndriyconnect@gmail.com",
   phone: "+62 823 4657 3790",
   intro:
     "I help SMEs, EdTech founders and government-backed programmes turn early traction into measurable, fundable businesses across Indonesia.",
   bio: [
-    "I have spent the last decade building and mentoring small businesses, EdTech startups and merchant communities — moving from CMO and CEO seats inside early-stage ventures to lead-mentor roles in national programmes run by the Ministry of Manpower, the Ministry of Communication and Informatics, and Bank Indonesia.",
-    "Whatever the brief — a single SME that needs a business plan, a cohort of first-time entrepreneurs, or a hundred-plus merchants to onboard in a week — my job is the same: write the playbook, sit beside the founder, and make the numbers move."
+    "I have spent the last decade building and mentoring small businesses, EdTech startups and merchant communities — moving from co-founder seats inside early-stage ventures like AIDU to lead-mentor roles in national programmes run by Kemenkop RI, the Ministry of Manpower and Kominfo. I have also sharpened that craft inside bootcamps at Bank Indonesia and NextDev Academy by Telkomsel.",
+    "Today I run Turikale Print — a local business in Maros, South Sulawesi, with a 5-star Google rating — while continuing to mentor SMEs, cohorts and founders across the region. Whatever the brief, my job is the same: write the playbook, sit beside the founder, and make the numbers move."
   ],
   stats: [
     { label: "Years building businesses", value: "10+" },
@@ -125,9 +125,11 @@ export const clients = [
   "Kemenkop RI",
   "Ministry of Manpower",
   "Kominfo",
-  "Bank Indonesia",
   "Google Gapura Digital",
   "Bukalapak",
   "GrabFood",
-  "AIDU EdTech"
+  "Bank Indonesia (Bootcamp)",
+  "NextDev Academy by Telkomsel (Bootcamp)",
+  "AIDU EdTech (Co-founded)",
+  "Turikale Print (Owner)"
 ];

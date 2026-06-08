@@ -69,6 +69,33 @@ class Category(BaseModel):
 # ------------- Seed data -------------
 CASE_STUDIES: List[dict] = [
     {
+        "id": "turikale-print",
+        "title": "Turikale Print — building a 5-star local business",
+        "subtitle": "Owner of a print and creative service business in Maros, South Sulawesi.",
+        "category": "market-expansion",
+        "year": "2019 — Present",
+        "cover_image": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1400&q=80",
+        "client": "Turikale Print · CV. OPU BARAKATI JAYA (findable on Google Maps)",
+        "summary": "Founded and still running a community-anchored print business with a 5-star Google rating and 3,715+ profile views.",
+        "challenge": "A small local print business in Maros faced the same problem most regional SMEs do: heavy reliance on walk-ins, no online presence, and no easy way for new customers to find or trust the service before visiting.",
+        "approach": [
+            "Stood up a Google Business Profile and kept it active with photos, hours and responsive replies.",
+            "Built repeat-customer loops around clear pricing, fast turnaround and friendly service so positive reviews stacked up.",
+            "Used the same digital-marketing playbook I teach SMEs in mentoring programmes — applied to my own shop."
+        ],
+        "outcomes": [
+            "Sustained 5-star average rating from real customers on Google Maps.",
+            "3,715+ profile views and steady inbound enquiries from the local area.",
+            "A working real-world case study I bring into every SME mentoring session."
+        ],
+        "metrics": [
+            {"label": "Rating", "value": "5\u2605"},
+            {"label": "Profile views", "value": "3,715+"},
+            {"label": "Since", "value": "2019"}
+        ],
+        "tags": ["Local business", "Owner", "Digital marketing"]
+    },
+    {
         "id": "koperasi-merah-putih",
         "title": "Turning village cooperatives into real businesses",
         "subtitle": "Embedded as Business Assistant for Indonesia's Koperasi Desa Merah Putih programme.",
@@ -124,16 +151,16 @@ CASE_STUDIES: List[dict] = [
     },
     {
         "id": "aidu-edtech",
-        "title": "AIDU — building Makassar's first exam-management EdTech",
-        "subtitle": "CEO of an early-stage EdTech that reached 714+ registered users.",
+        "title": "AIDU — co-founding Makassar's first exam-management EdTech",
+        "subtitle": "Co-founded and led an early-stage EdTech that reached 714+ registered users.",
         "category": "gtm-strategy",
         "year": "2018 — 2020",
         "cover_image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
         "client": "AIDU (EdTech startup, Makassar)",
-        "summary": "Founded and led the first dedicated exam-management EdTech in Makassar, growing it to 714+ users.",
-        "challenge": "Makassar had no localised EdTech focused on exam preparation and management. We had to build the product, the brand, and the trust of schools and parents from zero — in a market where most education spend still flowed offline.",
+        "summary": "Co-founded and led the first dedicated exam-management EdTech in Makassar, growing it to 714+ users.",
+        "challenge": "Makassar had no localised EdTech focused on exam preparation and management. Our small founding team had to build the product, the brand, and the trust of schools and parents from zero — in a market where most education spend still flowed offline.",
         "approach": [
-            "Defined the product wedge — exam management for tutoring centres — and shipped an MVP with the first three schools.",
+            "With the co-founding team, defined the product wedge — exam management for tutoring centres — and shipped an MVP with the first three schools.",
             "Built a founder-led sales motion across schools and tutoring centres, walking owners through the product personally.",
             "Codified onboarding so each new school could be live within a single week."
         ],
@@ -144,10 +171,10 @@ CASE_STUDIES: List[dict] = [
         ],
         "metrics": [
             {"label": "Registered users", "value": "714+"},
-            {"label": "Role", "value": "CEO"},
+            {"label": "Role", "value": "Co-founder & CEO"},
             {"label": "Region", "value": "Makassar"}
         ],
-        "tags": ["EdTech", "Founder-led sales", "Launch"]
+        "tags": ["EdTech", "Co-founded", "Founder-led sales"]
     },
     {
         "id": "gapura-digital",

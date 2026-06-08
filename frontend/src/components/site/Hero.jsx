@@ -88,8 +88,10 @@ export default function Hero() {
 
         <div className="mt-24 md:mt-32 border-t border-[#e5e1d8] pt-8">
           <div className="flex items-baseline justify-between flex-wrap gap-4">
-            <p className="overline">Selected Clients</p>
-            <p className="text-xs text-[#5e5b55] tracking-wide">8 of 200+ engagements</p>
+            <p className="overline">Programmes & Partners</p>
+            <p className="text-xs text-[#5e5b55] tracking-wide">
+              From government ministries to founding teams
+            </p>
           </div>
         </div>
       </div>

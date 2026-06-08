@@ -79,7 +79,7 @@ export default function Footer() {
           <span data-testid="footer-copyright">
             © {new Date().getFullYear()} Andry Ridwan. All rights reserved.
           </span>
-          <span>Portfolio · Makassar, Indonesia</span>
+          <span>Portfolio · Maros, South Sulawesi</span>
         </div>
       </div>
     </footer>

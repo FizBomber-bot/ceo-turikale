@@ -31,9 +31,9 @@ export default function Gallery() {
           <div className="md:col-span-7">
             <p className="overline mb-6">Selected Work</p>
             <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517]">
-              Six engagements from
+              Selected engagements
               <br />
-              the last decade.
+              from the last decade.
             </h2>
           </div>
           <div className="md:col-span-5 md:flex md:items-end">
