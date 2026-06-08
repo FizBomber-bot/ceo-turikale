@@ -1,0 +1,105 @@
+{
+  "theme": "Light",
+  "archetype": "5 (Luxury) - Adapted for Light Theme 'Editorial Minimalist'",
+  "colors": {
+    "background": "#FDFBF7",
+    "surface": "#FFFFFF",
+    "primary_text": "#141517",
+    "secondary_text": "#5E5B55",
+    "accent": "#7A2D2A",
+    "border": "#E5E1D8",
+    "hover_state": "#61221F",
+    "chip_bg": "#DCD6CC"
+  },
+  "typography": {
+    "heading_font": "Cormorant Garamond",
+    "body_font": "Manrope",
+    "rules": {
+      "h1": "text-5xl md:text-7xl lg:text-[5rem] font-light tracking-tighter leading-none text-[#141517]",
+      "h2": "text-3xl md:text-5xl font-light tracking-tight text-[#141517]",
+      "h3": "text-2xl font-medium tracking-tight",
+      "body": "text-base md:text-lg leading-relaxed text-[#5E5B55]",
+      "overline": "text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[#7A2D2A]"
+    }
+  },
+  "spacing_and_layout": {
+    "section_padding": "py-24 md:py-32 px-6 md:px-12 lg:px-24",
+    "grid_system": "grid-cols-1 md:grid-cols-12 gap-8 md:gap-12",
+    "hero_layout": "Asymmetric layout: Left side takes col-span-1 to col-span-7 with massive typography. Right side takes col-span-8 to col-span-12 with an offset portrait layered over an abstract texture.",
+    "bento_grid": "Used in About/Stats section. Mix of col-span-4 and col-span-8 to break symmetry.",
+    "gallery_layout": "Masonry-style or alternating image widths. Generous gap (gap-12 or gap-16) to let each case study breathe like an editorial spread."
+  },
+  "components": {
+    "navigation": "Sticky header (z-50) using glassmorphism: `backdrop-blur-xl bg-[#FDFBF7]/80`. Must have logo, 3-5 links, and primary CTA (Contact).",
+    "buttons": "Primary: Solid bg-[#7A2D2A] text-white with sharp or minimal rounded-sm corners. Secondary: bg-transparent border border-[#141517] text-[#141517]. All buttons must have smooth hover transitions (e.g., hover:bg-[#61221F] for primary).",
+    "filter_chips": "Minimalist underline style (border-b-2 border-transparent hover:border-[#7A2D2A]) or very thin bordered pills (border border-[#E5E1D8] text-sm). Not standard solid primary color chips.",
+    "cards": "Case Study Cards: No visible borders or shadows. Image dominant, title below with clean typography and subtle arrow icon appearing on hover. Sharp edges.",
+    "modal_dialog": "Case study details open in a Shadcn Dialog. Must be styled as a large, elegant side-sheet or full-screen overlay (bg-white/95 backdrop-blur-md) with generous padding (p-8 md:p-16) to feel like a high-end article.",
+    "contact_form": "Shadcn Form/Input components. Inputs should have `border-b` only (no full box border) or very clean, flat boxes (`bg-[#FDFBF7] border border-[#E5E1D8]`). Add success message toast upon submission."
+  },
+  "motion_and_interactions": {
+    "scrolling": "Smooth scrolling via Lenis is MANDATORY to give it a premium feel.",
+    "transitions": "Use Framer Motion for subtle fade-in-up entrance animations for text and images as they scroll into view.",
+    "hover_effects": "Images scale up slightly (scale-105) within a hidden overflow container. Links use an animated underline effect."
+  },
+  "visual_enhancers": {
+    "texture": "Apply a subtle SVG noise/grain overlay (opacity-5) across the entire body to kill digital flatness.",
+    "lines": "Use delicate 1px lines (`border-[#E5E1D8]`) to separate sections or grid items, emphasizing structure without weight."
+  },
+  "media_urls": {
+    "hero_texture": [
+      {
+        "url": "https://images.unsplash.com/photo-1498262257252-c282316270bc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxtaW5pbWFsaXN0JTIwYWJzdHJhY3QlMjBtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjB0ZXh0dXJlfGVufDB8fHx8MTc4MDg5NjYwOHww&ixlib=rb-4.1.0&q=85",
+        "category": "hero_background",
+        "description": "Minimalist abstract architecture texture (gray/white lines) - use as a subtle background behind the hero portrait or section."
+      }
+    ],
+    "portraits": [
+      {
+        "url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxjb25maWRlbnQlMjBwcm9mZXNzaW9uYWwlMjBjb3Jwb3JhdGUlMjBwb3J0cmFpdHxlbnwwfHx8fDE3ODA4OTY2MDh8MA&ixlib=rb-4.1.0&q=85",
+        "category": "profile_picture",
+        "description": "Confident male professional standing beside a wall. Use as the main portrait for Alex Morgan in the Hero or About section."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwyfHxjb25maWRlbnQlMjBwcm9mZXNzaW9uYWwlMjBjb3Jwb3JhdGUlMjBwb3J0cmFpdHxlbnwwfHx8fDE3ODA4OTY2MDh8MA&ixlib=rb-4.1.0&q=85",
+        "category": "testimonial_portrait",
+        "description": "Woman in gray jacket for testimonial section."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1676989880361-091e12efc056?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwzfHxjb25maWRlbnQlMjBwcm9mZXNzaW9uYWwlMjBjb3Jwb3JhdGUlMjBwb3J0cmFpdHxlbnwwfHx8fDE3ODA4OTY2MDh8MA&ixlib=rb-4.1.0&q=85",
+        "category": "testimonial_portrait",
+        "description": "Man with beard and glasses for testimonial section."
+      }
+    ],
+    "case_studies": [
+      {
+        "url": "https://images.pexels.com/photos/7698712/pexels-photo-7698712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "gallery_item",
+        "description": "Collaborative office meeting. Use for 'Strategic Partnerships' or 'Team Leadership' case study."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1758518727613-00192aed759b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
+        "category": "gallery_item",
+        "description": "Three professionals discussing documents. Use for 'Enterprise Sales' or 'Market Expansion' case study."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
+        "category": "gallery_item",
+        "description": "Two men using a computer. Use for 'GTM Strategy' case study."
+      }
+    ]
+  },
+  "accessibility_and_testing": {
+    "testing_attributes": "All interactive elements (buttons, links, form inputs, category chips) MUST have a `data-testid` attribute in kebab-case based on role (e.g., `data-testid='filter-gtm-chip'`, `data-testid='download-cv-button'`).",
+    "contrast": "Ensure the oxblood accent (#7A2D2A) has sufficient contrast against the alabaster background (#FDFBF7). Inputs and labels must maintain a 4.5:1 ratio."
+  },
+  "instructions_to_main_agent": [
+    "Strictly avoid default Inter, Roboto, or generic sans-serif fonts for headings. Implement Cormorant Garamond for all H1/H2/H3 tags, and Manrope for body text.",
+    "Do not use generic Shadcn Card components with their default borders and shadows. Use custom clean layouts (sharp edges, no shadow) for gallery items to maintain the editorial look.",
+    "Ensure the hero section uses an asymmetric layout and relies on negative space rather than filling every corner.",
+    "Implement Lenis for smooth scrolling in the main layout wrapper.",
+    "Case study details must open in a Shadcn Dialog that is heavily styled to look like an editorial sheet (large, clean, whitespace-heavy) rather than a standard system modal.",
+    "Form inputs should follow a minimalist, high-end approach (e.g., bottom borders only, or very subtle full borders without focus rings).",
+    "CV download button should use a placeholder route (e.g., '#' or '/resume.pdf') but function visually as a prominent CTA."
+  ]
+}
