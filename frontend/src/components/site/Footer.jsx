@@ -1,0 +1,87 @@
+import { profile } from "@/data/site";
+
+export default function Footer() {
+  return (
+    <footer
+      data-testid="site-footer"
+      className="px-6 md:px-12 lg:px-16 pt-16 pb-10 bg-[#141517] text-[#fdfbf7]/80"
+    >
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#fdfbf7]/15">
+          <div className="md:col-span-5">
+            <div className="font-serif text-3xl md:text-4xl text-[#fdfbf7]">
+              Alex Morgan<span className="text-[#c9a08e]">.</span>
+            </div>
+            <p className="mt-4 max-w-sm text-sm text-[#fdfbf7]/65 leading-relaxed">
+              {profile.title} — building partnerships, pipelines and playbooks
+              for category-defining B2B companies.
+            </p>
+          </div>
+          <div className="md:col-span-3">
+            <p className="overline mb-4" style={{ color: "#c9a08e" }}>
+              Contact
+            </p>
+            <a
+              data-testid="footer-email"
+              href={`mailto:${profile.email}`}
+              className="block text-[#fdfbf7] link-underline"
+            >
+              {profile.email}
+            </a>
+            <a
+              data-testid="footer-phone"
+              href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}
+              className="block text-sm mt-2 text-[#fdfbf7]/70 link-underline"
+            >
+              {profile.phone}
+            </a>
+          </div>
+          <div className="md:col-span-4">
+            <p className="overline mb-4" style={{ color: "#c9a08e" }}>
+              Elsewhere
+            </p>
+            <ul className="space-y-2 text-[#fdfbf7]/85">
+              <li>
+                <a
+                  data-testid="footer-linkedin"
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  data-testid="footer-x"
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline"
+                >
+                  Twitter / X
+                </a>
+              </li>
+              <li>
+                <a
+                  data-testid="footer-substack"
+                  href="#"
+                  className="link-underline"
+                >
+                  Field Notes (Substack)
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#fdfbf7]/55 tracking-wide">
+          <span data-testid="footer-copyright">
+            © {new Date().getFullYear()} Alex Morgan. All rights reserved.
+          </span>
+          <span>Editorial portfolio · Crafted in New York & London</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
