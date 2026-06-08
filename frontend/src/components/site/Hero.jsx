@@ -69,7 +69,7 @@ export default function Hero() {
               <img
                 src={profile.portrait}
                 alt="Andry Ridwan portrait"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 ring-1 ring-[#e5e1d8] pointer-events-none" />
             </div>

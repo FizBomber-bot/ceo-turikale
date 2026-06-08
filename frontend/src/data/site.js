@@ -17,7 +17,7 @@ export const profile = {
     { label: "EdTech users led", value: "714+" }
   ],
   portrait:
-    "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxjb25maWRlbnQlMjBwcm9mZXNzaW9uYWwlMjBjb3Jwb3JhdGUlMjBwb3J0cmFpdHxlbnwwfHx8fDE3ODA4OTY2MDh8MA&ixlib=rb-4.1.0&q=85",
+    "https://customer-assets.emergentagent.com/job_biz-dev-portfolio-3/artifacts/xxmlyyw0_Andry%20Ridwan.JPG",
   heroTexture:
     "https://images.unsplash.com/photo-1498262257252-c282316270bc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxtaW5pbWFsaXN0JTIwYWJzdHJhY3QlMjBtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjB0ZXh0dXJlfGVufDB8fHx8MTc4MDg5NjYwOHww&ixlib=rb-4.1.0&q=85"
 };
