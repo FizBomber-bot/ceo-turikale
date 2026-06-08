@@ -1,7 +1,7 @@
 import { ExternalLink, MapPin } from "lucide-react";
 
 const SITE = "https://turikaleprint.space";
-const MAPS = "https://www.google.com/maps/search/?api=1&query=Turikale+Print+Maros";
+const MAPS = "https://www.google.com/maps/place/Turikale+Print/data=!4m2!3m1!1s0x0:0xf34aa0af5aa85dd9?sa=X&ved=1t:2428&ictx=111";
 
 export default function NowRunning() {
   return (
