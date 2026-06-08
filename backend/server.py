@@ -119,6 +119,16 @@ async def get_current_user(request: Request) -> dict:
         raise HTTPException(status_code=401, detail="Invalid token")
 
 
+def get_client_ip(request: Request) -> str:
+    xff = request.headers.get("x-forwarded-for", "")
+    if xff:
+        return xff.split(",")[0].strip()
+    real_ip = request.headers.get("x-real-ip", "")
+    if real_ip:
+        return real_ip.strip()
+    return request.client.host if request.client else "unknown"
+
+
 # ---------------- Brute force ----------------
 LOCKOUT_AFTER = 5
 LOCKOUT_MINUTES = 15
@@ -544,17 +554,23 @@ async def on_shutdown():
 @api_router.post("/auth/login", response_model=UserOut)
 async def login(payload: LoginIn, request: Request, response: Response):
     email = payload.email.lower()
-    ip = request.client.host if request.client else "unknown"
-    identifier = f"{ip}:{email}"
+    ip = get_client_ip(request)
+    # Lockout by email primarily (defends against credential stuffing across rotating
+    # ingress IPs). Per-IP key kept as defense in depth.
+    identifier_email = f"email:{email}"
+    identifier_ip = f"ip:{ip}:{email}"
 
-    await check_lockout(identifier)
+    await check_lockout(identifier_email)
+    await check_lockout(identifier_ip)
 
     user = await db.users.find_one({"email": email})
     if not user or not verify_password(payload.password, user["password_hash"]):
-        await record_failure(identifier)
+        await record_failure(identifier_email)
+        await record_failure(identifier_ip)
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
-    await clear_failures(identifier)
+    await clear_failures(identifier_email)
+    await clear_failures(identifier_ip)
     access = create_access_token(user["id"], email)
     refresh = create_refresh_token(user["id"])
     set_auth_cookies(response, access, refresh)

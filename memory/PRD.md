@@ -1,49 +1,45 @@
-# Alex Morgan — Senior BD Portfolio
+# Andry Ridwan — Senior BD Portfolio
 
 ## Problem Statement
-Create a professional and interactive portfolio website for a senior Business Development specialist, complete with work gallery, category filters, a contact form and CV download button.
+Professional, interactive portfolio for a senior Business Development specialist with work gallery, category filters, contact form, CV download — plus a self-serve admin panel.
 
-## User Choices (locked at MVP)
-- Subject: placeholder "Alex Morgan, Senior BD Specialist"
-- User will supply own gallery projects later; rich BD case-study placeholders shipped meanwhile
-- Contact form stores submissions in MongoDB and shows success state (no email)
-- User will upload own CV PDF later (placeholder PDF currently served at `/api/cv`)
-- Design: editorial / luxury minimal — designer-led decisions
+## User Identity (live)
+- Name: Andry Ridwan
+- Title: Business Development & SME Growth Mentor
+- Location: Maros · South Sulawesi, Indonesia
+- Email: ndriyconnect@gmail.com  ·  Phone: +62 823 4657 3790
+- Instagram: @andry_ridwan  ·  Company: turikaleprint.space  ·  Google Maps: live
+- Programmes & partners (marquee): Kemenkop RI, Ministry of Manpower, Kominfo, Google Gapura Digital, Bukalapak, GrabFood, Bank Indonesia (Bootcamp), NextDev Academy by Telkomsel (Bootcamp), AIDU EdTech (Co-founded), Turikale Print (Owner)
 
 ## Architecture
-- **Backend**: FastAPI (`/api`) with MongoDB
-  - `GET /api/categories` — filter chips with counts
-  - `GET /api/case-studies?category=` — case studies (seed data in `server.py`)
-  - `GET /api/case-studies/{id}` — single case study
-  - `POST /api/contact` — store contact submission
-  - `GET /api/contact` — list submissions (admin/debug)
-  - `GET /api/cv` — placeholder PDF (replace `backend/static/cv_alex_morgan.pdf`)
-- **Frontend**: React + Tailwind + shadcn/ui + lenis smooth scroll
-  - Single-page portfolio at `/` with sections: Hero, ClientMarquee, About+Stats, Gallery+Filters, Services, Experience, Testimonials, Contact, Footer
-  - Case study details rendered in shadcn `Dialog`
-  - Sonner toaster for success/error feedback
-  - Cormorant Garamond serif + Manrope sans (Google Fonts)
-- Single-page Single-page; routes via react-router
+- **Backend** (FastAPI + MongoDB): MongoDB-backed profile + 7 case studies (seeded on startup, idempotent). Auth via JWT in httpOnly cookies (secure + samesite=none). Bcrypt password hashing. Brute-force lockout keyed on email (defends against rotating ingress IPs) with per-IP defense-in-depth.
+- **Frontend** (React + Tailwind + shadcn/ui + lenis + react-query): editorial luxury-minimal single-page portfolio at `/`. Admin SPA at `/admin/login` and `/admin` (protected).
+- **Uploads** mounted at `/api/uploads/*` (StaticFiles). CV PDF served at `/api/cv`.
 
-## Implemented (Dec 2025)
-- Editorial Hero with portrait + CV/View-Work CTAs and availability tag
-- Animated client marquee
-- About section with asymmetric stats grid
-- Work gallery with 6 seed case studies, masonry-style spans, hover scale
-- Category filter row (All / Strategic Partnerships / Enterprise Sales / Market Expansion / Client Success / GTM)
-- Rich case-study dialog (challenge, approach, outcomes, metrics, tags)
-- Services bento (4 capabilities) with hover dark-card transition
-- Experience timeline
-- Testimonials carousel with prev/next controls
-- Contact form with client + server validation, success state, sonner toast
-- CV download button (linked in nav, hero, contact, mobile menu)
-- Lenis smooth scrolling, grain overlay, animated underline links
-- React Query for data fetching
+## Public Endpoints (unchanged contract)
+GET /api/profile · /api/categories · /api/case-studies?category= · /api/case-studies/{id} · /api/cv · POST /api/contact
+
+## Admin Endpoints (cookie auth)
+POST /api/auth/login · POST /api/auth/logout · GET /api/auth/me · POST /api/auth/refresh
+GET/PUT /api/admin/profile
+GET/POST /api/admin/case-studies · PUT/DELETE /api/admin/case-studies/{id}
+POST /api/admin/upload/image (multipart) · POST /api/admin/upload/cv (multipart)
+GET/DELETE /api/admin/contacts[/{id}]
+
+## Admin Dashboard (`/admin`)
+Four tabs:
+1. Photos & CV — hero portrait upload, CV PDF upload, per-case-study cover image upload
+2. Profile — name/title/location/email/phone/socials/intro, bio paragraphs, headline stats
+3. Case Studies — list/edit/create/delete; full field editor (title, subtitle, summary, challenge, approach[], outcomes[], metrics[], tags[], year, client, category, sort_order, cover_image)
+4. Messages — inbound contact submissions with delete
+
+## Tests
+- /app/backend/tests/test_portfolio_api.py — 28 tests, 28/28 passing after lockout fix
+- /app/test_reports/iteration_2.json — full report
 
 ## Backlog / Next
-- P0: Replace placeholder CV at `backend/static/cv_alex_morgan.pdf` with real PDF
-- P0: Swap seed case studies for real client work (edit `CASE_STUDIES` in `backend/server.py`)
-- P1: Admin/auth + dashboard to manage case studies & view submissions
-- P1: Email notifications (Resend) on new contact submission
-- P2: Per-case-study deep-link URLs (`/work/:id`) + SEO meta tags
-- P2: Analytics / lead source tracking
+- P1: Email notifications on new contact submission (Resend / SendGrid)
+- P1: Admin editing for Services / Experience / Testimonials (still defaults in data/site.js)
+- P2: Per-case-study deep-link URLs (/work/:id) + SEO meta
+- P2: Password change UI for admin (currently env-driven)
+- P2: Analytics + lead-source capture on contact form
