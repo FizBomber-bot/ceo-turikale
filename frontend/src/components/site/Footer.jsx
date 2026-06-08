@@ -65,6 +65,17 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  data-testid="footer-instagram"
+                  href="https://instagram.com/andry_ridwan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline"
+                >
+                  Instagram — @andry_ridwan
+                </a>
+              </li>
+              <li>
+                <a
                   data-testid="footer-linkedin"
                   href="https://linkedin.com"
                   target="_blank"

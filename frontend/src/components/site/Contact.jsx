@@ -85,6 +85,15 @@ export default function Contact() {
               >
                 {profile.phone}
               </a>
+              <a
+                data-testid="contact-instagram-link"
+                href="https://instagram.com/andry_ridwan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block link-underline text-base"
+              >
+                Instagram — @andry_ridwan
+              </a>
               <div className="text-sm text-[#5e5b55] tracking-wide">
                 {profile.location}
               </div>
