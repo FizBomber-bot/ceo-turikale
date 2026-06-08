@@ -69,166 +69,166 @@ class Category(BaseModel):
 # ------------- Seed data -------------
 CASE_STUDIES: List[dict] = [
     {
-        "id": "northwind-channel",
-        "title": "Architecting a $42M global channel program",
-        "subtitle": "From cold partnerships to a thriving reseller ecosystem in 14 months.",
+        "id": "koperasi-merah-putih",
+        "title": "Turning village cooperatives into real businesses",
+        "subtitle": "Embedded as Business Assistant for Indonesia's Koperasi Desa Merah Putih programme.",
         "category": "strategic-partnerships",
-        "year": "2024",
+        "year": "2025",
         "cover_image": "https://images.pexels.com/photos/7698712/pexels-photo-7698712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "client": "Northwind Labs (Series C SaaS)",
-        "summary": "Designed and launched a tiered partner program that scaled indirect revenue from 6% to 31% of ARR.",
-        "challenge": "Northwind had strong direct sales but no repeatable partner motion. Competitors were locking up systems integrators and the board wanted indirect revenue to hit 30% of ARR within 18 months.",
+        "client": "Kemenkop RI · Koperasi Desa Merah Putih",
+        "summary": "Helping village cooperatives operate as functioning business units that stimulate the local economy.",
+        "challenge": "Many village cooperatives existed on paper but did not run as businesses — no bookkeeping, no clear products, no member-facing services. The national programme needed hands-on assistants who could turn that around at the village level.",
         "approach": [
-            "Mapped the partner landscape across NA and EMEA, ranking 240 targets by ICP fit and influence.",
-            "Co-authored a three-tier partner framework (Referral, Build, Strategic) with margin economics and a self-serve enablement portal.",
-            "Personally closed the first six lighthouse partners to prove the motion before scaling the team."
+            "Diagnosed each cooperative's revenue model, governance gaps and member needs in the first 30 days.",
+            "Co-built a simple monthly operating cadence — books, stock, member services, and a single growth experiment per quarter.",
+            "Connected cooperatives to local merchants and SMEs so the cooperative became a useful trading node, not just an administrative entity."
         ],
         "outcomes": [
-            "Indirect revenue grew from 6% to 31% of ARR in 14 months.",
-            "42 active partners contributing pipeline, with a 3.2x payback on partner CAC.",
-            "Two strategic OEM deals signed with category leaders."
+            "Cooperatives now run regular monthly closings and member reporting.",
+            "Local merchants routed through the cooperative for shared procurement.",
+            "Visible uplift in member participation and recurring transactions."
         ],
         "metrics": [
-            {"label": "Channel ARR", "value": "$42M"},
-            {"label": "Active partners", "value": "42"},
-            {"label": "Indirect ARR mix", "value": "31%"}
+            {"label": "Programme", "value": "Kemenkop RI"},
+            {"label": "Role", "value": "Business Assistant"},
+            {"label": "Cadence", "value": "Monthly ops"}
         ],
-        "tags": ["Partnerships", "GTM", "Channel"]
+        "tags": ["Cooperatives", "Government programme", "Local economy"]
     },
     {
-        "id": "lumen-enterprise",
-        "title": "Landing the largest deal in Lumen's history",
-        "subtitle": "A multi-thread, 11-month pursuit ending in a $17.4M, three-year contract.",
-        "category": "enterprise-sales",
-        "year": "2023",
-        "cover_image": "https://images.unsplash.com/photo-1758518727613-00192aed759b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
-        "client": "Fortune 100 financial services group",
-        "summary": "Navigated a complex 23-stakeholder buying committee to land Lumen's largest enterprise contract.",
-        "challenge": "The prospect had standardized on an incumbent for 9 years. Procurement was hostile, security review was a 400-question gauntlet, and budget for net-new tooling had been frozen twice.",
-        "approach": [
-            "Built a stakeholder map of 23 buyers; ran champion-building 1:1s with the four most influential.",
-            "Engineered a value hypothesis tied to a specific board-level KPI (cost-to-serve) and validated it in two paid pilots.",
-            "Negotiated a multi-year ramp deal that displaced 60% of the incumbent's footprint."
-        ],
-        "outcomes": [
-            "$17.4M TCV across three years, with $5.1M booked in year one.",
-            "Reference-grade case study unlocking three further F500 opportunities.",
-            "Procurement cycle compressed from a projected 14 months to 11."
-        ],
-        "metrics": [
-            {"label": "TCV", "value": "$17.4M"},
-            {"label": "Buying committee", "value": "23"},
-            {"label": "Cycle compression", "value": "−3 mo"}
-        ],
-        "tags": ["Enterprise", "Complex sales", "Negotiation"]
-    },
-    {
-        "id": "vector-emea",
-        "title": "Standing up EMEA from a single laptop",
-        "subtitle": "Built a four-country go-to-market motion that hit $12M ARR in year two.",
-        "category": "market-expansion",
-        "year": "2022",
-        "cover_image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
-        "client": "Vector Analytics (PE-backed)",
-        "summary": "Founded the EMEA region for Vector, hiring local AEs and signing the first 38 logos personally.",
-        "challenge": "Vector was a US-centric brand with zero EMEA presence, no localized pricing, and a product that needed GDPR rework before it could be sold in regulated industries.",
-        "approach": [
-            "Sequenced market entry: UK and Netherlands first as English-language beachheads, DACH and France in year two.",
-            "Partnered with product to ship a GDPR-compliant data residency option in 90 days.",
-            "Hired three founding AEs and an SDR pod, codifying a regional playbook within 5 months."
-        ],
-        "outcomes": [
-            "$12M ARR by month 24, 4 countries live.",
-            "38 logos personally sourced and closed during the founder-led sales phase.",
-            "EMEA contribution grew to 27% of total ARR by exit."
-        ],
-        "metrics": [
-            {"label": "ARR in 24 mo", "value": "$12M"},
-            {"label": "Countries live", "value": "4"},
-            {"label": "Logos signed", "value": "38"}
-        ],
-        "tags": ["Expansion", "Hiring", "Localization"]
-    },
-    {
-        "id": "forge-retention",
-        "title": "Turning churn into a retention engine",
-        "subtitle": "Rebuilt the post-sales motion and recovered $6.8M of at-risk ARR.",
+        "id": "tkmp-2024",
+        "title": "TKMP 2024 — funding & mentoring first-time founders",
+        "subtitle": "Cohort mentor for the Ministry of Manpower's Tenaga Kerja Mandiri Pemula programme.",
         "category": "client-success",
-        "year": "2023",
-        "cover_image": "https://images.unsplash.com/photo-1573164574511-73c773193279?auto=format&fit=crop&w=1400&q=80",
-        "client": "Forge SaaS (Series B)",
-        "summary": "Built a tiered customer success motion that lifted gross retention from 84% to 96%.",
-        "challenge": "Forge's growth was masking a churn problem. Net revenue retention had quietly dropped to 91% and three flagship accounts were threatening to leave at renewal.",
+        "year": "2024",
+        "cover_image": "https://images.unsplash.com/photo-1758518727613-00192aed759b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
+        "client": "Ministry of Manpower × Politeknik STIA LAN Bandung",
+        "summary": "Upgraded 20 SMEs to ready-to-fund status with a real business plan, legality and branding.",
+        "challenge": "The cohort was first-time entrepreneurs with funding allocated but no operating discipline. Without structured mentorship the grant risked becoming working capital rather than a launching pad.",
         "approach": [
-            "Segmented the book into Strategic, Growth and Long-Tail with distinct coverage models.",
-            "Personally led the recovery of the three flagship accounts via executive sponsorship and a structured value review.",
-            "Stood up a quarterly business review program with a shared scorecard between CS, product and finance."
+            "Ran weekly 1:1 mentoring across legality, bookkeeping, pricing and basic branding.",
+            "Worked through each founder's first sales channel — offline and digital — to validate willingness to pay.",
+            "Documented every business plan to a single, comparable template the ministry could audit."
         ],
         "outcomes": [
-            "Gross retention 84% → 96% in 9 months.",
-            "$6.8M ARR recovered from at-risk accounts.",
-            "NPS lifted from 28 to 51 across the strategic segment."
+            "20 SMEs upgraded to having a measurable business plan, legality, financial report and branding.",
+            "Founders graduated with a clear next-quarter revenue plan.",
+            "Mentorship model reused for subsequent programme cohorts."
         ],
         "metrics": [
-            {"label": "Gross retention", "value": "96%"},
-            {"label": "ARR recovered", "value": "$6.8M"},
-            {"label": "NPS lift", "value": "+23"}
+            {"label": "SMEs upgraded", "value": "20"},
+            {"label": "Programme", "value": "TKMP 2024"},
+            {"label": "Cadence", "value": "Weekly 1:1"}
         ],
-        "tags": ["Retention", "Customer Success", "Executive sponsorship"]
+        "tags": ["SME", "Mentoring", "Government programme"]
     },
     {
-        "id": "halo-gtm",
-        "title": "Launching a new product category, end-to-end",
-        "subtitle": "From positioning to first ten reference customers in under six months.",
+        "id": "aidu-edtech",
+        "title": "AIDU — building Makassar's first exam-management EdTech",
+        "subtitle": "CEO of an early-stage EdTech that reached 714+ registered users.",
         "category": "gtm-strategy",
-        "year": "2024",
-        "cover_image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1400&q=80",
-        "client": "Halo (Stealth Fintech)",
-        "summary": "Designed the GTM, pricing and first 10 design partners for a brand-new product category.",
-        "challenge": "Halo was about to launch a category-defining product with no comparable competitors, no pricing benchmark and a founding team that had never sold to CFOs.",
+        "year": "2018 — 2020",
+        "cover_image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
+        "client": "AIDU (EdTech startup, Makassar)",
+        "summary": "Founded and led the first dedicated exam-management EdTech in Makassar, growing it to 714+ users.",
+        "challenge": "Makassar had no localised EdTech focused on exam preparation and management. We had to build the product, the brand, and the trust of schools and parents from zero — in a market where most education spend still flowed offline.",
         "approach": [
-            "Ran 41 customer discovery interviews to triangulate a defensible category narrative and ICP.",
-            "Designed a tiered, outcome-based pricing model validated in willingness-to-pay tests.",
-            "Personally recruited 10 design partners across mid-market and enterprise."
+            "Defined the product wedge — exam management for tutoring centres — and shipped an MVP with the first three schools.",
+            "Built a founder-led sales motion across schools and tutoring centres, walking owners through the product personally.",
+            "Codified onboarding so each new school could be live within a single week."
         ],
         "outcomes": [
-            "$3.4M in committed ARR from design partners at launch.",
-            "Category name and positioning adopted by two top-tier industry analysts.",
-            "60% of design partners converted to full contracts within 90 days."
+            "714+ registered users on the platform.",
+            "First exam-management EdTech operating in the region.",
+            "Founder playbook reusable for future EdTech ventures."
         ],
         "metrics": [
-            {"label": "Design partners", "value": "10"},
-            {"label": "Launch ARR", "value": "$3.4M"},
-            {"label": "Conversion", "value": "60%"}
+            {"label": "Registered users", "value": "714+"},
+            {"label": "Role", "value": "CEO"},
+            {"label": "Region", "value": "Makassar"}
         ],
-        "tags": ["Launch", "Positioning", "Pricing"]
+        "tags": ["EdTech", "Founder-led sales", "Launch"]
     },
     {
-        "id": "atlas-alliance",
-        "title": "A category-defining alliance with a hyperscaler",
-        "subtitle": "Negotiated a co-sell and marketplace deal with a top-three cloud provider.",
-        "category": "strategic-partnerships",
-        "year": "2024",
-        "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80",
-        "client": "Atlas Data (growth-stage)",
-        "summary": "Closed a multi-year strategic alliance unlocking marketplace distribution and co-sell.",
-        "challenge": "Atlas needed enterprise distribution but lacked the brand to land it. The window to sign a strategic alliance with a hyperscaler was closing as competitors negotiated their own.",
+        "id": "gapura-digital",
+        "title": "Google Gapura Digital — bringing SMEs online",
+        "subtitle": "Local facilitator for Google's national SME digital-marketing programme.",
+        "category": "market-expansion",
+        "year": "2017",
+        "cover_image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1400&q=80",
+        "client": "Google Gapura Digital",
+        "summary": "Delivered hands-on training so traditional SMEs could grow through digital marketing.",
+        "challenge": "Most local SMEs were still entirely offline. Awareness of basic digital marketing — Google profiles, paid ads, social — was low and the gap to taking a first online order was wider than it looked.",
         "approach": [
-            "Built a joint value hypothesis with a specific revenue commit for both parties.",
-            "Engineered a 7-step executive sponsorship plan reaching the partner's GM in 5 weeks.",
-            "Negotiated a marketplace listing with private offer support and a co-sell incentive."
+            "Ran in-person workshops localised to the participants' industries and average ticket sizes.",
+            "Helped each SME stand up the basics: Google Business Profile, a working WhatsApp catalogue and one paid experiment.",
+            "Coached owners through their first 30 days of running the channel themselves."
         ],
         "outcomes": [
-            "Multi-year alliance with $9M of joint pipeline in quarter one.",
-            "Atlas listed as a launch partner at the hyperscaler's flagship conference.",
-            "Co-sell motion reduced average sales cycle by 28%."
+            "SMEs leaving the programme with a live digital storefront.",
+            "Owners equipped to keep running the channel without external help.",
+            "Local case studies used to recruit subsequent cohorts."
         ],
         "metrics": [
-            {"label": "Joint pipeline (Q1)", "value": "$9M"},
-            {"label": "Sales cycle", "value": "−28%"},
-            {"label": "Alliance length", "value": "3 yrs"}
+            {"label": "Role", "value": "Facilitator"},
+            {"label": "Format", "value": "Workshop + 1:1"},
+            {"label": "Outcome", "value": "Live storefronts"}
         ],
-        "tags": ["Alliance", "Marketplace", "Co-sell"]
+        "tags": ["Digital marketing", "SME", "Training"]
+    },
+    {
+        "id": "umkm-jualan-online",
+        "title": "121 merchants live in five days",
+        "subtitle": "Local volunteer coordinator for the national UMKM Jualan Online sprint.",
+        "category": "enterprise-sales",
+        "year": "2018",
+        "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80",
+        "client": "Kominfo × Bukalapak × GrabFood",
+        "summary": "Onboarded 121 local merchants onto Bukalapak and GrabFood inside a five-day programme window.",
+        "challenge": "The national sprint allocated only five days to add merchants in each region. Most local sellers had never used an e-commerce or food platform, and many didn't trust the process.",
+        "approach": [
+            "Recruited and trained a small local volunteer team before the sprint week opened.",
+            "Set up a kiosk-style onboarding flow so a merchant could be live within 20 minutes.",
+            "Followed up with merchants the week after to make sure their first orders actually flowed."
+        ],
+        "outcomes": [
+            "121 merchants registered and live across both platforms.",
+            "Onboarding flow replicated in subsequent regional waves.",
+            "Local community of sellers stayed active after the programme ended."
+        ],
+        "metrics": [
+            {"label": "Merchants live", "value": "121"},
+            {"label": "Sprint length", "value": "5 days"},
+            {"label": "Platforms", "value": "2"}
+        ],
+        "tags": ["Merchant onboarding", "Channel", "E-commerce"]
+    },
+    {
+        "id": "1000-startup-digital",
+        "title": "Gerakan Nasional 1000 Startup Digital",
+        "subtitle": "National mentor for Indonesia's flagship startup programme.",
+        "category": "strategic-partnerships",
+        "year": "2019 — 2020",
+        "cover_image": "https://images.unsplash.com/photo-1573164574511-73c773193279?auto=format&fit=crop&w=1400&q=80",
+        "client": "Ministry of Communication and Informatics",
+        "summary": "Mentored aspiring digital founders through validated business plans and first-customer milestones.",
+        "challenge": "Most participants arrived with ideas and energy but no operating template — no ICP, no validated problem and no realistic plan for the first ten customers.",
+        "approach": [
+            "Walked founders through a compressed discovery-to-MVP loop with a real customer in the room.",
+            "Coached on positioning, pricing and the first-customer playbook before any code was written.",
+            "Connected promising teams to the wider Indonesian startup ecosystem for follow-on support."
+        ],
+        "outcomes": [
+            "Cohorts shipped first MVPs with paying or committed customers.",
+            "Several teams continued into accelerator and grant pipelines after the programme.",
+            "Mentorship template reused across multiple regional sessions."
+        ],
+        "metrics": [
+            {"label": "Programme", "value": "1000 Startup"},
+            {"label": "Role", "value": "Mentor"},
+            {"label": "Scope", "value": "National"}
+        ],
+        "tags": ["Startup", "Mentoring", "National programme"]
     }
 ]
 

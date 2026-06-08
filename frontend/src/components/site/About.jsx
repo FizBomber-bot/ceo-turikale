@@ -12,7 +12,7 @@ export default function About() {
           <div className="md:col-span-4">
             <p className="overline mb-6">About</p>
             <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517]">
-              The commercial co-founder, on demand.
+              The mentor behind the businesses that grow.
             </h2>
           </div>
           <div className="md:col-span-7 md:col-start-6 space-y-6">

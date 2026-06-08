@@ -10,11 +10,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#fdfbf7]/15">
           <div className="md:col-span-5">
             <div className="font-serif text-3xl md:text-4xl text-[#fdfbf7]">
-              Alex Morgan<span className="text-[#c9a08e]">.</span>
+              Andry Ridwan<span className="text-[#c9a08e]">.</span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-[#fdfbf7]/65 leading-relaxed">
-              {profile.title} — building partnerships, pipelines and playbooks
-              for category-defining B2B companies.
+              {profile.title} — supporting SMEs, EdTech founders and
+              government-backed programmes across Indonesia.
             </p>
           </div>
           <div className="md:col-span-3">
@@ -77,9 +77,9 @@ export default function Footer() {
         </div>
         <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#fdfbf7]/55 tracking-wide">
           <span data-testid="footer-copyright">
-            © {new Date().getFullYear()} Alex Morgan. All rights reserved.
+            © {new Date().getFullYear()} Andry Ridwan. All rights reserved.
           </span>
-          <span>Editorial portfolio · Crafted in New York & London</span>
+          <span>Portfolio · Makassar, Indonesia</span>
         </div>
       </div>
     </footer>

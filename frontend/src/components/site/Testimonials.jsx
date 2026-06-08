@@ -20,7 +20,7 @@ export default function Testimonials() {
               Endorsements
             </p>
             <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
-              From founders, CROs and the board room.
+              From mentees, programme partners and the founders I&rsquo;ve worked beside.
             </h2>
           </div>
 

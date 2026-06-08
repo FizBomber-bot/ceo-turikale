@@ -65,9 +65,9 @@ export default function Contact() {
               next chapter.
             </h2>
             <p className="mt-8 text-base md:text-lg text-[#5e5b55] leading-relaxed max-w-md">
-              Open to senior BD, partnerships and GTM-leadership engagements
-              starting Q1 / Q2 2026. Drop a note and I&rsquo;ll reply within
-              48 hours.
+              Open to mentoring, programme facilitation and BD engagements with
+              SMEs, EdTech founders and government-backed initiatives. I reply
+              within 48 hours.
             </p>
 
             <div className="mt-12 space-y-4 text-[#141517]">

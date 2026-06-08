@@ -42,7 +42,7 @@ export default function Navbar() {
             onClick={() => go("hero")}
             className="font-serif text-xl md:text-2xl tracking-tight"
           >
-            Alex<span className="text-[#7a2d2a]">.</span>Morgan
+            Andry<span className="text-[#7a2d2a]">.</span>Ridwan
           </button>
 
           <nav className="hidden md:flex items-center gap-10">

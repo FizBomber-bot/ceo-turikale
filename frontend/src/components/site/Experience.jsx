@@ -12,16 +12,16 @@ export default function Experience() {
           <div className="md:col-span-5">
             <p className="overline mb-6">Experience</p>
             <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517]">
-              Twelve years.
+              From classroom
               <br />
-              Four chapters.
+              to cooperatives.
             </h2>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:flex md:items-end">
             <p className="text-base md:text-lg text-[#5e5b55] leading-relaxed">
-              From founder-led sales in EMEA to building a partnership engine
-              that hit a third of company ARR. Each role made the next one
-              possible.
+              Seventeen years across tutoring, EdTech leadership, SME
+              facilitation and national government programmes — every chapter
+              compounding into the next.
             </p>
           </div>
         </div>

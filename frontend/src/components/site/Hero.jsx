@@ -18,16 +18,16 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
           <div className="lg:col-span-7 reveal">
             <p className="overline mb-8" data-testid="hero-overline">
-              Portfolio — 2012 / 2025
+              Portfolio — 2008 / 2025
             </p>
             <h1
               className="font-serif font-light tracking-tighter leading-[0.95] text-[#141517]
                 text-[3.4rem] sm:text-7xl md:text-8xl lg:text-[8.5rem]"
               data-testid="hero-name"
             >
-              Alex
+              Andry
               <br />
-              Morgan<span className="text-[#7a2d2a]">.</span>
+              Ridwan<span className="text-[#7a2d2a]">.</span>
             </h1>
             <p
               className="mt-10 max-w-xl text-base md:text-lg text-[#5e5b55] leading-relaxed"
@@ -68,7 +68,7 @@ export default function Hero() {
             <div className="relative aspect-[4/5] overflow-hidden">
               <img
                 src={profile.portrait}
-                alt="Alex Morgan portrait"
+                alt="Andry Ridwan portrait"
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 ring-1 ring-[#e5e1d8] pointer-events-none" />
@@ -76,10 +76,10 @@ export default function Hero() {
             <div className="absolute -bottom-6 -left-6 hidden md:block">
               <div className="bg-[#fdfbf7] px-5 py-4 border border-[#e5e1d8]">
                 <div className="text-[10px] tracking-[0.22em] uppercase text-[#7a2d2a]">
-                  Available
+                  Open for
                 </div>
                 <div className="font-serif text-xl text-[#141517] mt-1">
-                  Q1 / Q2 2026
+                  Mentoring · BD · Programmes
                 </div>
               </div>
             </div>
