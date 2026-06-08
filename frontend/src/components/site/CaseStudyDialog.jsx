@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { X } from "lucide-react";
+import { assetUrl } from "@/lib/api";
 
 export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
   if (!caseStudy) return null;
@@ -14,7 +15,7 @@ export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
         <div className="relative">
           <div className="aspect-[16/8] w-full overflow-hidden bg-[#dcd6cc]">
             <img
-              src={caseStudy.cover_image}
+              src={assetUrl(caseStudy.cover_image)}
               alt={caseStudy.title}
               className="w-full h-full object-cover"
             />

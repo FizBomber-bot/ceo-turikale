@@ -1,8 +1,9 @@
 import { ArrowDownRight, Download } from "lucide-react";
-import { profile } from "@/data/site";
-import { cvDownloadUrl } from "@/lib/api";
+import { cvDownloadUrl, assetUrl } from "@/lib/api";
+import { useProfile } from "@/hooks/useProfile";
 
 export default function Hero() {
+  const { profile } = useProfile();
   const go = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -25,9 +26,12 @@ export default function Hero() {
                 text-[3.4rem] sm:text-7xl md:text-8xl lg:text-[8.5rem]"
               data-testid="hero-name"
             >
-              Andry
-              <br />
-              Ridwan<span className="text-[#7a2d2a]">.</span>
+              {(profile.name || "").split(" ").map((w, i, arr) => (
+                <span key={i}>
+                  {w}
+                  {i < arr.length - 1 ? <br /> : <span className="text-[#7a2d2a]">.</span>}
+                </span>
+              ))}
             </h1>
             <p
               className="mt-10 max-w-xl text-base md:text-lg text-[#5e5b55] leading-relaxed"
@@ -67,8 +71,8 @@ export default function Hero() {
           <div className="lg:col-span-5 relative reveal" style={{ animationDelay: "180ms" }}>
             <div className="relative aspect-[4/5] overflow-hidden">
               <img
-                src={profile.portrait}
-                alt="Andry Ridwan portrait"
+                src={assetUrl(profile.portrait)}
+                alt={`${profile.name} portrait`}
                 className="absolute inset-0 w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 ring-1 ring-[#e5e1d8] pointer-events-none" />

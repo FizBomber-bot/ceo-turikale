@@ -2,11 +2,12 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowUpRight, Loader2 } from "lucide-react";
 import { submitContact, cvDownloadUrl } from "@/lib/api";
-import { profile } from "@/data/site";
+import { useProfile } from "@/hooks/useProfile";
 
 const initial = { name: "", email: "", company: "", subject: "", message: "" };
 
 export default function Contact() {
+  const { profile } = useProfile();
   const [data, setData] = useState(initial);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -87,7 +88,7 @@ export default function Contact() {
               </a>
               <a
                 data-testid="contact-instagram-link"
-                href="https://instagram.com/andry_ridwan"
+                href={profile.instagram || "https://instagram.com/andry_ridwan"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block link-underline text-base"

@@ -1,0 +1,42 @@
+{
+  "summary": "End-to-end testing of Andry Ridwan portfolio + new admin panel. Backend pytest: 27/28 passed (96%). Public site renders Andry's portrait, 7 case studies, 6 categories with expected counts [7,2,1,2,1,1], Turikale Print NowRunning strip, CV download. Admin: login works with seeded creds, sets httpOnly access/refresh cookies, /auth/me works, logout clears, protected /admin routes 401 without cookie, profile PUT reflects in public GET, case-study CRUD works end-to-end, image upload (JPG OK, text rejected 415, >8MB rejected 413), CV PDF upload replaces and is served via /api/cv, non-PDF rejected 415, admin contacts list requires auth. Frontend admin UI: /admin redirects to /admin/login when not logged in, wrong creds shows error, valid creds login redirects to /admin, all 4 tabs visible (Photos & CV with portrait/CV/7 covers, Profile with save button, Case Studies with 7 picks + create button, Messages with submissions and delete). Sign Out clears cookies and protected route redirect works again. ONE REAL BUG FOUND: brute-force lockout never triggers in Kubernetes deployment because identifier uses request.client.host which rotates across ingress IPs (10.66.2.66 and 10.66.6.142 observed). 6 failed attempts only stored as 4 + 2 in two separate buckets — lockout effectively bypassed.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "/api/auth/login", "issue": "Brute-force lockout bypassed in production. identifier = f'{ip}:{email}' uses request.client.host, which is the upstream ingress IP (e.g. 10.66.2.66 vs 10.66.6.142 — multiple pods). Failed attempts split across IP buckets so the 5-attempt threshold per (ip,email) is never hit. Fix: read X-Forwarded-For (first hop) for the real client IP, or key the lockout on email only (with a small safety cap on per-IP attempts as defense in depth). Confirmed by inspecting login_attempts collection after 6 sequential failures with same email — saw two rows with different IPs and attempts=4 and attempts=2.", "priority": "HIGH"}
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_portfolio_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Fix brute-force lockout to use X-Forwarded-For (or email-only key). Current implementation is bypassable behind the Kubernetes ingress where request.client.host rotates between pod IPs."
+  ],
+  "critical_code_review_comments": [
+    "server.py lockout key uses request.client.host which behind a load-balancer/ingress is the upstream IP, not the originating client. Use X-Forwarded-For or just email for the rate-limit key.",
+    "set_auth_cookies uses secure=True samesite=none — correct for same preview domain over HTTPS.",
+    "Admin seeding is idempotent: existing admin is rehashed when ADMIN_PASSWORD changes — matches playbook.",
+    "All Mongo queries already exclude _id ({'_id': 0}). Good.",
+    "Image upload reads entire body before size check — for very large uploads this is memory-hungry. Acceptable given 8 MB cap, but consider streaming with size budget for safety.",
+    "POST /api/admin/upload/cv accepts content_type 'application/octet-stream' or .pdf extension — reasonable fallback.",
+    "Profile model is stored with _id='site' as a singleton — clean choice; public GET strips _id.",
+    "CV is saved as /app/backend/static/cv_alex_morgan.pdf (legacy filename) — works but the filename references a previous identity. Cosmetic only; consider renaming to cv.pdf.",
+    "FRONTEND_URL is single-origin; CORS adds localhost only when not localhost already. Cookies will not be sent from a different preview origin — fine."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_portfolio_api.py (expanded to cover auth + admin + uploads)"
+  ],
+  "success_rate": {"backend": "96% (27/28 passed; 1 expected-fail exposing real lockout bug)", "frontend": "100%"},
+  "test_credentials": "Admin: ndriyconnect@gmail.com / TurikalePrint2026!  (also seeded in /app/memory/test_credentials.md)",
+  "seed_data_creation": "Test contact submissions and a temporary case study were created via pytest; the case study and contacts created during the run were cleaned up. CV was replaced during upload test and restored to the previous PDF content.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend test file at /app/backend/tests/test_portfolio_api.py covers all current endpoints including auth, admin CRUD, uploads, lockout. Public URL: https://biz-dev-portfolio-3.preview.emergentagent.com. Admin testids: admin-login-page, admin-login-form, login-email, login-password, login-submit, login-error, admin-dashboard, admin-tab-{photos|profile|case-studies|messages}, admin-logout, upload-portrait, upload-cv, cv-preview-link, cover-card-{id}, profile-save, case-create, case-pick-{id}. The brute-force lockout test will keep failing until the X-Forwarded-For fix lands. Until then, the admin login endpoint is vulnerable to credential stuffing because each unique upstream IP gets its own 5-attempt budget.",
+  "rca of the issue": "Reproduction: from a single client, POST /api/auth/login 6 times with a fake email and wrong password. Expected: 6th (or later) request returns 429. Actual: all 6 return 401. Inspecting db.login_attempts shows two rows keyed by 10.66.2.66:fake_email and 10.66.6.142:fake_email with attempts 2 and 4 — the cluster ingress alternates between pods so request.client.host is the pod-facing IP. Fix: replace `ip = request.client.host if request.client else 'unknown'` with parsing of request.headers.get('x-forwarded-for','').split(',')[0].strip() (fallback to request.client.host), or drop IP from the key entirely and use email."
+}

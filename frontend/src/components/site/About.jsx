@@ -1,6 +1,7 @@
-import { profile } from "@/data/site";
+import { useProfile } from "@/hooks/useProfile";
 
 export default function About() {
+  const { profile } = useProfile();
   return (
     <section
       id="about"
@@ -16,7 +17,7 @@ export default function About() {
             </h2>
           </div>
           <div className="md:col-span-7 md:col-start-6 space-y-6">
-            {profile.bio.map((p, i) => (
+            {(profile.bio || []).map((p, i) => (
               <p key={i} className="text-base md:text-lg text-[#5e5b55] leading-relaxed">
                 {p}
               </p>
@@ -30,18 +31,20 @@ export default function About() {
 
         {/* Stats / bento */}
         <div className="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-12 gap-px bg-[#e5e1d8] border border-[#e5e1d8]">
-          {profile.stats.map((s, i) => (
+          {(profile.stats || []).map((s, i, arr) => (
             <div
-              key={s.label}
+              key={`${s.label}-${i}`}
               data-testid={`stat-${i}`}
               className={`bg-[#fdfbf7] p-8 md:p-12 ${
-                i === 0
-                  ? "md:col-span-5"
-                  : i === 1
-                  ? "md:col-span-3"
-                  : i === 2
-                  ? "md:col-span-4"
-                  : "md:col-span-12"
+                arr.length === 4
+                  ? i === 0
+                    ? "md:col-span-5"
+                    : i === 1
+                    ? "md:col-span-3"
+                    : i === 2
+                    ? "md:col-span-4"
+                    : "md:col-span-12"
+                  : `md:col-span-${Math.max(3, Math.floor(12 / arr.length))}`
               }`}
             >
               <div className="font-serif font-light text-5xl md:text-6xl lg:text-7xl text-[#141517] tracking-tighter">

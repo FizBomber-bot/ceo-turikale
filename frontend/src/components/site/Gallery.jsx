@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRight } from "lucide-react";
-import { fetchCategories, fetchCaseStudies } from "@/lib/api";
+import { fetchCategories, fetchCaseStudies, assetUrl } from "@/lib/api";
 import CaseStudyDialog from "./CaseStudyDialog";
 
 export default function Gallery() {
@@ -118,7 +118,7 @@ export default function Gallery() {
                     className={`relative w-full ${heights[i % heights.length]} overflow-hidden bg-[#dcd6cc]`}
                   >
                     <img
-                      src={cs.cover_image}
+                      src={assetUrl(cs.cover_image)}
                       alt={cs.title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                     />

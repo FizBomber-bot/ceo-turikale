@@ -1,6 +1,7 @@
-import { profile } from "@/data/site";
+import { useProfile } from "@/hooks/useProfile";
 
 export default function Footer() {
+  const { profile } = useProfile();
   return (
     <footer
       data-testid="site-footer"
@@ -10,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#fdfbf7]/15">
           <div className="md:col-span-5">
             <div className="font-serif text-3xl md:text-4xl text-[#fdfbf7]">
-              Andry Ridwan<span className="text-[#c9a08e]">.</span>
+              {profile.name}<span className="text-[#c9a08e]">.</span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-[#fdfbf7]/65 leading-relaxed">
               {profile.title} — supporting SMEs, EdTech founders and
@@ -44,7 +45,7 @@ export default function Footer() {
               <li>
                 <a
                   data-testid="footer-turikale-site"
-                  href="https://turikaleprint.space"
+                  href={profile.company_site || "https://turikaleprint.space"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link-underline"
@@ -55,7 +56,7 @@ export default function Footer() {
               <li>
                 <a
                   data-testid="footer-turikale-maps"
-                  href="https://www.google.com/maps/place/Turikale+Print/data=!4m2!3m1!1s0x0:0xf34aa0af5aa85dd9?sa=X&ved=1t:2428&ictx=111"
+                  href={profile.company_maps || "https://www.google.com/maps/place/Turikale+Print/data=!4m2!3m1!1s0x0:0xf34aa0af5aa85dd9?sa=X&ved=1t:2428&ictx=111"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link-underline"
@@ -66,7 +67,7 @@ export default function Footer() {
               <li>
                 <a
                   data-testid="footer-instagram"
-                  href="https://instagram.com/andry_ridwan"
+                  href={profile.instagram || "https://instagram.com/andry_ridwan"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link-underline"
@@ -76,13 +77,11 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  data-testid="footer-linkedin"
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  data-testid="footer-admin"
+                  href="/admin"
                   className="link-underline"
                 >
-                  LinkedIn
+                  Admin sign in
                 </a>
               </li>
             </ul>
@@ -90,9 +89,9 @@ export default function Footer() {
         </div>
         <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#fdfbf7]/55 tracking-wide">
           <span data-testid="footer-copyright">
-            © {new Date().getFullYear()} Andry Ridwan. All rights reserved.
+            © {new Date().getFullYear()} {profile.name}. All rights reserved.
           </span>
-          <span>Portfolio · Maros, South Sulawesi</span>
+          <span>Portfolio · {profile.location}</span>
         </div>
       </div>
     </footer>
