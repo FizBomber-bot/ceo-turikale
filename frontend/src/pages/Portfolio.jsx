@@ -1,5 +1,6 @@
 import Navbar from "@/components/site/Navbar";
 import Hero from "@/components/site/Hero";
+import NowRunning from "@/components/site/NowRunning";
 import ClientMarquee from "@/components/site/ClientMarquee";
 import About from "@/components/site/About";
 import Gallery from "@/components/site/Gallery";
@@ -14,6 +15,7 @@ export default function Portfolio() {
     <main data-testid="portfolio-page" className="bg-[#fdfbf7] text-[#141517] min-h-screen">
       <Navbar />
       <Hero />
+      <NowRunning />
       <ClientMarquee />
       <About />
       <Gallery />

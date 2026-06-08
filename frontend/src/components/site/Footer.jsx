@@ -43,6 +43,28 @@ export default function Footer() {
             <ul className="space-y-2 text-[#fdfbf7]/85">
               <li>
                 <a
+                  data-testid="footer-turikale-site"
+                  href="https://turikaleprint.space"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline"
+                >
+                  Turikale Print — turikaleprint.space
+                </a>
+              </li>
+              <li>
+                <a
+                  data-testid="footer-turikale-maps"
+                  href="https://www.google.com/maps/search/?api=1&query=Turikale+Print+Maros"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline"
+                >
+                  Turikale Print on Google Maps
+                </a>
+              </li>
+              <li>
+                <a
                   data-testid="footer-linkedin"
                   href="https://linkedin.com"
                   target="_blank"
@@ -50,26 +72,6 @@ export default function Footer() {
                   className="link-underline"
                 >
                   LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  data-testid="footer-x"
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-underline"
-                >
-                  Twitter / X
-                </a>
-              </li>
-              <li>
-                <a
-                  data-testid="footer-substack"
-                  href="#"
-                  className="link-underline"
-                >
-                  Field Notes (Substack)
                 </a>
               </li>
             </ul>
