@@ -1,13 +1,21 @@
 import { ArrowDownRight, Download } from "lucide-react";
 import { cvDownloadUrl, assetUrl } from "@/lib/api";
 import { useProfile } from "@/hooks/useProfile";
+import { useLang } from "@/context/LanguageContext";
+import { pickLang } from "@/i18n/strings";
 
 export default function Hero() {
   const { profile } = useProfile();
+  const { t, lang } = useLang();
+
   const go = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
+
+  const title = pickLang(profile.title, profile.title_id, lang);
+  const location = pickLang(profile.location, profile.location_id, lang);
+  const intro = pickLang(profile.intro, profile.intro_id, lang);
 
   return (
     <section
@@ -19,7 +27,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
           <div className="lg:col-span-7 reveal">
             <p className="overline mb-8" data-testid="hero-overline">
-              Portfolio — 2008 / 2025
+              {t("hero.overline")}
             </p>
             <h1
               className="font-serif font-light tracking-tighter leading-[0.95] text-[#141517]
@@ -37,7 +45,7 @@ export default function Hero() {
               className="mt-10 max-w-xl text-base md:text-lg text-[#5e5b55] leading-relaxed"
               data-testid="hero-intro"
             >
-              {profile.intro}
+              {intro}
             </p>
 
             <div className="mt-12 flex flex-wrap items-center gap-4">
@@ -48,7 +56,7 @@ export default function Hero() {
                 data-testid="hero-download-cv"
                 className="btn-primary inline-flex items-center gap-3 px-6 py-3.5 text-xs tracking-[0.2em] uppercase"
               >
-                Download CV
+                {t("nav.downloadCv")}
                 <Download size={14} />
               </a>
               <button
@@ -56,15 +64,15 @@ export default function Hero() {
                 data-testid="hero-view-work"
                 className="btn-outline inline-flex items-center gap-3 px-6 py-3.5 text-xs tracking-[0.2em] uppercase"
               >
-                View Work
+                {t("hero.viewWork")}
                 <ArrowDownRight size={14} />
               </button>
             </div>
 
             <div className="mt-16 flex items-center gap-6 text-xs tracking-[0.18em] uppercase text-[#5e5b55]">
-              <span>{profile.location}</span>
+              <span>{location}</span>
               <span className="h-px w-10 bg-[#e5e1d8]" />
-              <span>{profile.title}</span>
+              <span>{title}</span>
             </div>
           </div>
 
@@ -80,10 +88,10 @@ export default function Hero() {
             <div className="absolute -bottom-6 -left-6 hidden md:block">
               <div className="bg-[#fdfbf7] px-5 py-4 border border-[#e5e1d8]">
                 <div className="text-[10px] tracking-[0.22em] uppercase text-[#7a2d2a]">
-                  Open for
+                  {t("hero.availableFor")}
                 </div>
                 <div className="font-serif text-xl text-[#141517] mt-1">
-                  Mentoring · BD · Programmes
+                  {t("hero.availableValue")}
                 </div>
               </div>
             </div>
@@ -92,9 +100,9 @@ export default function Hero() {
 
         <div className="mt-24 md:mt-32 border-t border-[#e5e1d8] pt-8">
           <div className="flex items-baseline justify-between flex-wrap gap-4">
-            <p className="overline">Programmes & Partners</p>
+            <p className="overline">{t("hero.partners.overline")}</p>
             <p className="text-xs text-[#5e5b55] tracking-wide">
-              From government ministries to founding teams
+              {t("hero.partners.caption")}
             </p>
           </div>
         </div>

@@ -1,0 +1,36 @@
+{
+  "summary": "Iteration 3 — verified EN/ID bilingual feature. Backend pytest: 28/28 (regression) + 11/11 (new bilingual) = 39/39 PASS. Backend bilingual fields confirmed on GET /api/profile (title_id, location_id, intro_id, bio_id[2], stats[*].label_id) and on every seeded case study (turikale-print, koperasi-merah-putih, tkmp-2024, aidu-edtech, gapura-digital, umkm-jualan-online, 1000-startup-digital) with title_id/subtitle_id/summary_id/challenge_id/approach_id/outcomes_id populated. Admin PUT /api/admin/profile and /api/admin/case-studies/{id} round-trip both EN and ID fields with no data loss. Frontend: lang toggle (data-testid 'nav-lang-toggle') visible, switching to ID changes nav to Karya/Tentang/Pengalaman/Kontak, button to 'Unduh CV' and 'Hubungi saya', filter chips to Semua Karya/Kemitraan Strategis/Penjualan Enterprise/Ekspansi Pasar/Kesuksesan Klien/Strategi GTM, about title to 'Mentor di balik bisnis-bisnis yang bertumbuh.', stat labels to Bahasa, footer to Kontak/Lainnya/Masuk Admin/'Hak cipta dilindungi.', contact form labels to Nama Anda/Email/Perusahaan-Organisasi/Subjek/'Apa yang bisa saya bantu?' with submit 'Kirim Pesan'. Case dialog headings translate to Tantangan/Pendekatan/Hasil and Bahasa body content renders for turikale-print. localStorage 'ar.lang' is set ('id'/'en') and persists across reload. Admin Profile tab exposes Title (EN)+Title (ID — Bahasa), Location EN/ID, Intro EN/ID, Bio paragraphs split EN/ID with add buttons, and per-stat Value + Label (EN) + Label (ID). Admin Case Studies tab shows EN+ID columns for Title/Subtitle/Summary/Challenge and side-by-side EN/ID Approach + Outcomes lists; case-save-{id} button present.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_portfolio_api.py",
+    "/app/backend/tests/test_bilingual.py",
+    "/app/test_reports/pytest/iter3_existing.xml",
+    "/app/test_reports/pytest/iter3_bilingual.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Iteration 2 brute-force lockout bug is now resolved — 6 consecutive failed logins from the same client correctly returns 429 (test_brute_force_lockout passes).",
+    "Profile and CaseStudy *_id fields fall back to English when missing — verified via the public API and via the public dialog rendering; no broken UI even if backfill missed a row.",
+    "Admin payloads serialize cleanly via PUT — both EN and ID lists (bio, approach, outcomes) preserved on round-trip; metrics_id parallel array preserved.",
+    "Bilingual labels marked 'Title (EN)', 'Title (ID — Bahasa)' etc. are clear and consistent across Profile + Case Study editors.",
+    "No mongo _id leaked in responses; all bilingual fields return as plain JSON.",
+    "localStorage key 'ar.lang' matches spec; reload preserves selection."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_bilingual.py (new)"
+  ],
+  "success_rate": {"backend": "100% (39/39)", "frontend": "100% (all bilingual flows verified)"},
+  "test_credentials": "Admin: ndriyconnect@gmail.com / TurikalePrint2026!",
+  "seed_data_creation": "Temporary profile mutation 'title_id += \" (TEST)\"' and case study aidu-edtech 'summary_id += \" [TEST]\"' both reverted within their test methods. One TEST contact created and cleaned up.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Bilingual test file at /app/backend/tests/test_bilingual.py covers Profile + all 7 seeded case studies. Public URL: https://biz-dev-portfolio-3.preview.emergentagent.com. Lang toggle testids: nav-lang-toggle (desktop), nav-lang-toggle-mobile (mobile). LocalStorage key 'ar.lang'. The toggle button label itself is 'EN/ID' (or 'ID/EN' when ID is active). Admin Profile and Case Study editors expose EN/ID side-by-side per the spec; PUT /api/admin/profile and /api/admin/case-studies/{id} preserve both languages on round-trip."
+}

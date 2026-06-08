@@ -3,8 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowUpRight } from "lucide-react";
 import { fetchCategories, fetchCaseStudies, assetUrl } from "@/lib/api";
 import CaseStudyDialog from "./CaseStudyDialog";
+import { useLang } from "@/context/LanguageContext";
+import { pickLang } from "@/i18n/strings";
 
 export default function Gallery() {
+  const { t, lang } = useLang();
   const [active, setActive] = useState("all");
   const [openId, setOpenId] = useState(null);
 
@@ -29,18 +32,14 @@ export default function Gallery() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
           <div className="md:col-span-7">
-            <p className="overline mb-6">Selected Work</p>
-            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517]">
-              Selected engagements
-              <br />
-              from the last decade.
+            <p className="overline mb-6">{t("gallery.overline")}</p>
+            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517] whitespace-pre-line">
+              {t("gallery.title")}
             </h2>
           </div>
           <div className="md:col-span-5 md:flex md:items-end">
             <p className="text-base md:text-lg text-[#5e5b55] leading-relaxed">
-              Each engagement is documented with the actual problem, the
-              approach taken and the metric that mattered. Filter by capability
-              below.
+              {t("gallery.description")}
             </p>
           </div>
         </div>
@@ -68,7 +67,7 @@ export default function Gallery() {
                       : "border-transparent group-hover:border-[#141517]"
                   }`}
                 >
-                  {c.label}
+                  {t(`cat.${c.id}`)}
                 </span>
                 <span className="text-[10px] tabular-nums text-[#5e5b55]">
                   ({c.count})
@@ -85,7 +84,7 @@ export default function Gallery() {
               className="md:col-span-12 text-[#5e5b55] text-sm"
               data-testid="gallery-loading"
             >
-              Loading work&hellip;
+              {t("gallery.loading")}
             </div>
           )}
 
@@ -107,6 +106,8 @@ export default function Gallery() {
                 "aspect-[16/10]",
                 "aspect-[4/5]",
               ];
+              const title = pickLang(cs.title, cs.title_id, lang);
+              const subtitle = pickLang(cs.subtitle, cs.subtitle_id, lang);
               return (
                 <article
                   key={cs.id}
@@ -119,7 +120,7 @@ export default function Gallery() {
                   >
                     <img
                       src={assetUrl(cs.cover_image)}
-                      alt={cs.title}
+                      alt={title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                     />
                     <div className="absolute top-4 left-4 px-3 py-1 bg-[#fdfbf7]/90 backdrop-blur-sm text-[10px] tracking-[0.22em] uppercase text-[#141517]">
@@ -128,14 +129,12 @@ export default function Gallery() {
                   </div>
                   <div className="mt-6 flex items-start gap-4">
                     <div className="flex-1">
-                      <div className="overline mb-2">
-                        {categoryLabel(cs.category, categories)}
-                      </div>
+                      <div className="overline mb-2">{t(`cat.${cs.category}`)}</div>
                       <h3 className="font-serif text-2xl md:text-3xl text-[#141517] tracking-tight leading-tight">
-                        {cs.title}
+                        {title}
                       </h3>
                       <p className="mt-3 text-[#5e5b55] text-base leading-relaxed">
-                        {cs.subtitle}
+                        {subtitle}
                       </p>
                     </div>
                     <div className="shrink-0 mt-1 transition-transform duration-300 group-hover:rotate-45 group-hover:text-[#7a2d2a]">
@@ -155,8 +154,4 @@ export default function Gallery() {
       />
     </section>
   );
-}
-
-function categoryLabel(id, cats) {
-  return cats.find((c) => c.id === id)?.label ?? id;
 }

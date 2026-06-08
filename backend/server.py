@@ -198,6 +198,7 @@ class ContactSubmission(BaseModel):
 
 class Stat(BaseModel):
     label: str
+    label_id: Optional[str] = ""
     value: str
 
 
@@ -205,11 +206,15 @@ class Profile(BaseModel):
     model_config = ConfigDict(extra="ignore")
     name: str
     title: str
+    title_id: str = ""
     location: str
+    location_id: str = ""
     email: str
     phone: str
     intro: str
+    intro_id: str = ""
     bio: List[str] = []
+    bio_id: List[str] = []
     stats: List[Stat] = []
     portrait: str = ""
     instagram: str = ""
@@ -220,11 +225,15 @@ class Profile(BaseModel):
 class ProfileUpdate(BaseModel):
     name: Optional[str] = None
     title: Optional[str] = None
+    title_id: Optional[str] = None
     location: Optional[str] = None
+    location_id: Optional[str] = None
     email: Optional[str] = None
     phone: Optional[str] = None
     intro: Optional[str] = None
+    intro_id: Optional[str] = None
     bio: Optional[List[str]] = None
+    bio_id: Optional[List[str]] = None
     stats: Optional[List[Stat]] = None
     portrait: Optional[str] = None
     instagram: Optional[str] = None
@@ -240,14 +249,20 @@ class Metric(BaseModel):
 class CaseStudy(BaseModel):
     id: str
     title: str
+    title_id: str = ""
     subtitle: str
+    subtitle_id: str = ""
     category: str
     year: str
     cover_image: str
     summary: str
+    summary_id: str = ""
     challenge: str
+    challenge_id: str = ""
     approach: List[str]
+    approach_id: List[str] = []
     outcomes: List[str]
+    outcomes_id: List[str] = []
     metrics: List[Metric]
     client: str
     tags: List[str]
@@ -256,14 +271,20 @@ class CaseStudy(BaseModel):
 
 class CaseStudyUpsert(BaseModel):
     title: str
+    title_id: str = ""
     subtitle: str = ""
+    subtitle_id: str = ""
     category: str
     year: str = ""
     cover_image: str = ""
     summary: str = ""
+    summary_id: str = ""
     challenge: str = ""
+    challenge_id: str = ""
     approach: List[str] = []
+    approach_id: List[str] = []
     outcomes: List[str] = []
+    outcomes_id: List[str] = []
     metrics: List[Metric] = []
     client: str = ""
     tags: List[str] = []
@@ -290,19 +311,26 @@ CATEGORIES = [
 DEFAULT_PROFILE = {
     "name": "Andry Ridwan",
     "title": "Business Development & SME Growth Mentor",
+    "title_id": "Mentor Pengembangan Bisnis & Pertumbuhan UKM",
     "location": "Maros · South Sulawesi, Indonesia",
+    "location_id": "Maros · Sulawesi Selatan, Indonesia",
     "email": "ndriyconnect@gmail.com",
     "phone": "+62 823 4657 3790",
     "intro": "I help SMEs, EdTech founders and government-backed programmes turn early traction into measurable, fundable businesses across Indonesia.",
+    "intro_id": "Saya membantu UKM, founder EdTech, dan program pemerintah mengubah traksi awal menjadi bisnis yang terukur dan layak didanai di seluruh Indonesia.",
     "bio": [
         "I have spent the last decade building and mentoring small businesses, EdTech startups and merchant communities — moving from co-founder seats inside early-stage ventures like AIDU to lead-mentor roles in national programmes run by Kemenkop RI, the Ministry of Manpower and Kominfo. I have also sharpened that craft inside bootcamps at Bank Indonesia and NextDev Academy by Telkomsel.",
         "Today I run Turikale Print — a local business in Maros, South Sulawesi, with a 5-star Google rating — while continuing to mentor SMEs, cohorts and founders across the region. Whatever the brief, my job is the same: write the playbook, sit beside the founder, and make the numbers move.",
     ],
+    "bio_id": [
+        "Satu dekade terakhir saya habiskan untuk membangun dan mendampingi usaha kecil, startup EdTech, dan komunitas mitra dagang — dari kursi co-founder di startup tahap awal seperti AIDU hingga peran mentor utama di program nasional Kemenkop RI, Kementerian Ketenagakerjaan, dan Kominfo. Saya juga mempertajam keahlian itu lewat bootcamp di Bank Indonesia dan NextDev Academy by Telkomsel.",
+        "Hari ini saya menjalankan Turikale Print — bisnis lokal di Maros, Sulawesi Selatan, dengan rating 5 bintang di Google — sambil terus mendampingi UKM, kohort, dan founder di kawasan ini. Apa pun brief-nya, tugas saya sama: tuliskan playbook-nya, duduk di samping founder, dan pastikan angkanya bergerak.",
+    ],
     "stats": [
-        {"label": "Years building businesses", "value": "10+"},
-        {"label": "SMEs scaled to ready", "value": "20+"},
-        {"label": "Merchants onboarded (5 days)", "value": "121"},
-        {"label": "EdTech users led", "value": "714+"},
+        {"label": "Years building businesses", "label_id": "Tahun membangun bisnis", "value": "10+"},
+        {"label": "SMEs scaled to ready", "label_id": "UKM yang siap tumbuh", "value": "20+"},
+        {"label": "Merchants onboarded (5 days)", "label_id": "Mitra dagang terdaftar (5 hari)", "value": "121"},
+        {"label": "EdTech users led", "label_id": "Pengguna EdTech dipimpin", "value": "714+"},
     ],
     "portrait": "https://customer-assets.emergentagent.com/job_biz-dev-portfolio-3/artifacts/xxmlyyw0_Andry%20Ridwan.JPG",
     "instagram": "https://instagram.com/andry_ridwan",
@@ -315,22 +343,36 @@ DEFAULT_CASE_STUDIES = [
     {
         "id": "turikale-print",
         "title": "Turikale Print — building a 5-star local business",
+        "title_id": "Turikale Print — membangun bisnis lokal berbintang 5",
         "subtitle": "Owner of a print and creative service business in Maros, South Sulawesi.",
+        "subtitle_id": "Pemilik bisnis percetakan dan jasa kreatif di Maros, Sulawesi Selatan.",
         "category": "market-expansion",
         "year": "2019 — Present",
         "cover_image": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1400&q=80",
         "client": "Turikale Print · CV. OPU BARAKATI JAYA (findable on Google Maps)",
         "summary": "Founded and still running a community-anchored print business with a 5-star Google rating and 3,715+ profile views.",
+        "summary_id": "Mendirikan dan masih menjalankan bisnis percetakan berbasis komunitas dengan rating 5 bintang di Google dan 3.715+ kunjungan profil.",
         "challenge": "A small local print business in Maros faced the same problem most regional SMEs do: heavy reliance on walk-ins, no online presence, and no easy way for new customers to find or trust the service before visiting.",
+        "challenge_id": "Bisnis percetakan kecil di Maros menghadapi masalah yang sama dengan kebanyakan UKM daerah: terlalu bergantung pada pelanggan walk-in, belum punya kehadiran online, dan tidak ada cara mudah bagi calon pelanggan untuk menemukan atau memercayai layanan ini sebelum datang.",
         "approach": [
             "Stood up a Google Business Profile and kept it active with photos, hours and responsive replies.",
             "Built repeat-customer loops around clear pricing, fast turnaround and friendly service so positive reviews stacked up.",
             "Used the same digital-marketing playbook I teach SMEs in mentoring programmes — applied to my own shop.",
         ],
+        "approach_id": [
+            "Membangun Google Business Profile dan menjaganya tetap aktif dengan foto, jam buka, dan balasan yang responsif.",
+            "Membangun loop pelanggan repeat lewat harga yang jelas, waktu pengerjaan cepat, dan pelayanan ramah sehingga ulasan positif terus bertambah.",
+            "Menerapkan playbook digital marketing yang sama dengan yang saya ajarkan ke UKM di program mentoring — diterapkan ke toko sendiri.",
+        ],
         "outcomes": [
             "Sustained 5-star average rating from real customers on Google Maps.",
             "3,715+ profile views and steady inbound enquiries from the local area.",
             "A working real-world case study I bring into every SME mentoring session.",
+        ],
+        "outcomes_id": [
+            "Rating rata-rata 5 bintang yang konsisten dari pelanggan asli di Google Maps.",
+            "3.715+ kunjungan profil dan aliran pertanyaan masuk yang stabil dari sekitar Maros.",
+            "Studi kasus dunia nyata yang saya bawa ke setiap sesi mentoring UKM.",
         ],
         "metrics": [
             {"label": "Rating", "value": "5★"},
@@ -343,22 +385,36 @@ DEFAULT_CASE_STUDIES = [
     {
         "id": "koperasi-merah-putih",
         "title": "Turning village cooperatives into real businesses",
+        "title_id": "Mengubah koperasi desa menjadi bisnis sungguhan",
         "subtitle": "Embedded as Business Assistant for Indonesia's Koperasi Desa Merah Putih programme.",
+        "subtitle_id": "Pendamping Bisnis dalam program Koperasi Desa Merah Putih.",
         "category": "strategic-partnerships",
         "year": "2025",
         "cover_image": "https://images.pexels.com/photos/7698712/pexels-photo-7698712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         "client": "Kemenkop RI · Koperasi Desa Merah Putih",
         "summary": "Helping village cooperatives operate as functioning business units that stimulate the local economy.",
+        "summary_id": "Membantu koperasi desa beroperasi sebagai unit bisnis yang berfungsi dan menggerakkan ekonomi lokal.",
         "challenge": "Many village cooperatives existed on paper but did not run as businesses — no bookkeeping, no clear products, no member-facing services. The national programme needed hands-on assistants who could turn that around at the village level.",
+        "challenge_id": "Banyak koperasi desa hanya ada di atas kertas dan belum berjalan sebagai bisnis — tanpa pembukuan, tanpa produk yang jelas, tanpa layanan bagi anggotanya. Program nasional ini butuh pendamping lapangan yang bisa membalikkan keadaan itu di tingkat desa.",
         "approach": [
             "Diagnosed each cooperative's revenue model, governance gaps and member needs in the first 30 days.",
             "Co-built a simple monthly operating cadence — books, stock, member services, and a single growth experiment per quarter.",
             "Connected cooperatives to local merchants and SMEs so the cooperative became a useful trading node, not just an administrative entity.",
         ],
+        "approach_id": [
+            "Mendiagnosis model pendapatan, kelemahan tata kelola, dan kebutuhan anggota tiap koperasi dalam 30 hari pertama.",
+            "Menyusun ritme operasi bulanan sederhana — pembukuan, stok, layanan anggota, dan satu eksperimen pertumbuhan per kuartal.",
+            "Menghubungkan koperasi dengan mitra dagang dan UKM lokal sehingga koperasi menjadi simpul perdagangan yang berguna, bukan sekadar entitas administratif.",
+        ],
         "outcomes": [
             "Cooperatives now run regular monthly closings and member reporting.",
             "Local merchants routed through the cooperative for shared procurement.",
             "Visible uplift in member participation and recurring transactions.",
+        ],
+        "outcomes_id": [
+            "Koperasi kini menjalankan tutup buku bulanan dan pelaporan ke anggota secara rutin.",
+            "Mitra dagang lokal disalurkan lewat koperasi untuk pengadaan bersama.",
+            "Peningkatan partisipasi anggota dan transaksi berulang yang terlihat jelas.",
         ],
         "metrics": [
             {"label": "Programme", "value": "Kemenkop RI"},
@@ -371,22 +427,36 @@ DEFAULT_CASE_STUDIES = [
     {
         "id": "tkmp-2024",
         "title": "TKMP 2024 — funding & mentoring first-time founders",
+        "title_id": "TKMP 2024 — pendanaan & mentoring wirausaha pemula",
         "subtitle": "Cohort mentor for the Ministry of Manpower's Tenaga Kerja Mandiri Pemula programme.",
+        "subtitle_id": "Mentor kohort untuk program Tenaga Kerja Mandiri Pemula dari Kementerian Ketenagakerjaan.",
         "category": "client-success",
         "year": "2024",
         "cover_image": "https://images.unsplash.com/photo-1758518727613-00192aed759b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
         "client": "Ministry of Manpower × Politeknik STIA LAN Bandung",
         "summary": "Upgraded 20 SMEs to ready-to-fund status with a real business plan, legality and branding.",
+        "summary_id": "Mengupgrade 20 UKM menjadi status siap-didanai dengan rencana bisnis, legalitas, dan branding yang nyata.",
         "challenge": "The cohort was first-time entrepreneurs with funding allocated but no operating discipline. Without structured mentorship the grant risked becoming working capital rather than a launching pad.",
+        "challenge_id": "Pesertanya adalah wirausaha pemula yang sudah dapat alokasi pendanaan tapi belum punya disiplin operasi. Tanpa mentoring terstruktur, dana bisa habis untuk modal kerja, bukan jadi landasan tumbuh.",
         "approach": [
             "Ran weekly 1:1 mentoring across legality, bookkeeping, pricing and basic branding.",
             "Worked through each founder's first sales channel — offline and digital — to validate willingness to pay.",
             "Documented every business plan to a single, comparable template the ministry could audit.",
         ],
+        "approach_id": [
+            "Menjalankan mentoring 1-on-1 mingguan terkait legalitas, pembukuan, harga, dan branding dasar.",
+            "Menggarap kanal penjualan pertama tiap founder — offline maupun digital — untuk memvalidasi kesediaan membayar pelanggan.",
+            "Mendokumentasikan setiap rencana bisnis dalam satu template yang seragam dan bisa diaudit kementerian.",
+        ],
         "outcomes": [
             "20 SMEs upgraded to having a measurable business plan, legality, financial report and branding.",
             "Founders graduated with a clear next-quarter revenue plan.",
             "Mentorship model reused for subsequent programme cohorts.",
+        ],
+        "outcomes_id": [
+            "20 UKM kini memiliki rencana bisnis yang terukur, legalitas, laporan keuangan, dan branding.",
+            "Para founder lulus dengan rencana pendapatan kuartal berikutnya yang jelas.",
+            "Model mentoring ini dipakai ulang untuk kohort program berikutnya.",
         ],
         "metrics": [
             {"label": "SMEs upgraded", "value": "20"},
@@ -399,22 +469,36 @@ DEFAULT_CASE_STUDIES = [
     {
         "id": "aidu-edtech",
         "title": "AIDU — co-founding Makassar's first exam-management EdTech",
+        "title_id": "AIDU — co-founder EdTech manajemen ujian pertama di Makassar",
         "subtitle": "Co-founded and led an early-stage EdTech that reached 714+ registered users.",
+        "subtitle_id": "Co-founder dan memimpin EdTech tahap awal hingga mencapai 714+ pengguna terdaftar.",
         "category": "gtm-strategy",
         "year": "2018 — 2020",
         "cover_image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
         "client": "AIDU (EdTech startup, Makassar)",
         "summary": "Co-founded and led the first dedicated exam-management EdTech in Makassar, growing it to 714+ users.",
+        "summary_id": "Co-founder dan memimpin EdTech manajemen ujian pertama di Makassar hingga 714+ pengguna.",
         "challenge": "Makassar had no localised EdTech focused on exam preparation and management. Our small founding team had to build the product, the brand, and the trust of schools and parents from zero — in a market where most education spend still flowed offline.",
+        "challenge_id": "Makassar belum punya EdTech lokal yang fokus pada persiapan dan manajemen ujian. Tim founder kami harus membangun produk, brand, dan kepercayaan sekolah serta orang tua dari nol — di pasar yang sebagian besar belanja pendidikannya masih offline.",
         "approach": [
             "With the co-founding team, defined the product wedge — exam management for tutoring centres — and shipped an MVP with the first three schools.",
             "Built a founder-led sales motion across schools and tutoring centres, walking owners through the product personally.",
             "Codified onboarding so each new school could be live within a single week.",
         ],
+        "approach_id": [
+            "Bersama tim founder, menentukan ceruk produk — manajemen ujian untuk bimbel — dan meluncurkan MVP dengan tiga sekolah pertama.",
+            "Membangun motion penjualan yang dipimpin founder ke sekolah dan bimbel, mendampingi pemilik mereka memahami produk secara langsung.",
+            "Membakukan onboarding sehingga tiap sekolah baru bisa live dalam satu minggu.",
+        ],
         "outcomes": [
             "714+ registered users on the platform.",
             "First exam-management EdTech operating in the region.",
             "Founder playbook reusable for future EdTech ventures.",
+        ],
+        "outcomes_id": [
+            "714+ pengguna terdaftar di platform.",
+            "EdTech manajemen ujian pertama yang beroperasi di wilayah ini.",
+            "Playbook founder yang bisa dipakai ulang untuk EdTech selanjutnya.",
         ],
         "metrics": [
             {"label": "Registered users", "value": "714+"},
@@ -427,22 +511,36 @@ DEFAULT_CASE_STUDIES = [
     {
         "id": "gapura-digital",
         "title": "Google Gapura Digital — bringing SMEs online",
+        "title_id": "Google Gapura Digital — membawa UKM ke ranah online",
         "subtitle": "Local facilitator for Google's national SME digital-marketing programme.",
+        "subtitle_id": "Fasilitator lokal untuk program nasional digital marketing UKM dari Google.",
         "category": "market-expansion",
         "year": "2017",
         "cover_image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1400&q=80",
         "client": "Google Gapura Digital",
         "summary": "Delivered hands-on training so traditional SMEs could grow through digital marketing.",
+        "summary_id": "Memberikan pelatihan langsung agar UKM tradisional bisa tumbuh lewat digital marketing.",
         "challenge": "Most local SMEs were still entirely offline. Awareness of basic digital marketing — Google profiles, paid ads, social — was low and the gap to taking a first online order was wider than it looked.",
+        "challenge_id": "Mayoritas UKM lokal masih sepenuhnya offline. Pemahaman dasar tentang digital marketing — Google Profile, iklan berbayar, media sosial — masih rendah, dan jarak menuju pesanan online pertama lebih jauh dari yang terlihat.",
         "approach": [
             "Ran in-person workshops localised to the participants' industries and average ticket sizes.",
             "Helped each SME stand up the basics: Google Business Profile, a working WhatsApp catalogue and one paid experiment.",
             "Coached owners through their first 30 days of running the channel themselves.",
         ],
+        "approach_id": [
+            "Menjalankan workshop tatap muka yang disesuaikan dengan industri dan rata-rata transaksi peserta.",
+            "Membantu tiap UKM menyiapkan dasarnya: Google Business Profile, katalog WhatsApp yang berjalan, dan satu eksperimen iklan berbayar.",
+            "Mendampingi pemilik UKM menjalankan kanal itu sendiri di 30 hari pertama.",
+        ],
         "outcomes": [
             "SMEs leaving the programme with a live digital storefront.",
             "Owners equipped to keep running the channel without external help.",
             "Local case studies used to recruit subsequent cohorts.",
+        ],
+        "outcomes_id": [
+            "UKM lulus program dengan storefront digital yang sudah aktif.",
+            "Pemilik UKM mampu menjalankan kanal sendiri tanpa bantuan eksternal.",
+            "Studi kasus lokal yang kemudian dipakai merekrut kohort berikutnya.",
         ],
         "metrics": [
             {"label": "Role", "value": "Facilitator"},
@@ -455,22 +553,36 @@ DEFAULT_CASE_STUDIES = [
     {
         "id": "umkm-jualan-online",
         "title": "121 merchants live in five days",
+        "title_id": "121 mitra dagang aktif dalam lima hari",
         "subtitle": "Local volunteer coordinator for the national UMKM Jualan Online sprint.",
+        "subtitle_id": "Koordinator relawan lokal dalam sprint nasional UMKM Jualan Online.",
         "category": "enterprise-sales",
         "year": "2018",
         "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80",
         "client": "Kominfo × Bukalapak × GrabFood",
         "summary": "Onboarded 121 local merchants onto Bukalapak and GrabFood inside a five-day programme window.",
+        "summary_id": "Mendaftarkan 121 mitra dagang lokal ke Bukalapak dan GrabFood dalam jendela program lima hari.",
         "challenge": "The national sprint allocated only five days to add merchants in each region. Most local sellers had never used an e-commerce or food platform, and many didn't trust the process.",
+        "challenge_id": "Sprint nasional ini hanya menyediakan lima hari untuk menambah mitra dagang di tiap daerah. Mayoritas penjual lokal belum pernah memakai platform e-commerce atau food, dan banyak yang belum percaya pada prosesnya.",
         "approach": [
             "Recruited and trained a small local volunteer team before the sprint week opened.",
             "Set up a kiosk-style onboarding flow so a merchant could be live within 20 minutes.",
             "Followed up with merchants the week after to make sure their first orders actually flowed.",
         ],
+        "approach_id": [
+            "Merekrut dan melatih tim relawan lokal kecil sebelum minggu sprint dimulai.",
+            "Menyiapkan alur onboarding gaya kios sehingga seorang mitra dagang bisa aktif dalam 20 menit.",
+            "Menindaklanjuti mitra dagang seminggu setelahnya untuk memastikan pesanan pertama benar-benar masuk.",
+        ],
         "outcomes": [
             "121 merchants registered and live across both platforms.",
             "Onboarding flow replicated in subsequent regional waves.",
             "Local community of sellers stayed active after the programme ended.",
+        ],
+        "outcomes_id": [
+            "121 mitra dagang terdaftar dan aktif di kedua platform.",
+            "Alur onboarding direplikasi pada gelombang regional berikutnya.",
+            "Komunitas penjual lokal tetap aktif setelah program berakhir.",
         ],
         "metrics": [
             {"label": "Merchants live", "value": "121"},
@@ -483,22 +595,36 @@ DEFAULT_CASE_STUDIES = [
     {
         "id": "1000-startup-digital",
         "title": "Gerakan Nasional 1000 Startup Digital",
+        "title_id": "Gerakan Nasional 1000 Startup Digital",
         "subtitle": "National mentor for Indonesia's flagship startup programme.",
+        "subtitle_id": "Mentor nasional untuk program startup andalan Indonesia.",
         "category": "strategic-partnerships",
         "year": "2019 — 2020",
         "cover_image": "https://images.unsplash.com/photo-1573164574511-73c773193279?auto=format&fit=crop&w=1400&q=80",
         "client": "Ministry of Communication and Informatics",
         "summary": "Mentored aspiring digital founders through validated business plans and first-customer milestones.",
+        "summary_id": "Mendampingi calon founder digital melewati rencana bisnis yang tervalidasi dan milestone pelanggan pertama.",
         "challenge": "Most participants arrived with ideas and energy but no operating template — no ICP, no validated problem and no realistic plan for the first ten customers.",
+        "challenge_id": "Mayoritas peserta datang dengan ide dan semangat, tapi belum punya kerangka operasi — belum ada ICP, masalah yang tervalidasi, atau rencana realistis untuk sepuluh pelanggan pertama.",
         "approach": [
             "Walked founders through a compressed discovery-to-MVP loop with a real customer in the room.",
             "Coached on positioning, pricing and the first-customer playbook before any code was written.",
             "Connected promising teams to the wider Indonesian startup ecosystem for follow-on support.",
         ],
+        "approach_id": [
+            "Memandu founder melewati siklus discovery-ke-MVP yang dipadatkan dengan satu pelanggan nyata di ruangan.",
+            "Memberi coaching tentang positioning, harga, dan playbook pelanggan pertama sebelum satu baris kode pun ditulis.",
+            "Menghubungkan tim potensial ke ekosistem startup Indonesia yang lebih luas untuk dukungan lanjutan.",
+        ],
         "outcomes": [
             "Cohorts shipped first MVPs with paying or committed customers.",
             "Several teams continued into accelerator and grant pipelines after the programme.",
             "Mentorship template reused across multiple regional sessions.",
+        ],
+        "outcomes_id": [
+            "Kohort merilis MVP pertama dengan pelanggan yang berbayar atau berkomitmen.",
+            "Beberapa tim lanjut ke jalur akselerator dan hibah setelah program selesai.",
+            "Template mentoring dipakai ulang di berbagai sesi regional.",
         ],
         "metrics": [
             {"label": "Programme", "value": "1000 Startup"},
@@ -543,6 +669,43 @@ async def on_startup():
     # Case study seeding
     if await db.case_studies.count_documents({}) == 0:
         await db.case_studies.insert_many([dict(cs) for cs in DEFAULT_CASE_STUDIES])
+    else:
+        # Idempotent backfill of bilingual fields without overwriting user edits.
+        bilingual_keys = (
+            "title_id", "subtitle_id", "summary_id", "challenge_id",
+            "approach_id", "outcomes_id",
+        )
+        for cs in DEFAULT_CASE_STUDIES:
+            existing = await db.case_studies.find_one({"id": cs["id"]})
+            if not existing:
+                await db.case_studies.insert_one(dict(cs))
+                continue
+            missing = {k: cs[k] for k in bilingual_keys if not existing.get(k)}
+            if missing:
+                await db.case_studies.update_one({"id": cs["id"]}, {"$set": missing})
+
+    # Profile bilingual backfill (idempotent — only sets _id fields if missing)
+    prof = await db.profile.find_one({"_id": "site"})
+    if prof:
+        prof_missing = {}
+        for k in ("title_id", "location_id", "intro_id", "bio_id"):
+            if not prof.get(k):
+                prof_missing[k] = DEFAULT_PROFILE.get(k, "" if not k.endswith("bio_id") else [])
+        # Stat labels backfill
+        if prof.get("stats"):
+            label_id_map = {s["label"]: s.get("label_id", "") for s in DEFAULT_PROFILE["stats"]}
+            updated_stats = []
+            changed_stats = False
+            for s in prof["stats"]:
+                new_s = dict(s)
+                if not new_s.get("label_id") and new_s.get("label") in label_id_map:
+                    new_s["label_id"] = label_id_map[new_s["label"]]
+                    changed_stats = True
+                updated_stats.append(new_s)
+            if changed_stats:
+                prof_missing["stats"] = updated_stats
+        if prof_missing:
+            await db.profile.update_one({"_id": "site"}, {"$set": prof_missing})
 
 
 @app.on_event("shutdown")

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowUpRight, Loader2 } from "lucide-react";
-import { submitContact, cvDownloadUrl } from "@/lib/api";
+import { submitContact, cvDownloadUrl, formatApiError } from "@/lib/api";
 import { useProfile } from "@/hooks/useProfile";
+import { useLang } from "@/context/LanguageContext";
 
 const initial = { name: "", email: "", company: "", subject: "", message: "" };
 
 export default function Contact() {
   const { profile } = useProfile();
+  const { t } = useLang();
   const [data, setData] = useState(initial);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -20,9 +22,9 @@ export default function Contact() {
 
   const validate = () => {
     const e = {};
-    if (!data.name || data.name.trim().length < 2) e.name = "Please enter your name.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) e.email = "Please enter a valid email.";
-    if (!data.message || data.message.trim().length < 10) e.message = "A short message (10+ chars) helps.";
+    if (!data.name || data.name.trim().length < 2) e.name = t("contact.form.errorName");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) e.email = t("contact.form.errorEmail");
+    if (!data.message || data.message.trim().length < 10) e.message = t("contact.form.errorMessage");
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -41,10 +43,10 @@ export default function Contact() {
       });
       setSuccess(true);
       setData(initial);
-      toast.success("Message sent. I'll get back to you within 48 hours.");
+      toast.success(t("contact.success.toast"));
     } catch (err) {
-      const msg = err?.response?.data?.detail || "Something went wrong. Please try again.";
-      toast.error(typeof msg === "string" ? msg : "Submission failed.");
+      const msg = formatApiError(err?.response?.data?.detail) || t("contact.error.toast");
+      toast.error(typeof msg === "string" ? msg : t("contact.error.toast"));
     } finally {
       setSubmitting(false);
     }
@@ -59,16 +61,12 @@ export default function Contact() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
           <div className="md:col-span-5">
-            <p className="overline mb-6">Get in touch</p>
-            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.0] text-[#141517]">
-              Let&rsquo;s build the
-              <br />
-              next chapter.
+            <p className="overline mb-6">{t("contact.overline")}</p>
+            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.0] text-[#141517] whitespace-pre-line">
+              {t("contact.title")}
             </h2>
             <p className="mt-8 text-base md:text-lg text-[#5e5b55] leading-relaxed max-w-md">
-              Open to mentoring, programme facilitation and BD engagements with
-              SMEs, EdTech founders and government-backed initiatives. I reply
-              within 48 hours.
+              {t("contact.intro")}
             </p>
 
             <div className="mt-12 space-y-4 text-[#141517]">
@@ -81,7 +79,7 @@ export default function Contact() {
               </a>
               <a
                 data-testid="contact-phone-link"
-                href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}
+                href={`tel:${(profile.phone || "").replace(/[^+\d]/g, "")}`}
                 className="block link-underline text-base"
               >
                 {profile.phone}
@@ -95,9 +93,6 @@ export default function Contact() {
               >
                 Instagram — @andry_ridwan
               </a>
-              <div className="text-sm text-[#5e5b55] tracking-wide">
-                {profile.location}
-              </div>
             </div>
 
             <a
@@ -107,7 +102,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="mt-12 btn-outline inline-flex items-center gap-3 px-6 py-3.5 text-xs tracking-[0.2em] uppercase"
             >
-              Download CV
+              {t("nav.downloadCv")}
               <ArrowUpRight size={14} />
             </a>
           </div>
@@ -118,20 +113,17 @@ export default function Contact() {
                 data-testid="contact-success"
                 className="border border-[#e5e1d8] bg-[#fdfbf7] p-10 md:p-14"
               >
-                <p className="overline mb-6">Message Received</p>
+                <p className="overline mb-6">{t("contact.success.overline")}</p>
                 <h3 className="font-serif text-3xl md:text-4xl text-[#141517] leading-tight">
-                  Thank you. I&rsquo;ll be in touch within 48 hours.
+                  {t("contact.success.title")}
                 </h3>
-                <p className="mt-6 text-base text-[#5e5b55]">
-                  In the meantime, feel free to browse the work or download
-                  the CV.
-                </p>
+                <p className="mt-6 text-base text-[#5e5b55]">{t("contact.success.sub")}</p>
                 <button
                   data-testid="contact-send-another"
                   onClick={() => setSuccess(false)}
                   className="mt-10 btn-outline inline-flex items-center gap-2 px-5 py-2.5 text-xs tracking-[0.2em] uppercase"
                 >
-                  Send Another Message
+                  {t("contact.success.sendAnother")}
                 </button>
               </div>
             ) : (
@@ -141,35 +133,12 @@ export default function Contact() {
                 className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8"
                 noValidate
               >
-                <Field
-                  id="name"
-                  label="Your name"
-                  value={data.name}
-                  onChange={update("name")}
-                  error={errors.name}
-                />
-                <Field
-                  id="email"
-                  type="email"
-                  label="Email"
-                  value={data.email}
-                  onChange={update("email")}
-                  error={errors.email}
-                />
-                <Field
-                  id="company"
-                  label="Company / Organization"
-                  value={data.company}
-                  onChange={update("company")}
-                />
-                <Field
-                  id="subject"
-                  label="Subject"
-                  value={data.subject}
-                  onChange={update("subject")}
-                />
+                <Field id="name" label={t("contact.form.name")} value={data.name} onChange={update("name")} error={errors.name} />
+                <Field id="email" type="email" label={t("contact.form.email")} value={data.email} onChange={update("email")} error={errors.email} />
+                <Field id="company" label={t("contact.form.company")} value={data.company} onChange={update("company")} />
+                <Field id="subject" label={t("contact.form.subject")} value={data.subject} onChange={update("subject")} />
                 <div className="md:col-span-2">
-                  <Label htmlFor="message">What can I help with?</Label>
+                  <Label htmlFor="message">{t("contact.form.message")}</Label>
                   <textarea
                     id="message"
                     data-testid="contact-input-message"
@@ -177,7 +146,7 @@ export default function Contact() {
                     value={data.message}
                     onChange={update("message")}
                     className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e5e1d8] py-3 text-base text-[#141517] placeholder:text-[#5e5b55]/60 focus:border-[#141517] resize-none"
-                    placeholder="A few lines about the opportunity, timeline and stage."
+                    placeholder={t("contact.form.messagePlaceholder")}
                   />
                   {errors.message && (
                     <p className="mt-2 text-xs text-[#7a2d2a]" data-testid="error-message">
@@ -187,8 +156,7 @@ export default function Contact() {
                 </div>
                 <div className="md:col-span-2 flex items-center justify-between gap-4 pt-2">
                   <p className="text-xs text-[#5e5b55] tracking-wide max-w-md">
-                    By submitting, you agree to be contacted about your enquiry.
-                    No newsletters, ever.
+                    {t("contact.form.consent")}
                   </p>
                   <button
                     type="submit"
@@ -198,11 +166,11 @@ export default function Contact() {
                   >
                     {submitting ? (
                       <>
-                        Sending <Loader2 size={14} className="animate-spin" />
+                        {t("contact.form.submitting")} <Loader2 size={14} className="animate-spin" />
                       </>
                     ) : (
                       <>
-                        Send Message <ArrowUpRight size={14} />
+                        {t("contact.form.submit")} <ArrowUpRight size={14} />
                       </>
                     )}
                   </button>

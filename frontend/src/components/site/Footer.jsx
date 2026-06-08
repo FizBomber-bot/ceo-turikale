@@ -1,7 +1,12 @@
 import { useProfile } from "@/hooks/useProfile";
+import { useLang } from "@/context/LanguageContext";
+import { pickLang } from "@/i18n/strings";
 
 export default function Footer() {
   const { profile } = useProfile();
+  const { t, lang } = useLang();
+  const title = pickLang(profile.title, profile.title_id, lang);
+  const location = pickLang(profile.location, profile.location_id, lang);
   return (
     <footer
       data-testid="site-footer"
@@ -14,13 +19,12 @@ export default function Footer() {
               {profile.name}<span className="text-[#c9a08e]">.</span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-[#fdfbf7]/65 leading-relaxed">
-              {profile.title} — supporting SMEs, EdTech founders and
-              government-backed programmes across Indonesia.
+              {title} — {t("footer.tagline")}
             </p>
           </div>
           <div className="md:col-span-3">
             <p className="overline mb-4" style={{ color: "#c9a08e" }}>
-              Contact
+              {t("footer.contact")}
             </p>
             <a
               data-testid="footer-email"
@@ -31,7 +35,7 @@ export default function Footer() {
             </a>
             <a
               data-testid="footer-phone"
-              href={`tel:${profile.phone.replace(/[^+\d]/g, "")}`}
+              href={`tel:${(profile.phone || "").replace(/[^+\d]/g, "")}`}
               className="block text-sm mt-2 text-[#fdfbf7]/70 link-underline"
             >
               {profile.phone}
@@ -39,7 +43,7 @@ export default function Footer() {
           </div>
           <div className="md:col-span-4">
             <p className="overline mb-4" style={{ color: "#c9a08e" }}>
-              Elsewhere
+              {t("footer.elsewhere")}
             </p>
             <ul className="space-y-2 text-[#fdfbf7]/85">
               <li>
@@ -81,7 +85,7 @@ export default function Footer() {
                   href="/admin"
                   className="link-underline"
                 >
-                  Admin sign in
+                  {t("footer.adminSignIn")}
                 </a>
               </li>
             </ul>
@@ -89,9 +93,9 @@ export default function Footer() {
         </div>
         <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#fdfbf7]/55 tracking-wide">
           <span data-testid="footer-copyright">
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+            © {new Date().getFullYear()} {profile.name}. {t("footer.rights")}
           </span>
-          <span>Portfolio · {profile.location}</span>
+          <span>{t("footer.location")} · {location}</span>
         </div>
       </div>
     </footer>

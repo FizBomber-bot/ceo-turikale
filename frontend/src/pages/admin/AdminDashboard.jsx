@@ -249,14 +249,20 @@ function PhotosTab() {
 function stripUnknown(cs) {
   const {
     title,
+    title_id,
     subtitle,
+    subtitle_id,
     category,
     year,
     cover_image,
     summary,
+    summary_id,
     challenge,
+    challenge_id,
     approach,
+    approach_id,
     outcomes,
+    outcomes_id,
     metrics,
     client,
     tags,
@@ -264,14 +270,20 @@ function stripUnknown(cs) {
   } = cs;
   return {
     title,
+    title_id: title_id || "",
     subtitle: subtitle || "",
+    subtitle_id: subtitle_id || "",
     category,
     year: year || "",
     cover_image: cover_image || "",
     summary: summary || "",
+    summary_id: summary_id || "",
     challenge: challenge || "",
+    challenge_id: challenge_id || "",
     approach: approach || [],
+    approach_id: approach_id || [],
     outcomes: outcomes || [],
+    outcomes_id: outcomes_id || [],
     metrics: (metrics || []).map((m) => ({ label: m.label, value: m.value })),
     client: client || "",
     tags: tags || [],
@@ -444,18 +456,19 @@ function ProfileForm({ initial }) {
   });
 
   const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
-  const updateBio = (i, v) =>
-    setForm((f) => ({ ...f, bio: f.bio.map((p, idx) => (idx === i ? v : p)) }));
-  const addBio = () => setForm((f) => ({ ...f, bio: [...(f.bio || []), ""] }));
-  const removeBio = (i) =>
-    setForm((f) => ({ ...f, bio: f.bio.filter((_, idx) => idx !== i) }));
+  const updateBio = (key, i, v) =>
+    setForm((f) => ({ ...f, [key]: (f[key] || []).map((p, idx) => (idx === i ? v : p)) }));
+  const addBio = (key) =>
+    setForm((f) => ({ ...f, [key]: [...(f[key] || []), ""] }));
+  const removeBio = (key, i) =>
+    setForm((f) => ({ ...f, [key]: (f[key] || []).filter((_, idx) => idx !== i) }));
   const updateStat = (i, field, v) =>
     setForm((f) => ({
       ...f,
       stats: f.stats.map((s, idx) => (idx === i ? { ...s, [field]: v } : s)),
     }));
   const addStat = () =>
-    setForm((f) => ({ ...f, stats: [...(f.stats || []), { label: "", value: "" }] }));
+    setForm((f) => ({ ...f, stats: [...(f.stats || []), { label: "", label_id: "", value: "" }] }));
   const removeStat = (i) =>
     setForm((f) => ({ ...f, stats: f.stats.filter((_, idx) => idx !== i) }));
 
@@ -463,14 +476,12 @@ function ProfileForm({ initial }) {
     <>
       <SectionHeader
         overline="Profile"
-        title="The text the public site reads."
-        description="Name, title, location, contacts, intro, bio paragraphs and the four headline stats."
+        title="The text the public site reads (English + Bahasa)."
+        description="Both languages are stored side by side; if a Bahasa field is empty the public site falls back to English."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         <TextField label="Name" value={form.name} onChange={(v) => update("name", v)} />
-        <TextField label="Title" value={form.title} onChange={(v) => update("title", v)} />
-        <TextField label="Location" value={form.location} onChange={(v) => update("location", v)} />
         <TextField label="Email" value={form.email} onChange={(v) => update("email", v)} />
         <TextField label="Phone" value={form.phone} onChange={(v) => update("phone", v)} />
         <TextField label="Instagram URL" value={form.instagram} onChange={(v) => update("instagram", v)} />
@@ -478,45 +489,31 @@ function ProfileForm({ initial }) {
         <TextField label="Google Maps URL" value={form.company_maps} onChange={(v) => update("company_maps", v)} />
       </div>
 
-      <div className="mb-10">
-        <TextArea
-          label="Intro (hero subtitle)"
-          value={form.intro}
-          onChange={(v) => update("intro", v)}
-          rows={3}
-        />
-      </div>
+      <BilingualText
+        labelEn="Title (EN)" labelId="Title (ID — Bahasa)"
+        valueEn={form.title} valueId={form.title_id}
+        onEn={(v) => update("title", v)} onId={(v) => update("title_id", v)}
+      />
+      <BilingualText
+        labelEn="Location (EN)" labelId="Location (ID — Bahasa)"
+        valueEn={form.location} valueId={form.location_id}
+        onEn={(v) => update("location", v)} onId={(v) => update("location_id", v)}
+      />
+      <BilingualArea
+        labelEn="Intro (EN)" labelId="Intro (ID — Bahasa)"
+        valueEn={form.intro} valueId={form.intro_id}
+        onEn={(v) => update("intro", v)} onId={(v) => update("intro_id", v)}
+        rows={3}
+      />
 
-      <div className="mb-10">
-        <div className="flex items-center justify-between mb-3">
-          <p className="overline">Bio paragraphs</p>
-          <button
-            type="button"
-            onClick={addBio}
-            data-testid="bio-add"
-            className="text-xs tracking-[0.18em] uppercase link-underline"
-          >
-            + Add paragraph
-          </button>
-        </div>
-        <div className="space-y-4">
-          {form.bio.map((p, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <div className="flex-1">
-                <TextArea label={`Paragraph ${i + 1}`} value={p} onChange={(v) => updateBio(i, v)} rows={4} />
-              </div>
-              <button
-                type="button"
-                onClick={() => removeBio(i)}
-                className="mt-7 p-2 text-[#7a2d2a] hover:text-[#141517]"
-                aria-label="Remove paragraph"
-              >
-                <Trash2 size={16} />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+      <BilingualParagraphs
+        title="Bio paragraphs"
+        en={form.bio || []}
+        id={form.bio_id || []}
+        onAdd={(k) => addBio(k)}
+        onUpdate={(k, i, v) => updateBio(k, i, v)}
+        onRemove={(k, i) => removeBio(k, i)}
+      />
 
       <div className="mb-12">
         <div className="flex items-center justify-between mb-3">
@@ -532,9 +529,10 @@ function ProfileForm({ initial }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {form.stats.map((s, i) => (
             <div key={i} className="flex items-end gap-3 border border-[#e5e1d8] p-4 bg-[#fdfbf7]">
-              <div className="flex-1 grid grid-cols-2 gap-3">
+              <div className="flex-1 grid grid-cols-3 gap-3">
                 <TextField label="Value" value={s.value} onChange={(v) => updateStat(i, "value", v)} />
-                <TextField label="Label" value={s.label} onChange={(v) => updateStat(i, "label", v)} />
+                <TextField label="Label (EN)" value={s.label} onChange={(v) => updateStat(i, "label", v)} />
+                <TextField label="Label (ID)" value={s.label_id || ""} onChange={(v) => updateStat(i, "label_id", v)} />
               </div>
               <button
                 type="button"
@@ -570,17 +568,103 @@ function deepCopyProfile(p) {
   return {
     name: p.name || "",
     title: p.title || "",
+    title_id: p.title_id || "",
     location: p.location || "",
+    location_id: p.location_id || "",
     email: p.email || "",
     phone: p.phone || "",
     intro: p.intro || "",
+    intro_id: p.intro_id || "",
     bio: [...(p.bio || [])],
-    stats: (p.stats || []).map((s) => ({ ...s })),
+    bio_id: [...(p.bio_id || [])],
+    stats: (p.stats || []).map((s) => ({ label: s.label || "", label_id: s.label_id || "", value: s.value || "" })),
     portrait: p.portrait || "",
     instagram: p.instagram || "",
     company_site: p.company_site || "",
     company_maps: p.company_maps || "",
   };
+}
+
+function BilingualText({ labelEn, labelId, valueEn, valueId, onEn, onId }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <TextField label={labelEn} value={valueEn} onChange={onEn} />
+      <TextField label={labelId} value={valueId} onChange={onId} />
+    </div>
+  );
+}
+
+function BilingualArea({ labelEn, labelId, valueEn, valueId, onEn, onId, rows = 3 }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <TextArea label={labelEn} value={valueEn} onChange={onEn} rows={rows} />
+      <TextArea label={labelId} value={valueId} onChange={onId} rows={rows} />
+    </div>
+  );
+}
+
+function BilingualParagraphs({ title, en, id, onAdd, onUpdate, onRemove }) {
+  const rows = Math.max(en.length, id.length);
+  return (
+    <div className="mb-10">
+      <div className="flex items-center justify-between mb-3">
+        <p className="overline">{title}</p>
+        <div className="flex gap-4 text-xs tracking-[0.18em] uppercase">
+          <button type="button" onClick={() => onAdd("bio")} className="link-underline">
+            + EN paragraph
+          </button>
+          <button type="button" onClick={() => onAdd("bio_id")} className="link-underline">
+            + ID paragraph
+          </button>
+        </div>
+      </div>
+      <div className="space-y-4">
+        {Array.from({ length: rows }).map((_, i) => (
+          <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ParagraphCell
+              label={`EN — Paragraph ${i + 1}`}
+              value={en[i]}
+              empty={i >= en.length}
+              onChange={(v) => onUpdate("bio", i, v)}
+              onRemove={() => onRemove("bio", i)}
+            />
+            <ParagraphCell
+              label={`ID — Paragraf ${i + 1}`}
+              value={id[i]}
+              empty={i >= id.length}
+              onChange={(v) => onUpdate("bio_id", i, v)}
+              onRemove={() => onRemove("bio_id", i)}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ParagraphCell({ label, value, empty, onChange, onRemove }) {
+  if (empty) {
+    return (
+      <div className="border border-dashed border-[#e5e1d8] p-4 text-xs text-[#5e5b55] italic">
+        ({label.startsWith("ID") ? "Bahasa version" : "English version"} not yet provided)
+      </div>
+    );
+  }
+  return (
+    <div className="flex items-start gap-2">
+      <div className="flex-1">
+        <TextArea label={label} value={value || ""} onChange={onChange} rows={4} />
+      </div>
+      <button
+        type="button"
+        onClick={onRemove}
+        className="mt-7 p-2 text-[#7a2d2a] hover:text-[#141517]"
+        aria-label="Remove"
+      >
+        <Trash2 size={16} />
+      </button>
+    </div>
+  );
 }
 
 // ------------- Case Studies Tab -------------
@@ -596,14 +680,20 @@ function CaseStudiesTab() {
     mutationFn: () =>
       adminCreateCaseStudy({
         title: "New case study",
+        title_id: "",
         subtitle: "",
+        subtitle_id: "",
         category: "strategic-partnerships",
         year: "",
         cover_image: "",
         summary: "",
+        summary_id: "",
         challenge: "",
+        challenge_id: "",
         approach: [],
+        approach_id: [],
         outcomes: [],
+        outcomes_id: [],
         metrics: [],
         client: "",
         tags: [],
@@ -724,7 +814,6 @@ function CaseStudyEditor({ caseStudy, onDelete }) {
   return (
     <div className="border border-[#e5e1d8] p-6 md:p-8 bg-[#fdfbf7]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <TextField label="Title" value={form.title} onChange={(v) => u("title", v)} />
         <TextField label="Client / Organisation" value={form.client} onChange={(v) => u("client", v)} />
         <label className="block">
           <span className="text-[11px] tracking-[0.22em] uppercase text-[#5e5b55]">Category</span>
@@ -739,33 +828,57 @@ function CaseStudyEditor({ caseStudy, onDelete }) {
           </select>
         </label>
         <TextField label="Year" value={form.year} onChange={(v) => u("year", v)} placeholder="2024 or 2018 — 2020" />
-        <div className="md:col-span-2">
-          <TextField label="Subtitle (one line)" value={form.subtitle} onChange={(v) => u("subtitle", v)} />
-        </div>
-        <div className="md:col-span-2">
-          <TextArea label="Summary (gallery card body)" value={form.summary} onChange={(v) => u("summary", v)} rows={3} />
-        </div>
-        <div className="md:col-span-2">
-          <TextArea label="Challenge" value={form.challenge} onChange={(v) => u("challenge", v)} rows={4} />
-        </div>
         <TextField label="Sort order (lower = earlier)" type="number" value={form.sort_order} onChange={(v) => u("sort_order", parseInt(v) || 0)} />
-        <TextField label="Cover image URL" value={form.cover_image} onChange={(v) => u("cover_image", v)} placeholder="/api/uploads/... or https://..." />
+        <div className="md:col-span-2">
+          <TextField label="Cover image URL" value={form.cover_image} onChange={(v) => u("cover_image", v)} placeholder="/api/uploads/... or https://..." />
+        </div>
       </div>
 
-      <ListEditor
-        title="Approach steps"
-        items={form.approach}
-        onChange={(i, v) => updateList("approach", i, v)}
-        onAdd={() => addList("approach", "")}
-        onRemove={(i) => removeList("approach", i)}
+      <div className="mt-6 mb-2 overline">Title</div>
+      <BilingualText
+        labelEn="Title (EN)" labelId="Title (ID — Bahasa)"
+        valueEn={form.title} valueId={form.title_id}
+        onEn={(v) => u("title", v)} onId={(v) => u("title_id", v)}
+      />
+      <div className="overline mb-2">Subtitle</div>
+      <BilingualText
+        labelEn="Subtitle (EN)" labelId="Subtitle (ID — Bahasa)"
+        valueEn={form.subtitle} valueId={form.subtitle_id}
+        onEn={(v) => u("subtitle", v)} onId={(v) => u("subtitle_id", v)}
+      />
+      <div className="overline mb-2">Summary</div>
+      <BilingualArea
+        labelEn="Summary (EN)" labelId="Summary (ID — Bahasa)"
+        valueEn={form.summary} valueId={form.summary_id}
+        onEn={(v) => u("summary", v)} onId={(v) => u("summary_id", v)}
+        rows={3}
+      />
+      <div className="overline mb-2">Challenge</div>
+      <BilingualArea
+        labelEn="Challenge (EN)" labelId="Challenge (ID — Bahasa)"
+        valueEn={form.challenge} valueId={form.challenge_id}
+        onEn={(v) => u("challenge", v)} onId={(v) => u("challenge_id", v)}
+        rows={4}
       />
 
-      <ListEditor
+      <BilingualList
+        title="Approach steps"
+        enItems={form.approach}
+        idItems={form.approach_id}
+        onUpdate={(k, i, v) => updateList(k, i, v)}
+        onAdd={(k) => addList(k, "")}
+        onRemove={(k, i) => removeList(k, i)}
+        keys={{ en: "approach", id: "approach_id" }}
+      />
+
+      <BilingualList
         title="Outcomes"
-        items={form.outcomes}
-        onChange={(i, v) => updateList("outcomes", i, v)}
-        onAdd={() => addList("outcomes", "")}
-        onRemove={(i) => removeList("outcomes", i)}
+        enItems={form.outcomes}
+        idItems={form.outcomes_id}
+        onUpdate={(k, i, v) => updateList(k, i, v)}
+        onAdd={(k) => addList(k, "")}
+        onRemove={(k, i) => removeList(k, i)}
+        keys={{ en: "outcomes", id: "outcomes_id" }}
       />
 
       <div className="mt-8">
@@ -892,6 +1005,30 @@ function ListEditor({ title, items, onChange, onAdd, onRemove }) {
             </button>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function BilingualList({ title, enItems, idItems, onUpdate, onAdd, onRemove, keys }) {
+  return (
+    <div className="mt-8 border-t border-[#e5e1d8] pt-6">
+      <p className="overline mb-3">{title}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <ListEditor
+          title="English"
+          items={enItems || []}
+          onChange={(i, v) => onUpdate(keys.en, i, v)}
+          onAdd={() => onAdd(keys.en)}
+          onRemove={(i) => onRemove(keys.en, i)}
+        />
+        <ListEditor
+          title="Bahasa Indonesia"
+          items={idItems || []}
+          onChange={(i, v) => onUpdate(keys.id, i, v)}
+          onAdd={() => onAdd(keys.id)}
+          onRemove={(i) => onRemove(keys.id, i)}
+        />
       </div>
     </div>
   );

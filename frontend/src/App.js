@@ -7,6 +7,7 @@ import AdminLogin from "@/pages/admin/AdminLogin";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import ProtectedRoute from "@/components/admin/ProtectedRoute";
 import { AuthProvider } from "@/context/AuthContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { Toaster } from "@/components/ui/sonner";
 
 function App() {
@@ -31,20 +32,22 @@ function App() {
     <div className="App">
       <div className="grain" aria-hidden="true" />
       <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Portfolio />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Portfolio />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </AuthProvider>
+        </LanguageProvider>
       </BrowserRouter>
       <Toaster position="bottom-right" />
     </div>

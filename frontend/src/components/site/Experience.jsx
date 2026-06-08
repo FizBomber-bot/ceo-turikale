@@ -1,6 +1,9 @@
 import { experience } from "@/data/site";
+import { useLang } from "@/context/LanguageContext";
+import { pickLang } from "@/i18n/strings";
 
 export default function Experience() {
+  const { t, lang } = useLang();
   return (
     <section
       id="experience"
@@ -10,45 +13,45 @@ export default function Experience() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
           <div className="md:col-span-5">
-            <p className="overline mb-6">Experience</p>
-            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517]">
-              From classroom
-              <br />
-              to cooperatives.
+            <p className="overline mb-6">{t("exp.overline")}</p>
+            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517] whitespace-pre-line">
+              {t("exp.title")}
             </h2>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:flex md:items-end">
             <p className="text-base md:text-lg text-[#5e5b55] leading-relaxed">
-              Seventeen years across tutoring, EdTech leadership, SME
-              facilitation and national government programmes — every chapter
-              compounding into the next.
+              {t("exp.description")}
             </p>
           </div>
         </div>
 
         <div className="border-t border-[#141517]">
-          {experience.map((e, i) => (
-            <div
-              key={i}
-              data-testid={`exp-${i}`}
-              className="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 md:py-10 border-b border-[#e5e1d8] group hover:bg-[#fdfbf7] transition-colors"
-            >
-              <div className="md:col-span-2 text-xs tracking-[0.18em] uppercase text-[#5e5b55] pt-1">
-                {e.period}
+          {experience.map((e, i) => {
+            const role = pickLang(e.role, e.role_id, lang);
+            const org = pickLang(e.org, e.org_id, lang);
+            const period = pickLang(e.period, e.period_id, lang);
+            const note = pickLang(e.note, e.note_id, lang);
+            return (
+              <div
+                key={i}
+                data-testid={`exp-${i}`}
+                className="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 md:py-10 border-b border-[#e5e1d8] group hover:bg-[#fdfbf7] transition-colors"
+              >
+                <div className="md:col-span-2 text-xs tracking-[0.18em] uppercase text-[#5e5b55] pt-1">
+                  {period}
+                </div>
+                <div className="md:col-span-5">
+                  <h3 className="font-serif text-2xl md:text-3xl text-[#141517] tracking-tight">
+                    {role}
+                  </h3>
+                </div>
+                <div className="md:col-span-3 text-base text-[#141517] pt-1">{org}</div>
+                <div className="md:col-span-2 text-sm text-[#5e5b55] pt-1.5 italic font-serif">
+                  {note}
+                </div>
               </div>
-              <div className="md:col-span-5">
-                <h3 className="font-serif text-2xl md:text-3xl text-[#141517] tracking-tight">
-                  {e.role}
-                </h3>
-              </div>
-              <div className="md:col-span-3 text-base text-[#141517] pt-1">
-                {e.org}
-              </div>
-              <div className="md:col-span-2 text-sm text-[#5e5b55] pt-1.5 italic font-serif">
-                {e.note}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

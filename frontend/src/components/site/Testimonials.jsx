@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { testimonials } from "@/data/site";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { useLang } from "@/context/LanguageContext";
+import { pickLang } from "@/i18n/strings";
 
 export default function Testimonials() {
+  const { t, lang } = useLang();
   const [i, setI] = useState(0);
-  const t = testimonials[i];
+  const tItem = testimonials[i];
   const next = () => setI((p) => (p + 1) % testimonials.length);
   const prev = () => setI((p) => (p - 1 + testimonials.length) % testimonials.length);
+
+  const quote = pickLang(tItem.quote, tItem.quote_id, lang);
+  const name = pickLang(tItem.name, tItem.name_id, lang);
+  const role = pickLang(tItem.role, tItem.role_id, lang);
 
   return (
     <section
@@ -17,10 +24,10 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
             <p className="overline mb-6" style={{ color: "#c9a08e" }}>
-              Endorsements
+              {t("test.overline")}
             </p>
             <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
-              From mentees, programme partners and the founders I&rsquo;ve worked beside.
+              {t("test.title")}
             </h2>
           </div>
 
@@ -30,15 +37,15 @@ export default function Testimonials() {
               data-testid={`testimonial-${i}`}
               className="mt-8 font-serif text-2xl md:text-3xl lg:text-4xl leading-[1.25] font-light"
             >
-              {t.quote}
+              {quote}
             </blockquote>
             <div className="mt-10 flex items-center gap-5">
               <div className="h-14 w-14 overflow-hidden ring-1 ring-[#fdfbf7]/20">
-                <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
+                <img src={tItem.avatar} alt={name} className="w-full h-full object-cover" />
               </div>
               <div>
-                <div className="font-serif text-xl">{t.name}</div>
-                <div className="text-sm text-[#fdfbf7]/65 tracking-wide">{t.role}</div>
+                <div className="font-serif text-xl">{name}</div>
+                <div className="text-sm text-[#fdfbf7]/65 tracking-wide">{role}</div>
               </div>
             </div>
 
@@ -47,7 +54,7 @@ export default function Testimonials() {
                 data-testid="testimonial-prev"
                 onClick={prev}
                 className="h-12 w-12 border border-[#fdfbf7]/30 inline-flex items-center justify-center hover:bg-[#fdfbf7] hover:text-[#141517] transition-colors"
-                aria-label="Previous testimonial"
+                aria-label={t("test.prev")}
               >
                 <ArrowLeft size={18} />
               </button>
@@ -55,7 +62,7 @@ export default function Testimonials() {
                 data-testid="testimonial-next"
                 onClick={next}
                 className="h-12 w-12 border border-[#fdfbf7]/30 inline-flex items-center justify-center hover:bg-[#fdfbf7] hover:text-[#141517] transition-colors"
-                aria-label="Next testimonial"
+                aria-label={t("test.next")}
               >
                 <ArrowRight size={18} />
               </button>
