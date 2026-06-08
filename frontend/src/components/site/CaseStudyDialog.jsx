@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 
 export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
@@ -10,6 +10,7 @@ export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
         className="max-w-[1100px] w-[95vw] max-h-[92vh] overflow-y-auto p-0 bg-[#fdfbf7] border border-[#e5e1d8] rounded-none"
       >
         <DialogTitle className="sr-only">{caseStudy.title}</DialogTitle>
+        <DialogDescription className="sr-only">{caseStudy.subtitle}</DialogDescription>
         <div className="relative">
           <div className="aspect-[16/8] w-full overflow-hidden bg-[#dcd6cc]">
             <img
