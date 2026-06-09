@@ -432,7 +432,7 @@ DEFAULT_CASE_STUDIES = [
         "subtitle_id": "Mentor kohort untuk program Tenaga Kerja Mandiri Pemula dari Kementerian Ketenagakerjaan.",
         "category": "client-success",
         "year": "2024",
-        "cover_image": "https://images.unsplash.com/photo-1758518727613-00192aed759b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
+        "cover_image": "https://customer-assets.emergentagent.com/job_github-builder-24/artifacts/nu09qpz0_Kunjungan%20Tim%20Pitu%20Riase.jpg",
         "client": "Ministry of Manpower × Politeknik STIA LAN Bandung",
         "summary": "Upgraded 20 SMEs to ready-to-fund status with a real business plan, legality and branding.",
         "summary_id": "Mengupgrade 20 UKM menjadi status siap-didanai dengan rencana bisnis, legalitas, dan branding yang nyata.",
