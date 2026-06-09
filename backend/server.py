@@ -390,7 +390,7 @@ DEFAULT_CASE_STUDIES = [
         "subtitle_id": "Pendamping Bisnis dalam program Koperasi Desa Merah Putih.",
         "category": "strategic-partnerships",
         "year": "2025",
-        "cover_image": "https://images.pexels.com/photos/7698712/pexels-photo-7698712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "cover_image": "https://customer-assets.emergentagent.com/job_github-builder-24/artifacts/3atjnvks_camba%20pendampingan%20RAT.png",
         "client": "Kemenkop RI · Koperasi Desa Merah Putih",
         "summary": "Helping village cooperatives operate as functioning business units that stimulate the local economy.",
         "summary_id": "Membantu koperasi desa beroperasi sebagai unit bisnis yang berfungsi dan menggerakkan ekonomi lokal.",
