@@ -474,7 +474,7 @@ DEFAULT_CASE_STUDIES = [
         "subtitle_id": "Co-founder dan memimpin EdTech tahap awal hingga mencapai 714+ pengguna terdaftar.",
         "category": "gtm-strategy",
         "year": "2018 — 2020",
-        "cover_image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMG1lZXRpbmclMjBtb2Rlcm4lMjBvZmZpY2V8ZW58MHx8fHwxNzgwODk2NjA4fDA&ixlib=rb-4.1.0&q=85",
+        "cover_image": "https://customer-assets.emergentagent.com/job_github-builder-24/artifacts/7v68t8fp_Pitching%20AIDU%20.jpg",
         "client": "AIDU (EdTech startup, Makassar)",
         "summary": "Co-founded and led the first dedicated exam-management EdTech in Makassar, growing it to 714+ users.",
         "summary_id": "Co-founder dan memimpin EdTech manajemen ujian pertama di Makassar hingga 714+ pengguna.",
