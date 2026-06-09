@@ -12,7 +12,7 @@ import Footer from "@/components/site/Footer";
 
 export default function Portfolio() {
   return (
-    <main data-testid="portfolio-page" className="bg-[#fdfbf7] text-[#141517] min-h-screen">
+    <main data-testid="portfolio-page" className="bg-[#f1ece9] text-[#1f444c] min-h-screen">
       <Navbar />
       <Hero />
       <NowRunning />

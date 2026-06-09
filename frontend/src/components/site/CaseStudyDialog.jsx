@@ -18,12 +18,12 @@ export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         data-testid="case-study-dialog"
-        className="max-w-[1100px] w-[95vw] max-h-[92vh] overflow-y-auto p-0 bg-[#fdfbf7] border border-[#e5e1d8] rounded-none"
+        className="max-w-[1100px] w-[95vw] max-h-[92vh] overflow-y-auto p-0 bg-[#f1ece9] border border-[#e3dcd5] rounded-none"
       >
         <DialogTitle className="sr-only">{title}</DialogTitle>
         <DialogDescription className="sr-only">{subtitle}</DialogDescription>
         <div className="relative">
-          <div className="aspect-[16/8] w-full overflow-hidden bg-[#dcd6cc]">
+          <div className="aspect-[16/8] w-full overflow-hidden bg-[#d8cfc6]">
             <img
               src={assetUrl(caseStudy.cover_image)}
               alt={title}
@@ -33,7 +33,7 @@ export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
           <button
             data-testid="case-study-close"
             onClick={() => onOpenChange(false)}
-            className="absolute top-4 right-4 p-2 bg-[#fdfbf7]/90 border border-[#e5e1d8] hover:bg-[#141517] hover:text-[#fdfbf7] transition-colors"
+            className="absolute top-4 right-4 p-2 bg-[#f1ece9]/90 border border-[#e3dcd5] hover:bg-[#1f444c] hover:text-[#f1ece9] transition-colors"
             aria-label={t("case.close")}
           >
             <X size={18} />
@@ -41,24 +41,24 @@ export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
         </div>
 
         <div className="p-8 md:p-14 lg:p-16">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs tracking-[0.2em] uppercase text-[#5e5b55] mb-6">
-            <span className="text-[#7a2d2a]">{caseStudy.year}</span>
-            <span className="h-px w-8 bg-[#e5e1d8]" />
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs tracking-[0.2em] uppercase text-[#5b6e72] mb-6">
+            <span className="text-[#a45f1a]">{caseStudy.year}</span>
+            <span className="h-px w-8 bg-[#e3dcd5]" />
             <span>{caseStudy.client}</span>
           </div>
 
-          <h2 className="font-serif font-light tracking-tight text-3xl md:text-5xl lg:text-6xl text-[#141517] leading-[1.05]">
+          <h2 className="font-serif font-light tracking-tight text-3xl md:text-5xl lg:text-6xl text-[#1f444c] leading-[1.05]">
             {title}
           </h2>
-          <p className="mt-6 max-w-3xl text-lg md:text-xl text-[#5e5b55] leading-relaxed font-serif italic">
+          <p className="mt-6 max-w-3xl text-lg md:text-xl text-[#5b6e72] leading-relaxed font-serif italic">
             {subtitle}
           </p>
 
           {/* Metrics row */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#e5e1d8] border border-[#e5e1d8]">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#e3dcd5] border border-[#e3dcd5]">
             {(caseStudy.metrics || []).map((m) => (
-              <div key={m.label} className="bg-[#fdfbf7] p-6">
-                <div className="font-serif font-light text-4xl md:text-5xl text-[#141517]">
+              <div key={m.label} className="bg-[#f1ece9] p-6">
+                <div className="font-serif font-light text-4xl md:text-5xl text-[#1f444c]">
                   {m.value}
                 </div>
                 <div className="mt-2 overline">{m.label}</div>
@@ -71,23 +71,23 @@ export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
               <p className="overline mb-3">{t("case.challenge")}</p>
             </div>
             <div className="md:col-span-8">
-              <p className="text-base md:text-lg text-[#5e5b55] leading-relaxed">
+              <p className="text-base md:text-lg text-[#5b6e72] leading-relaxed">
                 {challenge}
               </p>
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-10 border-t border-[#e5e1d8] pt-12">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-10 border-t border-[#e3dcd5] pt-12">
             <div className="md:col-span-4">
               <p className="overline mb-3">{t("case.approach")}</p>
             </div>
             <ol className="md:col-span-8 space-y-5">
               {approach.map((step, i) => (
                 <li key={i} className="flex gap-5">
-                  <span className="font-serif text-2xl text-[#7a2d2a] leading-none tabular-nums">
+                  <span className="font-serif text-2xl text-[#a45f1a] leading-none tabular-nums">
                     0{i + 1}
                   </span>
-                  <span className="text-base md:text-lg text-[#141517] leading-relaxed">
+                  <span className="text-base md:text-lg text-[#1f444c] leading-relaxed">
                     {step}
                   </span>
                 </li>
@@ -95,25 +95,25 @@ export default function CaseStudyDialog({ caseStudy, open, onOpenChange }) {
             </ol>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-10 border-t border-[#e5e1d8] pt-12">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-10 border-t border-[#e3dcd5] pt-12">
             <div className="md:col-span-4">
               <p className="overline mb-3">{t("case.outcome")}</p>
             </div>
             <ul className="md:col-span-8 space-y-4">
               {outcomes.map((o, i) => (
-                <li key={i} className="flex gap-4 text-base md:text-lg text-[#141517] leading-relaxed">
-                  <span className="mt-2.5 h-1.5 w-1.5 bg-[#7a2d2a] shrink-0" />
+                <li key={i} className="flex gap-4 text-base md:text-lg text-[#1f444c] leading-relaxed">
+                  <span className="mt-2.5 h-1.5 w-1.5 bg-[#a45f1a] shrink-0" />
                   {o}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-14 pt-8 border-t border-[#e5e1d8] flex flex-wrap gap-3">
+          <div className="mt-14 pt-8 border-t border-[#e3dcd5] flex flex-wrap gap-3">
             {(caseStudy.tags || []).map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1.5 text-[11px] tracking-[0.18em] uppercase border border-[#e5e1d8] text-[#5e5b55]"
+                className="px-3 py-1.5 text-[11px] tracking-[0.18em] uppercase border border-[#e3dcd5] text-[#5b6e72]"
               >
                 {tag}
               </span>

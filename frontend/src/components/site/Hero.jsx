@@ -30,19 +30,19 @@ export default function Hero() {
               {t("hero.overline")}
             </p>
             <h1
-              className="font-serif font-light tracking-tighter leading-[0.95] text-[#141517]
+              className="font-serif font-light tracking-tighter leading-[0.95] text-[#1f444c]
                 text-[3.4rem] sm:text-7xl md:text-8xl lg:text-[8.5rem]"
               data-testid="hero-name"
             >
               {(profile.name || "").split(" ").map((w, i, arr) => (
                 <span key={i}>
                   {w}
-                  {i < arr.length - 1 ? <br /> : <span className="text-[#7a2d2a]">.</span>}
+                  {i < arr.length - 1 ? <br /> : <span className="text-[#a45f1a]">.</span>}
                 </span>
               ))}
             </h1>
             <p
-              className="mt-10 max-w-xl text-base md:text-lg text-[#5e5b55] leading-relaxed"
+              className="mt-10 max-w-xl text-base md:text-lg text-[#5b6e72] leading-relaxed"
               data-testid="hero-intro"
             >
               {intro}
@@ -69,9 +69,9 @@ export default function Hero() {
               </button>
             </div>
 
-            <div className="mt-16 flex items-center gap-6 text-xs tracking-[0.18em] uppercase text-[#5e5b55]">
+            <div className="mt-16 flex items-center gap-6 text-xs tracking-[0.18em] uppercase text-[#5b6e72]">
               <span>{location}</span>
-              <span className="h-px w-10 bg-[#e5e1d8]" />
+              <span className="h-px w-10 bg-[#e3dcd5]" />
               <span>{title}</span>
             </div>
           </div>
@@ -83,14 +83,14 @@ export default function Hero() {
                 alt={`${profile.name} portrait`}
                 className="absolute inset-0 w-full h-full object-cover object-center"
               />
-              <div className="absolute inset-0 ring-1 ring-[#e5e1d8] pointer-events-none" />
+              <div className="absolute inset-0 ring-1 ring-[#e3dcd5] pointer-events-none" />
             </div>
             <div className="absolute -bottom-6 -left-6 hidden md:block">
-              <div className="bg-[#fdfbf7] px-5 py-4 border border-[#e5e1d8]">
-                <div className="text-[10px] tracking-[0.22em] uppercase text-[#7a2d2a]">
+              <div className="bg-[#f1ece9] px-5 py-4 border border-[#e3dcd5]">
+                <div className="text-[10px] tracking-[0.22em] uppercase text-[#a45f1a]">
                   {t("hero.availableFor")}
                 </div>
-                <div className="font-serif text-xl text-[#141517] mt-1">
+                <div className="font-serif text-xl text-[#1f444c] mt-1">
                   {t("hero.availableValue")}
                 </div>
               </div>
@@ -98,10 +98,10 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mt-24 md:mt-32 border-t border-[#e5e1d8] pt-8">
+        <div className="mt-24 md:mt-32 border-t border-[#e3dcd5] pt-8">
           <div className="flex items-baseline justify-between flex-wrap gap-4">
             <p className="overline">{t("hero.partners.overline")}</p>
-            <p className="text-xs text-[#5e5b55] tracking-wide">
+            <p className="text-xs text-[#5b6e72] tracking-wide">
               {t("hero.partners.caption")}
             </p>
           </div>

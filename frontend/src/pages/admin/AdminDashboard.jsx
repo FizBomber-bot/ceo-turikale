@@ -43,12 +43,12 @@ export default function AdminDashboard() {
   if (checked && !user) return <Navigate to="/admin/login" replace />;
 
   return (
-    <main data-testid="admin-dashboard" className="min-h-screen bg-[#fdfbf7]">
-      <header className="border-b border-[#e5e1d8] bg-[#fdfbf7] sticky top-0 z-30 backdrop-blur">
+    <main data-testid="admin-dashboard" className="min-h-screen bg-[#f1ece9]">
+      <header className="border-b border-[#e3dcd5] bg-[#f1ece9] sticky top-0 z-30 backdrop-blur">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-4 flex items-center justify-between gap-6">
           <div className="font-serif text-xl md:text-2xl">
-            Admin<span className="text-[#7a2d2a]">.</span>
-            <span className="ml-2 text-xs tracking-[0.22em] uppercase text-[#5e5b55]">
+            Admin<span className="text-[#a45f1a]">.</span>
+            <span className="ml-2 text-xs tracking-[0.22em] uppercase text-[#5b6e72]">
               Andry Ridwan Portfolio
             </span>
           </div>
@@ -83,7 +83,7 @@ export default function AdminDashboard() {
                 data-testid={`admin-tab-${t.id}`}
                 onClick={() => setTab(t.id)}
                 className={`text-sm pb-3 border-b-2 transition-colors whitespace-nowrap ${
-                  active ? "border-[#7a2d2a] text-[#7a2d2a]" : "border-transparent text-[#141517] hover:border-[#141517]"
+                  active ? "border-[#a45f1a] text-[#a45f1a]" : "border-transparent text-[#1f444c] hover:border-[#1f444c]"
                 }`}
               >
                 {t.label}
@@ -108,11 +108,11 @@ function SectionHeader({ overline, title, description }) {
   return (
     <div className="mb-10">
       <p className="overline mb-3">{overline}</p>
-      <h2 className="font-serif font-light text-3xl md:text-4xl text-[#141517] tracking-tight">
+      <h2 className="font-serif font-light text-3xl md:text-4xl text-[#1f444c] tracking-tight">
         {title}
       </h2>
       {description && (
-        <p className="mt-3 text-[#5e5b55] max-w-2xl">{description}</p>
+        <p className="mt-3 text-[#5b6e72] max-w-2xl">{description}</p>
       )}
     </div>
   );
@@ -121,7 +121,7 @@ function SectionHeader({ overline, title, description }) {
 function TextField({ label, value, onChange, type = "text", placeholder }) {
   return (
     <label className="block">
-      <span className="text-[11px] tracking-[0.22em] uppercase text-[#5e5b55]">
+      <span className="text-[11px] tracking-[0.22em] uppercase text-[#5b6e72]">
         {label}
       </span>
       <input
@@ -129,7 +129,7 @@ function TextField({ label, value, onChange, type = "text", placeholder }) {
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="mt-2 w-full bg-[#fdfbf7] border border-[#e5e1d8] px-3 py-2.5 text-sm text-[#141517] focus:outline-none focus:border-[#141517]"
+        className="mt-2 w-full bg-[#f1ece9] border border-[#e3dcd5] px-3 py-2.5 text-sm text-[#1f444c] focus:outline-none focus:border-[#1f444c]"
       />
     </label>
   );
@@ -138,7 +138,7 @@ function TextField({ label, value, onChange, type = "text", placeholder }) {
 function TextArea({ label, value, onChange, rows = 4, placeholder }) {
   return (
     <label className="block">
-      <span className="text-[11px] tracking-[0.22em] uppercase text-[#5e5b55]">
+      <span className="text-[11px] tracking-[0.22em] uppercase text-[#5b6e72]">
         {label}
       </span>
       <textarea
@@ -146,7 +146,7 @@ function TextArea({ label, value, onChange, rows = 4, placeholder }) {
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         rows={rows}
-        className="mt-2 w-full bg-[#fdfbf7] border border-[#e5e1d8] px-3 py-2.5 text-sm text-[#141517] focus:outline-none focus:border-[#141517] resize-y"
+        className="mt-2 w-full bg-[#f1ece9] border border-[#e3dcd5] px-3 py-2.5 text-sm text-[#1f444c] focus:outline-none focus:border-[#1f444c] resize-y"
       />
     </label>
   );
@@ -209,9 +209,9 @@ function PhotosTab() {
         </div>
       </div>
 
-      <div className="mt-16 border-t border-[#e5e1d8] pt-10">
+      <div className="mt-16 border-t border-[#e3dcd5] pt-10">
         <p className="overline mb-4">Case study covers</p>
-        <p className="text-sm text-[#5e5b55] mb-8 max-w-2xl">
+        <p className="text-sm text-[#5b6e72] mb-8 max-w-2xl">
           Each cover is the image that appears for that engagement in the
           gallery. Recommended ratio: landscape, around 1400×900.
         </p>
@@ -231,10 +231,10 @@ function PhotosTab() {
                 }
               />
               <div className="mt-3">
-                <div className="text-xs tracking-[0.18em] uppercase text-[#7a2d2a]">
+                <div className="text-xs tracking-[0.18em] uppercase text-[#a45f1a]">
                   {cs.year}
                 </div>
-                <div className="font-serif text-lg text-[#141517] leading-tight mt-1">
+                <div className="font-serif text-lg text-[#1f444c] leading-tight mt-1">
                   {cs.title}
                 </div>
               </div>
@@ -319,17 +319,17 @@ function ImageUploader({ currentUrl, aspect = "aspect-[4/3]", onUploaded, testId
 
   return (
     <div>
-      <div className={`relative ${aspect} w-full overflow-hidden bg-[#e5e1d8] border border-[#e5e1d8]`}>
+      <div className={`relative ${aspect} w-full overflow-hidden bg-[#e3dcd5] border border-[#e3dcd5]`}>
         {preview ? (
           <img src={assetUrl(preview)} alt="preview" className="absolute inset-0 w-full h-full object-cover" />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-xs tracking-[0.22em] uppercase text-[#5e5b55]">
+          <div className="absolute inset-0 flex items-center justify-center text-xs tracking-[0.22em] uppercase text-[#5b6e72]">
             No image yet
           </div>
         )}
         {busy && (
-          <div className="absolute inset-0 bg-[#fdfbf7]/70 flex items-center justify-center">
-            <Loader2 className="animate-spin text-[#141517]" size={24} />
+          <div className="absolute inset-0 bg-[#f1ece9]/70 flex items-center justify-center">
+            <Loader2 className="animate-spin text-[#1f444c]" size={24} />
           </div>
         )}
       </div>
@@ -384,12 +384,12 @@ function CvUploader() {
   };
 
   return (
-    <div className="border border-[#e5e1d8] bg-[#fdfbf7] p-6 md:p-8">
+    <div className="border border-[#e3dcd5] bg-[#f1ece9] p-6 md:p-8">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div>
-          <h3 className="font-serif text-2xl text-[#141517]">CV PDF</h3>
-          <p className="mt-2 text-sm text-[#5e5b55] max-w-md">
-            The public <code className="text-[#141517]">/api/cv</code> endpoint
+          <h3 className="font-serif text-2xl text-[#1f444c]">CV PDF</h3>
+          <p className="mt-2 text-sm text-[#5b6e72] max-w-md">
+            The public <code className="text-[#1f444c]">/api/cv</code> endpoint
             serves whatever file you upload here. Replace anytime.
           </p>
         </div>
@@ -437,7 +437,7 @@ function CvUploader() {
 // ------------- Profile Tab -------------
 function ProfileTab() {
   const { data: profile } = useQuery({ queryKey: ["admin-profile"], queryFn: adminGetProfile });
-  if (!profile) return <p className="text-sm text-[#5e5b55]">Loading profile…</p>;
+  if (!profile) return <p className="text-sm text-[#5b6e72]">Loading profile…</p>;
   return <ProfileForm key={profile.name + "-" + (profile.bio || []).length} initial={profile} />;
 }
 
@@ -528,7 +528,7 @@ function ProfileForm({ initial }) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {form.stats.map((s, i) => (
-            <div key={i} className="flex items-end gap-3 border border-[#e5e1d8] p-4 bg-[#fdfbf7]">
+            <div key={i} className="flex items-end gap-3 border border-[#e3dcd5] p-4 bg-[#f1ece9]">
               <div className="flex-1 grid grid-cols-3 gap-3">
                 <TextField label="Value" value={s.value} onChange={(v) => updateStat(i, "value", v)} />
                 <TextField label="Label (EN)" value={s.label} onChange={(v) => updateStat(i, "label", v)} />
@@ -537,7 +537,7 @@ function ProfileForm({ initial }) {
               <button
                 type="button"
                 onClick={() => removeStat(i)}
-                className="p-2 text-[#7a2d2a] hover:text-[#141517]"
+                className="p-2 text-[#a45f1a] hover:text-[#1f444c]"
                 aria-label="Remove stat"
               >
                 <Trash2 size={16} />
@@ -645,7 +645,7 @@ function BilingualParagraphs({ title, en, id, onAdd, onUpdate, onRemove }) {
 function ParagraphCell({ label, value, empty, onChange, onRemove }) {
   if (empty) {
     return (
-      <div className="border border-dashed border-[#e5e1d8] p-4 text-xs text-[#5e5b55] italic">
+      <div className="border border-dashed border-[#e3dcd5] p-4 text-xs text-[#5b6e72] italic">
         ({label.startsWith("ID") ? "Bahasa version" : "English version"} not yet provided)
       </div>
     );
@@ -658,7 +658,7 @@ function ParagraphCell({ label, value, empty, onChange, onRemove }) {
       <button
         type="button"
         onClick={onRemove}
-        className="mt-7 p-2 text-[#7a2d2a] hover:text-[#141517]"
+        className="mt-7 p-2 text-[#a45f1a] hover:text-[#1f444c]"
         aria-label="Remove"
       >
         <Trash2 size={16} />
@@ -740,7 +740,7 @@ function CaseStudiesTab() {
           >
             + Add new case study
           </button>
-          <ul className="mt-4 divide-y divide-[#e5e1d8] border border-[#e5e1d8]">
+          <ul className="mt-4 divide-y divide-[#e3dcd5] border border-[#e3dcd5]">
             {cases.map((cs) => (
               <li key={cs.id}>
                 <button
@@ -748,13 +748,13 @@ function CaseStudiesTab() {
                   data-testid={`case-pick-${cs.id}`}
                   onClick={() => setEditingId(cs.id)}
                   className={`w-full text-left p-4 transition-colors ${
-                    editingId === cs.id ? "bg-[#fdfbf7]" : "hover:bg-[#fdfbf7]"
+                    editingId === cs.id ? "bg-[#f1ece9]" : "hover:bg-[#f1ece9]"
                   }`}
                 >
-                  <div className="text-[10px] tracking-[0.22em] uppercase text-[#7a2d2a]">
+                  <div className="text-[10px] tracking-[0.22em] uppercase text-[#a45f1a]">
                     {cs.year || "—"} · {CATEGORY_OPTIONS.find((o) => o.id === cs.category)?.label || cs.category}
                   </div>
-                  <div className="font-serif text-base text-[#141517] mt-1 leading-tight">
+                  <div className="font-serif text-base text-[#1f444c] mt-1 leading-tight">
                     {cs.title}
                   </div>
                 </button>
@@ -775,7 +775,7 @@ function CaseStudiesTab() {
               }}
             />
           ) : (
-            <div className="border border-[#e5e1d8] p-10 text-center text-[#5e5b55]">
+            <div className="border border-[#e3dcd5] p-10 text-center text-[#5b6e72]">
               <p className="overline mb-3">No case study selected</p>
               <p className="text-sm">Pick one from the list to start editing, or create a new one.</p>
             </div>
@@ -812,15 +812,15 @@ function CaseStudyEditor({ caseStudy, onDelete }) {
     setForm((f) => ({ ...f, metrics: f.metrics.map((m, idx) => (idx === i ? { ...m, [field]: v } : m)) }));
 
   return (
-    <div className="border border-[#e5e1d8] p-6 md:p-8 bg-[#fdfbf7]">
+    <div className="border border-[#e3dcd5] p-6 md:p-8 bg-[#f1ece9]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <TextField label="Client / Organisation" value={form.client} onChange={(v) => u("client", v)} />
         <label className="block">
-          <span className="text-[11px] tracking-[0.22em] uppercase text-[#5e5b55]">Category</span>
+          <span className="text-[11px] tracking-[0.22em] uppercase text-[#5b6e72]">Category</span>
           <select
             value={form.category}
             onChange={(e) => u("category", e.target.value)}
-            className="mt-2 w-full bg-[#fdfbf7] border border-[#e5e1d8] px-3 py-2.5 text-sm text-[#141517] focus:outline-none focus:border-[#141517]"
+            className="mt-2 w-full bg-[#f1ece9] border border-[#e3dcd5] px-3 py-2.5 text-sm text-[#1f444c] focus:outline-none focus:border-[#1f444c]"
           >
             {CATEGORY_OPTIONS.map((o) => (
               <option key={o.id} value={o.id}>{o.label}</option>
@@ -894,7 +894,7 @@ function CaseStudyEditor({ caseStudy, onDelete }) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {form.metrics.map((m, i) => (
-            <div key={i} className="flex items-end gap-2 border border-[#e5e1d8] p-3 bg-white">
+            <div key={i} className="flex items-end gap-2 border border-[#e3dcd5] p-3 bg-white">
               <div className="grid grid-cols-2 gap-2 flex-1">
                 <TextField label="Value" value={m.value} onChange={(v) => updateMetric(i, "value", v)} />
                 <TextField label="Label" value={m.label} onChange={(v) => updateMetric(i, "label", v)} />
@@ -902,7 +902,7 @@ function CaseStudyEditor({ caseStudy, onDelete }) {
               <button
                 type="button"
                 onClick={() => removeList("metrics", i)}
-                className="p-2 text-[#7a2d2a] hover:text-[#141517]"
+                className="p-2 text-[#a45f1a] hover:text-[#1f444c]"
               >
                 <Trash2 size={16} />
               </button>
@@ -928,12 +928,12 @@ function CaseStudyEditor({ caseStudy, onDelete }) {
               <input
                 value={t}
                 onChange={(e) => updateList("tags", i, e.target.value)}
-                className="bg-[#fdfbf7] border border-[#e5e1d8] px-3 py-1.5 text-xs"
+                className="bg-[#f1ece9] border border-[#e3dcd5] px-3 py-1.5 text-xs"
               />
               <button
                 type="button"
                 onClick={() => removeList("tags", i)}
-                className="text-[#7a2d2a] hover:text-[#141517]"
+                className="text-[#a45f1a] hover:text-[#1f444c]"
                 aria-label="Remove tag"
               >
                 <Trash2 size={14} />
@@ -948,7 +948,7 @@ function CaseStudyEditor({ caseStudy, onDelete }) {
           type="button"
           onClick={onDelete}
           data-testid={`case-delete-${caseStudy.id}`}
-          className="text-xs tracking-[0.2em] uppercase text-[#7a2d2a] hover:text-[#141517] inline-flex items-center gap-2"
+          className="text-xs tracking-[0.2em] uppercase text-[#a45f1a] hover:text-[#1f444c] inline-flex items-center gap-2"
         >
           <Trash2 size={14} /> Delete
         </button>
@@ -986,19 +986,19 @@ function ListEditor({ title, items, onChange, onAdd, onRemove }) {
       <div className="space-y-2">
         {items.map((it, i) => (
           <div key={i} className="flex items-start gap-3">
-            <span className="text-[10px] tabular-nums mt-3 text-[#7a2d2a]">
+            <span className="text-[10px] tabular-nums mt-3 text-[#a45f1a]">
               {String(i + 1).padStart(2, "0")}
             </span>
             <textarea
               value={it}
               onChange={(e) => onChange(i, e.target.value)}
               rows={2}
-              className="flex-1 bg-[#fdfbf7] border border-[#e5e1d8] px-3 py-2 text-sm resize-y focus:outline-none focus:border-[#141517]"
+              className="flex-1 bg-[#f1ece9] border border-[#e3dcd5] px-3 py-2 text-sm resize-y focus:outline-none focus:border-[#1f444c]"
             />
             <button
               type="button"
               onClick={() => onRemove(i)}
-              className="mt-2 p-2 text-[#7a2d2a] hover:text-[#141517]"
+              className="mt-2 p-2 text-[#a45f1a] hover:text-[#1f444c]"
               aria-label="Remove"
             >
               <Trash2 size={14} />
@@ -1012,7 +1012,7 @@ function ListEditor({ title, items, onChange, onAdd, onRemove }) {
 
 function BilingualList({ title, enItems, idItems, onUpdate, onAdd, onRemove, keys }) {
   return (
-    <div className="mt-8 border-t border-[#e5e1d8] pt-6">
+    <div className="mt-8 border-t border-[#e3dcd5] pt-6">
       <p className="overline mb-3">{title}</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <ListEditor
@@ -1058,27 +1058,27 @@ function MessagesTab() {
         title="Inbound enquiries from the contact form."
       />
 
-      {isLoading && <p className="text-sm text-[#5e5b55]">Loading messages…</p>}
+      {isLoading && <p className="text-sm text-[#5b6e72]">Loading messages…</p>}
 
       {!isLoading && items.length === 0 && (
-        <div className="border border-[#e5e1d8] p-10 text-center text-[#5e5b55]">
+        <div className="border border-[#e3dcd5] p-10 text-center text-[#5b6e72]">
           No messages yet.
         </div>
       )}
 
       <div className="space-y-4">
         {items.map((m) => (
-          <article key={m.id} data-testid={`message-${m.id}`} className="border border-[#e5e1d8] p-6 bg-[#fdfbf7]">
+          <article key={m.id} data-testid={`message-${m.id}`} className="border border-[#e3dcd5] p-6 bg-[#f1ece9]">
             <div className="flex items-start justify-between gap-4 flex-wrap">
               <div>
-                <div className="font-serif text-xl text-[#141517]">{m.name}</div>
-                <div className="text-xs text-[#5e5b55] mt-1 tracking-wide">
+                <div className="font-serif text-xl text-[#1f444c]">{m.name}</div>
+                <div className="text-xs text-[#5b6e72] mt-1 tracking-wide">
                   <a href={`mailto:${m.email}`} className="link-underline">{m.email}</a>
                   {m.company && <> · {m.company}</>}
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-[10px] tracking-[0.22em] uppercase text-[#5e5b55]">
+                <span className="text-[10px] tracking-[0.22em] uppercase text-[#5b6e72]">
                   {new Date(m.created_at).toLocaleString()}
                 </span>
                 <button
@@ -1086,7 +1086,7 @@ function MessagesTab() {
                   onClick={() => {
                     if (window.confirm("Delete this message?")) remove.mutate(m.id);
                   }}
-                  className="p-2 text-[#7a2d2a] hover:text-[#141517]"
+                  className="p-2 text-[#a45f1a] hover:text-[#1f444c]"
                   aria-label="Delete"
                 >
                   <Trash2 size={16} />
@@ -1094,11 +1094,11 @@ function MessagesTab() {
               </div>
             </div>
             {m.subject && (
-              <div className="mt-4 text-sm font-medium text-[#141517]">
+              <div className="mt-4 text-sm font-medium text-[#1f444c]">
                 {m.subject}
               </div>
             )}
-            <p className="mt-3 text-[#141517] text-base leading-relaxed whitespace-pre-wrap">
+            <p className="mt-3 text-[#1f444c] text-base leading-relaxed whitespace-pre-wrap">
               {m.message}
             </p>
           </article>

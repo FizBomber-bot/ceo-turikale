@@ -5,37 +5,37 @@
 @tailwind utilities;
 
 :root {
-    --bg: #fdfbf7;
+    --bg: #f1ece9;
     --surface: #ffffff;
-    --ink: #141517;
-    --muted: #5e5b55;
-    --accent: #7a2d2a;
-    --accent-hover: #61221f;
-    --border: #e5e1d8;
-    --chip: #dcd6cc;
+    --ink: #1f444c;
+    --muted: #5b6e72;
+    --accent: #a45f1a;
+    --accent-hover: #7a4612;
+    --border: #e3dcd5;
+    --chip: #d8cfc6;
 }
 
 @layer base {
     :root {
-        --background: 40 35% 98%;
-        --foreground: 220 6% 9%;
+        --background: 24 22% 93%;
+        --foreground: 190 42% 21%;
         --card: 0 0% 100%;
-        --card-foreground: 220 6% 9%;
+        --card-foreground: 190 42% 21%;
         --popover: 0 0% 100%;
-        --popover-foreground: 220 6% 9%;
-        --primary: 220 6% 9%;
-        --primary-foreground: 40 35% 98%;
-        --secondary: 35 19% 84%;
-        --secondary-foreground: 220 6% 9%;
-        --muted: 35 19% 92%;
-        --muted-foreground: 33 5% 36%;
-        --accent: 2 47% 32%;
-        --accent-foreground: 40 35% 98%;
+        --popover-foreground: 190 42% 21%;
+        --primary: 190 42% 21%;
+        --primary-foreground: 24 22% 93%;
+        --secondary: 30 25% 82%;
+        --secondary-foreground: 190 42% 21%;
+        --muted: 30 22% 88%;
+        --muted-foreground: 192 12% 40%;
+        --accent: 30 73% 37%;
+        --accent-foreground: 24 22% 93%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 35 23% 87%;
-        --input: 35 23% 87%;
-        --ring: 2 47% 32%;
+        --border: 30 22% 85%;
+        --input: 30 22% 85%;
+        --ring: 30 73% 37%;
         --radius: 0.25rem;
     }
 }
@@ -59,8 +59,8 @@ body {
 }
 
 ::selection {
-    background: #141517;
-    color: #fdfbf7;
+    background: #1f444c;
+    color: #f1ece9;
 }
 
 .font-serif {
@@ -120,11 +120,11 @@ body {
     height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #e5e1d8;
+    background: #e3dcd5;
     border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #cfc8bb;
+    background: #cdc4ba;
 }
 ::-webkit-scrollbar-track {
     background: transparent;

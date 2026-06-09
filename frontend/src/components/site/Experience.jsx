@@ -14,18 +14,18 @@ export default function Experience() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
           <div className="md:col-span-5">
             <p className="overline mb-6">{t("exp.overline")}</p>
-            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517] whitespace-pre-line">
+            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#1f444c] whitespace-pre-line">
               {t("exp.title")}
             </h2>
           </div>
           <div className="md:col-span-6 md:col-start-7 md:flex md:items-end">
-            <p className="text-base md:text-lg text-[#5e5b55] leading-relaxed">
+            <p className="text-base md:text-lg text-[#5b6e72] leading-relaxed">
               {t("exp.description")}
             </p>
           </div>
         </div>
 
-        <div className="border-t border-[#141517]">
+        <div className="border-t border-[#1f444c]">
           {experience.map((e, i) => {
             const role = pickLang(e.role, e.role_id, lang);
             const org = pickLang(e.org, e.org_id, lang);
@@ -35,18 +35,18 @@ export default function Experience() {
               <div
                 key={i}
                 data-testid={`exp-${i}`}
-                className="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 md:py-10 border-b border-[#e5e1d8] group hover:bg-[#fdfbf7] transition-colors"
+                className="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 md:py-10 border-b border-[#e3dcd5] group hover:bg-[#f1ece9] transition-colors"
               >
-                <div className="md:col-span-2 text-xs tracking-[0.18em] uppercase text-[#5e5b55] pt-1">
+                <div className="md:col-span-2 text-xs tracking-[0.18em] uppercase text-[#5b6e72] pt-1">
                   {period}
                 </div>
                 <div className="md:col-span-5">
-                  <h3 className="font-serif text-2xl md:text-3xl text-[#141517] tracking-tight">
+                  <h3 className="font-serif text-2xl md:text-3xl text-[#1f444c] tracking-tight">
                     {role}
                   </h3>
                 </div>
-                <div className="md:col-span-3 text-base text-[#141517] pt-1">{org}</div>
-                <div className="md:col-span-2 text-sm text-[#5e5b55] pt-1.5 italic font-serif">
+                <div className="md:col-span-3 text-base text-[#1f444c] pt-1">{org}</div>
+                <div className="md:col-span-2 text-sm text-[#5b6e72] pt-1.5 italic font-serif">
                   {note}
                 </div>
               </div>

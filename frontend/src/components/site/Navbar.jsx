@@ -33,7 +33,7 @@ export default function Navbar() {
       data-testid="site-navbar"
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#fdfbf7]/80 backdrop-blur-xl border-b border-[#e5e1d8]"
+          ? "bg-[#f1ece9]/80 backdrop-blur-xl border-b border-[#e3dcd5]"
           : "bg-transparent"
       }`}
     >
@@ -44,7 +44,7 @@ export default function Navbar() {
             onClick={() => go("hero")}
             className="font-serif text-xl md:text-2xl tracking-tight"
           >
-            Andry<span className="text-[#7a2d2a]">.</span>Ridwan
+            Andry<span className="text-[#a45f1a]">.</span>Ridwan
           </button>
 
           <nav className="hidden md:flex items-center gap-10">
@@ -53,7 +53,7 @@ export default function Navbar() {
                 key={l.id}
                 data-testid={`nav-link-${l.id}`}
                 onClick={() => go(l.id)}
-                className="text-sm tracking-wide text-[#141517] link-underline"
+                className="text-sm tracking-wide text-[#1f444c] link-underline"
               >
                 {l.label}
               </button>
@@ -65,13 +65,13 @@ export default function Navbar() {
               data-testid="nav-lang-toggle"
               onClick={toggleLang}
               aria-label={t("lang.label")}
-              className="inline-flex items-center gap-2 px-3 py-2 text-xs tracking-[0.18em] uppercase border border-[#e5e1d8] hover:border-[#141517] transition-colors"
+              className="inline-flex items-center gap-2 px-3 py-2 text-xs tracking-[0.18em] uppercase border border-[#e3dcd5] hover:border-[#1f444c] transition-colors"
               title={`${t("lang.label")}: ${lang.toUpperCase()}`}
             >
               <Globe size={12} />
               <span className="tabular-nums">{lang === "en" ? "EN" : "ID"}</span>
-              <span className="text-[#5e5b55]">/</span>
-              <span className="text-[#5e5b55]">{lang === "en" ? "ID" : "EN"}</span>
+              <span className="text-[#5b6e72]">/</span>
+              <span className="text-[#5b6e72]">{lang === "en" ? "ID" : "EN"}</span>
             </button>
             <a
               data-testid="nav-cv-download"
@@ -96,7 +96,7 @@ export default function Navbar() {
               data-testid="nav-lang-toggle-mobile"
               onClick={toggleLang}
               aria-label={t("lang.label")}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] tracking-[0.18em] uppercase border border-[#e5e1d8]"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] tracking-[0.18em] uppercase border border-[#e3dcd5]"
             >
               <Globe size={11} />
               {lang === "en" ? "EN" : "ID"}
@@ -113,7 +113,7 @@ export default function Navbar() {
         </div>
 
         {open && (
-          <div className="md:hidden pb-8 pt-2 border-t border-[#e5e1d8]">
+          <div className="md:hidden pb-8 pt-2 border-t border-[#e3dcd5]">
             <nav className="flex flex-col gap-5 pt-6">
               {links.map((l) => (
                 <button

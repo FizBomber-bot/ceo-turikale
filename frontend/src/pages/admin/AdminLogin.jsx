@@ -29,13 +29,13 @@ export default function AdminLogin() {
   };
 
   return (
-    <main data-testid="admin-login-page" className="min-h-screen bg-[#fdfbf7] grid lg:grid-cols-12">
-      <div className="hidden lg:block lg:col-span-5 bg-[#141517] text-[#fdfbf7] p-16 relative">
+    <main data-testid="admin-login-page" className="min-h-screen bg-[#f1ece9] grid lg:grid-cols-12">
+      <div className="hidden lg:block lg:col-span-5 bg-[#1f444c] text-[#f1ece9] p-16 relative">
         <div className="font-serif text-3xl">
-          Andry<span className="text-[#c9a08e]">.</span>Ridwan
+          Andry<span className="text-[#d49b5a]">.</span>Ridwan
         </div>
         <div className="absolute bottom-16 left-16 right-16">
-          <p className="overline mb-6" style={{ color: "#c9a08e" }}>
+          <p className="overline mb-6" style={{ color: "#d49b5a" }}>
             Admin Console
           </p>
           <h1 className="font-serif font-light text-5xl leading-[1.05]">
@@ -43,7 +43,7 @@ export default function AdminLogin() {
             <br />
             entrance.
           </h1>
-          <p className="mt-6 text-sm text-[#fdfbf7]/65 leading-relaxed max-w-sm">
+          <p className="mt-6 text-sm text-[#f1ece9]/65 leading-relaxed max-w-sm">
             Sign in to update your photo, CV, profile and case studies. Public
             site updates instantly.
           </p>
@@ -58,16 +58,16 @@ export default function AdminLogin() {
           noValidate
         >
           <p className="overline mb-6">Sign in</p>
-          <h2 className="font-serif font-light text-4xl md:text-5xl leading-tight text-[#141517]">
-            Welcome back<span className="text-[#7a2d2a]">.</span>
+          <h2 className="font-serif font-light text-4xl md:text-5xl leading-tight text-[#1f444c]">
+            Welcome back<span className="text-[#a45f1a]">.</span>
           </h2>
-          <p className="mt-4 text-base text-[#5e5b55]">
+          <p className="mt-4 text-base text-[#5b6e72]">
             Use the admin credentials seeded from <code>backend/.env</code>.
           </p>
 
           <div className="mt-10 space-y-8">
             <div>
-              <label className="text-[11px] tracking-[0.22em] uppercase text-[#5e5b55]">
+              <label className="text-[11px] tracking-[0.22em] uppercase text-[#5b6e72]">
                 Email
               </label>
               <input
@@ -76,11 +76,11 @@ export default function AdminLogin() {
                 autoComplete="username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e5e1d8] py-3 text-base text-[#141517] focus:border-[#141517]"
+                className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e3dcd5] py-3 text-base text-[#1f444c] focus:border-[#1f444c]"
               />
             </div>
             <div>
-              <label className="text-[11px] tracking-[0.22em] uppercase text-[#5e5b55]">
+              <label className="text-[11px] tracking-[0.22em] uppercase text-[#5b6e72]">
                 Password
               </label>
               <input
@@ -89,13 +89,13 @@ export default function AdminLogin() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e5e1d8] py-3 text-base text-[#141517] focus:border-[#141517]"
+                className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e3dcd5] py-3 text-base text-[#1f444c] focus:border-[#1f444c]"
               />
             </div>
           </div>
 
           {error && (
-            <p data-testid="login-error" className="mt-6 text-sm text-[#7a2d2a]">
+            <p data-testid="login-error" className="mt-6 text-sm text-[#a45f1a]">
               {error}
             </p>
           )}
@@ -119,7 +119,7 @@ export default function AdminLogin() {
 
           <a
             href="/"
-            className="mt-10 block text-xs tracking-[0.18em] uppercase text-[#5e5b55] link-underline"
+            className="mt-10 block text-xs tracking-[0.18em] uppercase text-[#5b6e72] link-underline"
           >
             ← Back to portfolio
           </a>

@@ -56,20 +56,20 @@ export default function Contact() {
     <section
       id="contact"
       data-testid="contact-section"
-      className="px-6 md:px-12 lg:px-16 py-24 md:py-32 border-t border-[#e5e1d8]"
+      className="px-6 md:px-12 lg:px-16 py-24 md:py-32 border-t border-[#e3dcd5]"
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
           <div className="md:col-span-5">
             <p className="overline mb-6">{t("contact.overline")}</p>
-            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.0] text-[#141517] whitespace-pre-line">
+            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.0] text-[#1f444c] whitespace-pre-line">
               {t("contact.title")}
             </h2>
-            <p className="mt-8 text-base md:text-lg text-[#5e5b55] leading-relaxed max-w-md">
+            <p className="mt-8 text-base md:text-lg text-[#5b6e72] leading-relaxed max-w-md">
               {t("contact.intro")}
             </p>
 
-            <div className="mt-12 space-y-4 text-[#141517]">
+            <div className="mt-12 space-y-4 text-[#1f444c]">
               <a
                 data-testid="contact-email-link"
                 href={`mailto:${profile.email}`}
@@ -111,13 +111,13 @@ export default function Contact() {
             {success ? (
               <div
                 data-testid="contact-success"
-                className="border border-[#e5e1d8] bg-[#fdfbf7] p-10 md:p-14"
+                className="border border-[#e3dcd5] bg-[#f1ece9] p-10 md:p-14"
               >
                 <p className="overline mb-6">{t("contact.success.overline")}</p>
-                <h3 className="font-serif text-3xl md:text-4xl text-[#141517] leading-tight">
+                <h3 className="font-serif text-3xl md:text-4xl text-[#1f444c] leading-tight">
                   {t("contact.success.title")}
                 </h3>
-                <p className="mt-6 text-base text-[#5e5b55]">{t("contact.success.sub")}</p>
+                <p className="mt-6 text-base text-[#5b6e72]">{t("contact.success.sub")}</p>
                 <button
                   data-testid="contact-send-another"
                   onClick={() => setSuccess(false)}
@@ -145,17 +145,17 @@ export default function Contact() {
                     rows={5}
                     value={data.message}
                     onChange={update("message")}
-                    className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e5e1d8] py-3 text-base text-[#141517] placeholder:text-[#5e5b55]/60 focus:border-[#141517] resize-none"
+                    className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e3dcd5] py-3 text-base text-[#1f444c] placeholder:text-[#5b6e72]/60 focus:border-[#1f444c] resize-none"
                     placeholder={t("contact.form.messagePlaceholder")}
                   />
                   {errors.message && (
-                    <p className="mt-2 text-xs text-[#7a2d2a]" data-testid="error-message">
+                    <p className="mt-2 text-xs text-[#a45f1a]" data-testid="error-message">
                       {errors.message}
                     </p>
                   )}
                 </div>
                 <div className="md:col-span-2 flex items-center justify-between gap-4 pt-2">
-                  <p className="text-xs text-[#5e5b55] tracking-wide max-w-md">
+                  <p className="text-xs text-[#5b6e72] tracking-wide max-w-md">
                     {t("contact.form.consent")}
                   </p>
                   <button
@@ -188,7 +188,7 @@ function Label({ htmlFor, children }) {
   return (
     <label
       htmlFor={htmlFor}
-      className="text-[11px] tracking-[0.22em] uppercase text-[#5e5b55]"
+      className="text-[11px] tracking-[0.22em] uppercase text-[#5b6e72]"
     >
       {children}
     </label>
@@ -205,10 +205,10 @@ function Field({ id, label, value, onChange, type = "text", error }) {
         type={type}
         value={value}
         onChange={onChange}
-        className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e5e1d8] py-3 text-base text-[#141517] placeholder:text-[#5e5b55]/60 focus:border-[#141517]"
+        className="minimal-input mt-2 w-full bg-transparent border-0 border-b border-[#e3dcd5] py-3 text-base text-[#1f444c] placeholder:text-[#5b6e72]/60 focus:border-[#1f444c]"
       />
       {error && (
-        <p className="mt-2 text-xs text-[#7a2d2a]" data-testid={`error-${id}`}>
+        <p className="mt-2 text-xs text-[#a45f1a]" data-testid={`error-${id}`}>
           {error}
         </p>
       )}

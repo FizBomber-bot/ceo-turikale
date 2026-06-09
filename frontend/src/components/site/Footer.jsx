@@ -10,42 +10,42 @@ export default function Footer() {
   return (
     <footer
       data-testid="site-footer"
-      className="px-6 md:px-12 lg:px-16 pt-16 pb-10 bg-[#141517] text-[#fdfbf7]/80"
+      className="px-6 md:px-12 lg:px-16 pt-16 pb-10 bg-[#1f444c] text-[#f1ece9]/80"
     >
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#fdfbf7]/15">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#f1ece9]/15">
           <div className="md:col-span-5">
-            <div className="font-serif text-3xl md:text-4xl text-[#fdfbf7]">
-              {profile.name}<span className="text-[#c9a08e]">.</span>
+            <div className="font-serif text-3xl md:text-4xl text-[#f1ece9]">
+              {profile.name}<span className="text-[#d49b5a]">.</span>
             </div>
-            <p className="mt-4 max-w-sm text-sm text-[#fdfbf7]/65 leading-relaxed">
+            <p className="mt-4 max-w-sm text-sm text-[#f1ece9]/65 leading-relaxed">
               {title} — {t("footer.tagline")}
             </p>
           </div>
           <div className="md:col-span-3">
-            <p className="overline mb-4" style={{ color: "#c9a08e" }}>
+            <p className="overline mb-4" style={{ color: "#d49b5a" }}>
               {t("footer.contact")}
             </p>
             <a
               data-testid="footer-email"
               href={`mailto:${profile.email}`}
-              className="block text-[#fdfbf7] link-underline"
+              className="block text-[#f1ece9] link-underline"
             >
               {profile.email}
             </a>
             <a
               data-testid="footer-phone"
               href={`tel:${(profile.phone || "").replace(/[^+\d]/g, "")}`}
-              className="block text-sm mt-2 text-[#fdfbf7]/70 link-underline"
+              className="block text-sm mt-2 text-[#f1ece9]/70 link-underline"
             >
               {profile.phone}
             </a>
           </div>
           <div className="md:col-span-4">
-            <p className="overline mb-4" style={{ color: "#c9a08e" }}>
+            <p className="overline mb-4" style={{ color: "#d49b5a" }}>
               {t("footer.elsewhere")}
             </p>
-            <ul className="space-y-2 text-[#fdfbf7]/85">
+            <ul className="space-y-2 text-[#f1ece9]/85">
               <li>
                 <a
                   data-testid="footer-turikale-site"
@@ -91,7 +91,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#fdfbf7]/55 tracking-wide">
+        <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[#f1ece9]/55 tracking-wide">
           <span data-testid="footer-copyright">
             © {new Date().getFullYear()} {profile.name}. {t("footer.rights")}
           </span>

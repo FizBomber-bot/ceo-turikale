@@ -27,18 +27,18 @@ export default function Gallery() {
     <section
       id="work"
       data-testid="gallery-section"
-      className="px-6 md:px-12 lg:px-16 py-24 md:py-32 border-t border-[#e5e1d8]"
+      className="px-6 md:px-12 lg:px-16 py-24 md:py-32 border-t border-[#e3dcd5]"
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-16">
           <div className="md:col-span-7">
             <p className="overline mb-6">{t("gallery.overline")}</p>
-            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#141517] whitespace-pre-line">
+            <h2 className="font-serif font-light tracking-tight text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#1f444c] whitespace-pre-line">
               {t("gallery.title")}
             </h2>
           </div>
           <div className="md:col-span-5 md:flex md:items-end">
-            <p className="text-base md:text-lg text-[#5e5b55] leading-relaxed">
+            <p className="text-base md:text-lg text-[#5b6e72] leading-relaxed">
               {t("gallery.description")}
             </p>
           </div>
@@ -47,7 +47,7 @@ export default function Gallery() {
         {/* Filter chips */}
         <div
           data-testid="filter-row"
-          className="flex flex-wrap gap-x-8 gap-y-4 mb-14 border-b border-[#e5e1d8] pb-6"
+          className="flex flex-wrap gap-x-8 gap-y-4 mb-14 border-b border-[#e3dcd5] pb-6"
         >
           {categories.map((c) => {
             const isActive = active === c.id;
@@ -57,19 +57,19 @@ export default function Gallery() {
                 data-testid={`filter-${c.id}`}
                 onClick={() => setActive(c.id)}
                 className={`group inline-flex items-baseline gap-2 text-sm tracking-wide transition-colors ${
-                  isActive ? "text-[#7a2d2a]" : "text-[#141517]"
+                  isActive ? "text-[#a45f1a]" : "text-[#1f444c]"
                 }`}
               >
                 <span
                   className={`border-b-2 pb-1 transition-colors ${
                     isActive
-                      ? "border-[#7a2d2a]"
-                      : "border-transparent group-hover:border-[#141517]"
+                      ? "border-[#a45f1a]"
+                      : "border-transparent group-hover:border-[#1f444c]"
                   }`}
                 >
                   {t(`cat.${c.id}`)}
                 </span>
-                <span className="text-[10px] tabular-nums text-[#5e5b55]">
+                <span className="text-[10px] tabular-nums text-[#5b6e72]">
                   ({c.count})
                 </span>
               </button>
@@ -81,7 +81,7 @@ export default function Gallery() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-20">
           {isLoading && (
             <div
-              className="md:col-span-12 text-[#5e5b55] text-sm"
+              className="md:col-span-12 text-[#5b6e72] text-sm"
               data-testid="gallery-loading"
             >
               {t("gallery.loading")}
@@ -116,28 +116,28 @@ export default function Gallery() {
                   onClick={() => setOpenId(cs.id)}
                 >
                   <div
-                    className={`relative w-full ${heights[i % heights.length]} overflow-hidden bg-[#dcd6cc]`}
+                    className={`relative w-full ${heights[i % heights.length]} overflow-hidden bg-[#d8cfc6]`}
                   >
                     <img
                       src={assetUrl(cs.cover_image)}
                       alt={title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                     />
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-[#fdfbf7]/90 backdrop-blur-sm text-[10px] tracking-[0.22em] uppercase text-[#141517]">
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-[#f1ece9]/90 backdrop-blur-sm text-[10px] tracking-[0.22em] uppercase text-[#1f444c]">
                       {cs.year}
                     </div>
                   </div>
                   <div className="mt-6 flex items-start gap-4">
                     <div className="flex-1">
                       <div className="overline mb-2">{t(`cat.${cs.category}`)}</div>
-                      <h3 className="font-serif text-2xl md:text-3xl text-[#141517] tracking-tight leading-tight">
+                      <h3 className="font-serif text-2xl md:text-3xl text-[#1f444c] tracking-tight leading-tight">
                         {title}
                       </h3>
-                      <p className="mt-3 text-[#5e5b55] text-base leading-relaxed">
+                      <p className="mt-3 text-[#5b6e72] text-base leading-relaxed">
                         {subtitle}
                       </p>
                     </div>
-                    <div className="shrink-0 mt-1 transition-transform duration-300 group-hover:rotate-45 group-hover:text-[#7a2d2a]">
+                    <div className="shrink-0 mt-1 transition-transform duration-300 group-hover:rotate-45 group-hover:text-[#a45f1a]">
                       <ArrowUpRight size={22} />
                     </div>
                   </div>

@@ -12,20 +12,20 @@ export default function NowRunning() {
   return (
     <section
       data-testid="now-running-section"
-      className="px-6 md:px-12 lg:px-16 py-16 md:py-24 border-t border-[#e5e1d8] bg-[#fdfbf7]"
+      className="px-6 md:px-12 lg:px-16 py-16 md:py-24 border-t border-[#e3dcd5] bg-[#f1ece9]"
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
           <div className="md:col-span-5">
             <p className="overline mb-5">{t("now.overline")}</p>
-            <h2 className="font-serif font-light tracking-tight text-3xl md:text-4xl lg:text-5xl leading-[1.05] text-[#141517]">
-              Turikale Print<span className="text-[#7a2d2a]">.</span>
+            <h2 className="font-serif font-light tracking-tight text-3xl md:text-4xl lg:text-5xl leading-[1.05] text-[#1f444c]">
+              Turikale Print<span className="text-[#a45f1a]">.</span>
             </h2>
-            <p className="mt-4 text-sm tracking-wide text-[#5e5b55]">{t("now.org")}</p>
+            <p className="mt-4 text-sm tracking-wide text-[#5b6e72]">{t("now.org")}</p>
           </div>
 
           <div className="md:col-span-4">
-            <p className="text-base md:text-lg text-[#5e5b55] leading-relaxed">{t("now.body")}</p>
+            <p className="text-base md:text-lg text-[#5b6e72] leading-relaxed">{t("now.body")}</p>
           </div>
 
           <div className="md:col-span-3 flex flex-col gap-3 md:items-end">
