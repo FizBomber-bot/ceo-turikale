@@ -5,7 +5,7 @@ import requests
 
 BASE_URL = os.environ.get(
     "REACT_APP_BACKEND_URL",
-    "https://biz-dev-portfolio-3.preview.emergentagent.com",
+    "https://github-builder-24.preview.emergentagent.com",
 ).rstrip("/")
 API = f"{BASE_URL}/api"
 

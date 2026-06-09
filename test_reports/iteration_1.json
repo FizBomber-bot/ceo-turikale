@@ -34,6 +34,6 @@
   "seed_data_creation": "Created one MongoDB contact_submission via pytest (name=TEST Reviewer) and one via UI (name=Test User, email=browsertest@example.com). Both persisted in contact_submissions collection.",
   "retest_needed": false,
   "main_agent_can_self_test": true,
-  "context_for_next_testing_agent": "Backend test file at /app/backend/tests/test_portfolio_api.py covers all current endpoints; reuse + extend. App is a single page at '/'. All filter chips and case cards use data-testid filter-{category-id} and case-card-{case-id}. Public URL: https://biz-dev-portfolio-3.preview.emergentagent.com.",
+  "context_for_next_testing_agent": "Backend test file at /app/backend/tests/test_portfolio_api.py covers all current endpoints; reuse + extend. App is a single page at '/'. All filter chips and case cards use data-testid filter-{category-id} and case-card-{case-id}. Public URL: https://github-builder-24.preview.emergentagent.com.",
   "rca of the issue": "N/A — all tests passed."
 }
