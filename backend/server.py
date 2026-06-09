@@ -516,7 +516,7 @@ DEFAULT_CASE_STUDIES = [
         "subtitle_id": "Fasilitator lokal untuk program nasional digital marketing UKM dari Google.",
         "category": "market-expansion",
         "year": "2017",
-        "cover_image": "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1400&q=80",
+        "cover_image": "https://customer-assets.emergentagent.com/job_github-builder-24/artifacts/wts0tnrp_Peserta%20TOT%20Google%20Gapura%20Digital.png",
         "client": "Google Gapura Digital",
         "summary": "Delivered hands-on training so traditional SMEs could grow through digital marketing.",
         "summary_id": "Memberikan pelatihan langsung agar UKM tradisional bisa tumbuh lewat digital marketing.",
