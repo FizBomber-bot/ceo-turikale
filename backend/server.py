@@ -558,7 +558,7 @@ DEFAULT_CASE_STUDIES = [
         "subtitle_id": "Koordinator relawan lokal dalam sprint nasional UMKM Jualan Online.",
         "category": "enterprise-sales",
         "year": "2018",
-        "cover_image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80",
+        "cover_image": "https://customer-assets.emergentagent.com/job_github-builder-24/artifacts/xy1p9pnm_Pendaftaran%20ke%20ekosistem%20digital.jpg",
         "client": "Kominfo × Bukalapak × GrabFood",
         "summary": "Onboarded 121 local merchants onto Bukalapak and GrabFood inside a five-day programme window.",
         "summary_id": "Mendaftarkan 121 mitra dagang lokal ke Bukalapak dan GrabFood dalam jendela program lima hari.",
