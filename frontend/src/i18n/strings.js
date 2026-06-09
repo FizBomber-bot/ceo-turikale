@@ -15,10 +15,10 @@ export const STRINGS = {
   // Hero
   "hero.overline": { en: "Portfolio — 2008 / 2025", id: "Portofolio — 2008 / 2025" },
   "hero.viewWork": { en: "View Work", id: "Lihat Karya" },
-  "hero.availableFor": { en: "Open for", id: "Tersedia untuk" },
+  "hero.availableFor": { en: "Specialization", id: "Spesialisasi" },
   "hero.availableValue": {
-    en: "Mentoring · BD · Programmes",
-    id: "Mentoring · BD · Program",
+    en: "Business Development · Mentoring · Coaching",
+    id: "Business Development · Mentoring · Coaching",
   },
   "hero.partners.overline": { en: "Programmes & Partners", id: "Program & Mitra" },
   "hero.partners.caption": {
