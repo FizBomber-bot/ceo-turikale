@@ -600,7 +600,7 @@ DEFAULT_CASE_STUDIES = [
         "subtitle_id": "Mentor nasional untuk program startup andalan Indonesia.",
         "category": "strategic-partnerships",
         "year": "2019 — 2020",
-        "cover_image": "https://images.unsplash.com/photo-1573164574511-73c773193279?auto=format&fit=crop&w=1400&q=80",
+        "cover_image": "https://customer-assets.emergentagent.com/job_github-builder-24/artifacts/c5p3pqq3_Gerakan%20Nasional%201000%20StartUp%20Digital.jpg",
         "client": "Ministry of Communication and Informatics",
         "summary": "Mentored aspiring digital founders through validated business plans and first-customer milestones.",
         "summary_id": "Mendampingi calon founder digital melewati rencana bisnis yang tervalidasi dan milestone pelanggan pertama.",
