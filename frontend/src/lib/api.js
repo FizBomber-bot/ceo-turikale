@@ -13,6 +13,7 @@ export const fetchCategories = async () => (await api.get("/categories")).data;
 export const fetchCaseStudies = async (category) =>
   (await api.get("/case-studies", { params: category ? { category } : {} })).data;
 export const fetchProfile = async () => (await api.get("/profile")).data;
+export const fetchTestimonials = async () => (await api.get("/testimonials")).data;
 export const submitContact = async (payload) => (await api.post("/contact", payload)).data;
 export const cvDownloadUrl = `${API}/cv`;
 
@@ -35,6 +36,15 @@ export const adminDeleteCaseStudy = async (id) =>
 export const adminListContacts = async () => (await api.get("/admin/contacts")).data;
 export const adminDeleteContact = async (id) =>
   (await api.delete(`/admin/contacts/${id}`)).data;
+
+export const adminListTestimonials = async () =>
+  (await api.get("/admin/testimonials")).data;
+export const adminCreateTestimonial = async (data) =>
+  (await api.post("/admin/testimonials", data)).data;
+export const adminUpdateTestimonial = async (id, data) =>
+  (await api.put(`/admin/testimonials/${id}`, data)).data;
+export const adminDeleteTestimonial = async (id) =>
+  (await api.delete(`/admin/testimonials/${id}`)).data;
 
 export const uploadImage = async (file) => {
   const fd = new FormData();

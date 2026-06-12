@@ -1,0 +1,38 @@
+{
+  "summary": "Iteration 4 — verified the new Testimonials feature end-to-end after the GitHub port. Backend pytest: 16/16 PASS on /app/backend/tests/test_testimonials.py covering auth (login sets cookies, /me with/without cookies), public GET /api/testimonials (sorted by sort_order, bilingual fields present, no _id leak), admin auth guard (401 on GET/POST/PUT/DELETE without cookies), full admin CRUD (POST 201 with id auto-assigned + sort_order auto-bumped from 0, PUT partial updates preserving untouched fields, DELETE removes from public, 404 on unknown id for PUT/DELETE), and light regression (admin profile/case-studies/contacts GET all 200). Frontend: home loads, testimonials-section visible, testimonial-avatar bounding box is exactly 112x112 px (verified), testimonial-counter starts '01 / 03' and increments to '02 / 03' after clicking testimonial-next. Admin login at /admin/login with admin@example.com/admin123 redirects to /admin and shows admin-dashboard. Testimonials tab shows admin-testimonials-list with 3 admin-testimonial-item cards. Created new testimonial via admin-add-testimonial dialog → list grew to 4 AND public counter went to '01 / 04' on reload. Edited the test card EN quote → updated text rendered in card. Deleted the test card via admin-confirm-delete-testimonial → list back to 3. admin-logout redirects to /admin/login and revisiting /admin redirects back to login (cookies cleared).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Public home (multiple sections)", "issues": ["React warning: An empty string ('') was passed to the 'src' attribute. Likely an <img src=''> rendered when an optional avatar/portrait/cover_image field is empty. Should render no <img> or use null instead of empty string to avoid the browser fetching the page URL as the image."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_testimonials.py",
+    "/app/test_reports/pytest/iter4_testimonials.xml"
+  ],
+  "action_items": [
+    "Fix empty-string img src warning in public components (Testimonials.jsx avatar and possibly Profile portrait / case study cover): render the <img> only when the URL is truthy, or pass null/undefined instead of ''. Non-blocking but causes a console error and an extra network hit."
+  ],
+  "critical_code_review_comments": [
+    "Testimonials models correctly default *_id fields to empty string, allowing graceful EN fallback in the UI.",
+    "POST /api/admin/testimonials auto-bumps sort_order when payload value is 0 — verified, prevents duplicate ordering at the top.",
+    "Public GET /api/testimonials excludes Mongo _id via projection ({'_id': 0}); no leak observed.",
+    "Cookie-based auth (httpOnly access_token + refresh_token) works through the preview ingress; CORS allows credentials.",
+    "Two stale 401 console errors on first paint of /admin/login come from /api/auth/me probe before auth — expected and harmless, but could be silenced by routing /admin/login outside the auth-bootstrap call.",
+    "Empty <img src=''> warning indicates Testimonials/Profile/case study components render <img src={value}> unconditionally. Recommend `{value ? <img src={value} .../> : <FallbackInitials/>}`."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_testimonials.py (new)"
+  ],
+  "success_rate": {"backend": "100% (16/16)", "frontend": "100% (all 12 requested flows verified)"},
+  "test_credentials": "admin@example.com / admin123 (matches /app/memory/test_credentials.md and backend/.env)",
+  "seed_data_creation": "One TEST testimonial created via admin UI ('TEST UI CREATED QUOTE 7821' → edited to '... EDITED ... 9988') and then deleted within the same playwright run. No residual data; backend list returns to 3 seeded items.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Testimonials backend tests live in /app/backend/tests/test_testimonials.py (uses admin@example.com/admin123 — the NEW credentials for the GitHub-ported codebase). Public URL: https://review-control-1.preview.emergentagent.com. The older /app/backend/tests/test_portfolio_api.py and test_bilingual.py reference an OBSOLETE credential set (ndriyconnect@gmail.com / TurikalePrint2026!) from a different deployment; they will fail against this build. If running full regression, update those two files' ADMIN_EMAIL/ADMIN_PASSWORD constants to admin@example.com/admin123 first. Admin testimonial dialog has 6 inputs (name_en, name_id, role_en, role_id, avatar_url, sort_order) and 2 textareas (quote_en, quote_id); fill by index works reliably."
+}

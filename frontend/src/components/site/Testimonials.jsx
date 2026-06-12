@@ -1,19 +1,41 @@
-import { useState } from "react";
-import { testimonials } from "@/data/site";
+import { useEffect, useState } from "react";
+import { testimonials as fallback } from "@/data/site";
+import { fetchTestimonials, assetUrl } from "@/lib/api";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { useLang } from "@/context/LanguageContext";
 import { pickLang } from "@/i18n/strings";
 
 export default function Testimonials() {
   const { t, lang } = useLang();
+  const [items, setItems] = useState(fallback);
   const [i, setI] = useState(0);
-  const tItem = testimonials[i];
-  const next = () => setI((p) => (p + 1) % testimonials.length);
-  const prev = () => setI((p) => (p - 1 + testimonials.length) % testimonials.length);
+
+  useEffect(() => {
+    let alive = true;
+    fetchTestimonials()
+      .then((data) => {
+        if (!alive) return;
+        if (Array.isArray(data) && data.length) {
+          setItems(data);
+          setI(0);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  if (!items.length) return null;
+  const safeI = i % items.length;
+  const tItem = items[safeI];
+  const next = () => setI((p) => (p + 1) % items.length);
+  const prev = () => setI((p) => (p - 1 + items.length) % items.length);
 
   const quote = pickLang(tItem.quote, tItem.quote_id, lang);
   const name = pickLang(tItem.name, tItem.name_id, lang);
   const role = pickLang(tItem.role, tItem.role_id, lang);
+  const avatarSrc = assetUrl(tItem.avatar);
 
   return (
     <section
@@ -34,14 +56,27 @@ export default function Testimonials() {
           <div className="md:col-span-7 md:col-start-6">
             <Quote className="text-[#a45f1a]" size={42} />
             <blockquote
-              data-testid={`testimonial-${i}`}
+              data-testid={`testimonial-${safeI}`}
               className="mt-8 font-serif text-2xl md:text-3xl lg:text-4xl leading-[1.25] font-light"
             >
               {quote}
             </blockquote>
-            <div className="mt-10 flex items-center gap-5">
-              <div className="h-14 w-14 overflow-hidden ring-1 ring-[#f1ece9]/20">
-                <img src={tItem.avatar} alt={name} className="w-full h-full object-cover" />
+            <div className="mt-10 flex items-center gap-6">
+              <div
+                data-testid="testimonial-avatar"
+                className="h-28 w-28 md:h-28 md:w-28 overflow-hidden ring-1 ring-[#f1ece9]/20 shrink-0"
+              >
+                {avatarSrc ? (
+                  <img
+                    src={avatarSrc}
+                    alt={name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-white/10 font-serif text-3xl">
+                    {(name || "?").slice(0, 1)}
+                  </div>
+                )}
               </div>
               <div>
                 <div className="font-serif text-xl">{name}</div>
@@ -66,8 +101,11 @@ export default function Testimonials() {
               >
                 <ArrowRight size={18} />
               </button>
-              <div className="ml-3 text-xs tracking-[0.22em] uppercase text-[#f1ece9]/60 tabular-nums">
-                {String(i + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
+              <div
+                data-testid="testimonial-counter"
+                className="ml-3 text-xs tracking-[0.22em] uppercase text-[#f1ece9]/60 tabular-nums"
+              >
+                {String(safeI + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
               </div>
             </div>
           </div>

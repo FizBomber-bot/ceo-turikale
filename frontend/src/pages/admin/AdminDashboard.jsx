@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Loader2, Upload, LogOut, Save, ExternalLink, Trash2 } from "lucide-react";
+import { Loader2, Upload, LogOut, Save, ExternalLink, Trash2, Plus, Pencil, X } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   adminGetProfile,
@@ -12,6 +12,10 @@ import {
   adminDeleteCaseStudy,
   adminListContacts,
   adminDeleteContact,
+  adminListTestimonials,
+  adminCreateTestimonial,
+  adminUpdateTestimonial,
+  adminDeleteTestimonial,
   uploadImage,
   uploadCv,
   assetUrl,
@@ -24,6 +28,7 @@ const TABS = [
   { id: "photos", label: "Photos & CV" },
   { id: "profile", label: "Profile" },
   { id: "case-studies", label: "Case Studies" },
+  { id: "testimonials", label: "Testimonials" },
   { id: "messages", label: "Messages" },
 ];
 
@@ -97,6 +102,7 @@ export default function AdminDashboard() {
         {tab === "photos" && <PhotosTab />}
         {tab === "profile" && <ProfileTab />}
         {tab === "case-studies" && <CaseStudiesTab />}
+        {tab === "testimonials" && <TestimonialsTab />}
         {tab === "messages" && <MessagesTab />}
       </section>
     </main>
@@ -1105,5 +1111,397 @@ function MessagesTab() {
         ))}
       </div>
     </>
+  );
+}
+
+
+// ------------- Testimonials Tab -------------
+const EMPTY_TESTIMONIAL = {
+  id: null,
+  quote: "",
+  quote_id: "",
+  name: "",
+  name_id: "",
+  role: "",
+  role_id: "",
+  avatar: "",
+  sort_order: 0,
+};
+
+function TestimonialsTab() {
+  const qc = useQueryClient();
+  const { data: items = [], isLoading } = useQuery({
+    queryKey: ["admin-testimonials"],
+    queryFn: adminListTestimonials,
+  });
+  const [editing, setEditing] = useState(null);
+  const [deleting, setDeleting] = useState(null);
+
+  const refreshPublic = () => {
+    qc.invalidateQueries({ queryKey: ["admin-testimonials"] });
+    qc.invalidateQueries({ queryKey: ["testimonials"] });
+  };
+
+  const createMut = useMutation({
+    mutationFn: adminCreateTestimonial,
+    onSuccess: () => {
+      toast.success("Testimonial added.");
+      setEditing(null);
+      refreshPublic();
+    },
+    onError: (e) => toast.error(formatApiError(e?.response?.data?.detail)),
+  });
+
+  const updateMut = useMutation({
+    mutationFn: ({ id, payload }) => adminUpdateTestimonial(id, payload),
+    onSuccess: () => {
+      toast.success("Testimonial updated.");
+      setEditing(null);
+      refreshPublic();
+    },
+    onError: (e) => toast.error(formatApiError(e?.response?.data?.detail)),
+  });
+
+  const deleteMut = useMutation({
+    mutationFn: adminDeleteTestimonial,
+    onSuccess: () => {
+      toast.success("Testimonial deleted.");
+      setDeleting(null);
+      refreshPublic();
+    },
+    onError: (e) => toast.error(formatApiError(e?.response?.data?.detail)),
+  });
+
+  const handleSave = (form) => {
+    const payload = {
+      quote: form.quote.trim(),
+      quote_id: form.quote_id.trim(),
+      name: form.name.trim(),
+      name_id: form.name_id.trim(),
+      role: form.role.trim(),
+      role_id: form.role_id.trim(),
+      avatar: form.avatar.trim(),
+      sort_order: Number(form.sort_order) || 0,
+    };
+    if (form.id) updateMut.mutate({ id: form.id, payload });
+    else createMut.mutate(payload);
+  };
+
+  return (
+    <>
+      <div className="flex items-end justify-between flex-wrap gap-6 mb-10">
+        <div>
+          <p className="overline mb-3">Testimonials</p>
+          <h2 className="font-serif font-light text-3xl md:text-4xl text-[#1f444c] tracking-tight">
+            Manage endorsements
+          </h2>
+          <p className="mt-3 text-[#5b6e72] max-w-2xl">
+            Bilingual quotes (EN & ID) shown in the public Endorsements section.
+            Changes go live immediately on save.
+          </p>
+        </div>
+        <button
+          type="button"
+          data-testid="admin-add-testimonial"
+          onClick={() => setEditing(EMPTY_TESTIMONIAL)}
+          className="btn-primary inline-flex items-center gap-2 px-5 py-3 text-xs tracking-[0.18em] uppercase"
+        >
+          <Plus size={14} /> Add testimonial
+        </button>
+      </div>
+
+      {isLoading ? (
+        <p className="text-[#5b6e72]">Loading…</p>
+      ) : items.length === 0 ? (
+        <div className="border border-dashed border-[#e3dcd5] p-10 text-center text-[#5b6e72]">
+          No testimonials yet. Click <strong>Add testimonial</strong> to create one.
+        </div>
+      ) : (
+        <ul
+          data-testid="admin-testimonials-list"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+        >
+          {items.map((t) => (
+            <li
+              key={t.id}
+              data-testid="admin-testimonial-item"
+              data-id={t.id}
+              className="border border-[#e3dcd5] bg-white/40 p-6"
+            >
+              <div className="flex items-start gap-4">
+                <div className="h-14 w-14 overflow-hidden ring-1 ring-[#e3dcd5] shrink-0">
+                  {t.avatar ? (
+                    <img
+                      src={assetUrl(t.avatar)}
+                      alt={t.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-[#f1ece9] flex items-center justify-center font-serif text-[#1f444c]">
+                      {(t.name || "?").slice(0, 1)}
+                    </div>
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-serif text-lg text-[#1f444c] truncate">
+                    {t.name}
+                  </div>
+                  <div className="text-xs text-[#5b6e72] truncate">{t.role}</div>
+                  <p className="mt-3 text-sm text-[#1f444c]/85 line-clamp-3">
+                    “{t.quote}”
+                  </p>
+                  {t.quote_id && (
+                    <p className="mt-2 text-xs text-[#5b6e72] italic line-clamp-2">
+                      ID · {t.quote_id}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="mt-5 flex items-center justify-between">
+                <span className="text-[11px] tracking-[0.18em] uppercase text-[#5b6e72]">
+                  Order: {t.sort_order}
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    data-testid="admin-edit-testimonial"
+                    onClick={() => setEditing(t)}
+                    className="btn-outline inline-flex items-center gap-1 px-3 py-2 text-[11px] tracking-[0.18em] uppercase"
+                  >
+                    <Pencil size={12} /> Edit
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="admin-delete-testimonial"
+                    onClick={() => setDeleting(t)}
+                    className="btn-outline inline-flex items-center gap-1 px-3 py-2 text-[11px] tracking-[0.18em] uppercase border-[#a45f1a] text-[#a45f1a]"
+                  >
+                    <Trash2 size={12} /> Delete
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {editing && (
+        <TestimonialFormDialog
+          initial={editing}
+          busy={createMut.isPending || updateMut.isPending}
+          onCancel={() => setEditing(null)}
+          onSave={handleSave}
+        />
+      )}
+      {deleting && (
+        <ConfirmDialog
+          title="Delete this testimonial?"
+          body={`"${deleting.quote.slice(0, 120)}${deleting.quote.length > 120 ? "…" : ""}" — ${deleting.name}`}
+          busy={deleteMut.isPending}
+          onCancel={() => setDeleting(null)}
+          onConfirm={() => deleteMut.mutate(deleting.id)}
+          confirmLabel="Delete"
+          testId="admin-confirm-delete-testimonial"
+        />
+      )}
+    </>
+  );
+}
+
+function TestimonialFormDialog({ initial, onCancel, onSave, busy }) {
+  const [form, setForm] = useState(initial);
+  const isEdit = Boolean(form.id);
+  const set = (k) => (v) => setForm((f) => ({ ...f, [k]: v }));
+
+  const handleAvatarUpload = async (file) => {
+    try {
+      const { url } = await uploadImage(file);
+      setForm((f) => ({ ...f, avatar: url }));
+      toast.success("Avatar uploaded.");
+    } catch (e) {
+      toast.error(formatApiError(e?.response?.data?.detail));
+    }
+  };
+
+  return (
+    <div
+      data-testid="admin-testimonial-dialog"
+      className="fixed inset-0 z-50 bg-black/40 flex items-start md:items-center justify-center px-4 py-10 overflow-auto"
+    >
+      <div className="bg-[#f1ece9] w-full max-w-3xl border border-[#e3dcd5] shadow-2xl">
+        <div className="flex items-start justify-between p-6 md:p-8 border-b border-[#e3dcd5]">
+          <div>
+            <p className="overline mb-2">{isEdit ? "Edit" : "New"} testimonial</p>
+            <h3 className="font-serif font-light text-2xl md:text-3xl text-[#1f444c]">
+              {isEdit ? "Update endorsement" : "Add endorsement"}
+            </h3>
+          </div>
+          <button
+            type="button"
+            onClick={onCancel}
+            data-testid="admin-cancel-testimonial"
+            aria-label="Close"
+            className="p-2 text-[#1f444c] hover:text-[#a45f1a]"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <form
+          className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSave(form);
+          }}
+        >
+          <TextField
+            label="Name (EN)"
+            value={form.name}
+            onChange={set("name")}
+          />
+          <TextField
+            label="Nama (ID)"
+            value={form.name_id}
+            onChange={set("name_id")}
+          />
+          <TextField
+            label="Role (EN)"
+            value={form.role}
+            onChange={set("role")}
+          />
+          <TextField
+            label="Peran (ID)"
+            value={form.role_id}
+            onChange={set("role_id")}
+          />
+          <div className="md:col-span-2">
+            <TextArea
+              label="Quote (EN)"
+              value={form.quote}
+              onChange={set("quote")}
+              rows={4}
+            />
+          </div>
+          <div className="md:col-span-2">
+            <TextArea
+              label="Kutipan (ID)"
+              value={form.quote_id}
+              onChange={set("quote_id")}
+              rows={4}
+            />
+          </div>
+          <div className="md:col-span-2">
+            <span className="text-[11px] tracking-[0.22em] uppercase text-[#5b6e72]">
+              Avatar
+            </span>
+            <div className="mt-2 flex items-start gap-4">
+              <div className="h-20 w-20 overflow-hidden ring-1 ring-[#e3dcd5] shrink-0">
+                {form.avatar ? (
+                  <img
+                    src={assetUrl(form.avatar)}
+                    alt="preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-[#f1ece9] flex items-center justify-center text-[#5b6e72] text-xs">
+                    None
+                  </div>
+                )}
+              </div>
+              <div className="flex-1 space-y-2">
+                <input
+                  type="text"
+                  value={form.avatar}
+                  onChange={(e) => set("avatar")(e.target.value)}
+                  placeholder="https://… or /api/uploads/abc.jpg"
+                  data-testid="admin-testimonial-avatar-url"
+                  className="w-full bg-[#f1ece9] border border-[#e3dcd5] px-3 py-2.5 text-sm text-[#1f444c] focus:outline-none focus:border-[#1f444c]"
+                />
+                <label className="inline-flex items-center gap-2 text-xs text-[#1f444c] cursor-pointer hover:text-[#a45f1a]">
+                  <Upload size={14} />
+                  <span className="tracking-[0.18em] uppercase">Upload image</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (f) handleAvatarUpload(f);
+                    }}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <TextField
+            label="Display order"
+            type="number"
+            value={form.sort_order}
+            onChange={(v) => set("sort_order")(Number(v) || 0)}
+          />
+
+          <div className="md:col-span-2 flex justify-end gap-3 pt-4 border-t border-[#e3dcd5] mt-2">
+            <button
+              type="button"
+              onClick={onCancel}
+              className="btn-outline px-5 py-2.5 text-xs tracking-[0.18em] uppercase"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={busy}
+              data-testid="admin-save-testimonial"
+              className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 text-xs tracking-[0.18em] uppercase"
+            >
+              {busy ? (
+                <Loader2 size={14} className="animate-spin" />
+              ) : (
+                <Save size={14} />
+              )}
+              {isEdit ? "Save changes" : "Create"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function ConfirmDialog({
+  title,
+  body,
+  confirmLabel = "Confirm",
+  onCancel,
+  onConfirm,
+  busy,
+  testId,
+}) {
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-6">
+      <div className="bg-[#f1ece9] w-full max-w-md p-8 border border-[#e3dcd5]">
+        <h3 className="font-serif text-2xl text-[#1f444c]">{title}</h3>
+        <p className="mt-3 text-sm text-[#1f444c]/80">{body}</p>
+        <div className="mt-8 flex justify-end gap-3">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="btn-outline px-5 py-2.5 text-xs tracking-[0.18em] uppercase"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            disabled={busy}
+            data-testid={testId}
+            className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 text-xs tracking-[0.18em] uppercase"
+          >
+            {busy ? <Loader2 size={14} className="animate-spin" /> : null}
+            {confirmLabel}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

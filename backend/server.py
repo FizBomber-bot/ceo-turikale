@@ -297,6 +297,36 @@ class Category(BaseModel):
     count: int
 
 
+class TestimonialBase(BaseModel):
+    quote: str = Field(min_length=1, max_length=2000)
+    quote_id: str = ""
+    name: str = Field(min_length=1, max_length=120)
+    name_id: str = ""
+    role: str = Field(default="", max_length=160)
+    role_id: str = ""
+    avatar: str = ""
+    sort_order: int = 0
+
+
+class TestimonialCreate(TestimonialBase):
+    pass
+
+
+class TestimonialUpdate(BaseModel):
+    quote: Optional[str] = None
+    quote_id: Optional[str] = None
+    name: Optional[str] = None
+    name_id: Optional[str] = None
+    role: Optional[str] = None
+    role_id: Optional[str] = None
+    avatar: Optional[str] = None
+    sort_order: Optional[int] = None
+
+
+class Testimonial(TestimonialBase):
+    id: str
+
+
 CATEGORIES = [
     {"id": "all", "label": "All Work"},
     {"id": "strategic-partnerships", "label": "Strategic Partnerships"},
@@ -304,6 +334,40 @@ CATEGORIES = [
     {"id": "market-expansion", "label": "Market Expansion"},
     {"id": "client-success", "label": "Client Success"},
     {"id": "gtm-strategy", "label": "GTM Strategy"},
+]
+
+
+DEFAULT_TESTIMONIALS = [
+    {
+        "quote": "Andry rebuilt my business from the ground up — legal entity, books, branding and the first real sales pipeline. Six months in I finally felt like I was running a company, not a side hustle.",
+        "quote_id": "Andry membangun ulang bisnis saya dari nol — badan hukum, pembukuan, branding, dan pipeline penjualan pertama yang nyata. Enam bulan kemudian saya akhirnya merasa benar-benar menjalankan perusahaan, bukan sekadar sampingan.",
+        "name": "SME Owner",
+        "name_id": "Pemilik UKM",
+        "role": "TKMP 2024 cohort, Bandung",
+        "role_id": "Peserta TKMP 2024, Bandung",
+        "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=srgb&fm=jpg&w=400&q=85",
+        "sort_order": 10,
+    },
+    {
+        "quote": "As facilitator for our regional cohort, Andry didn't just deliver the curriculum — he stayed close to every founder until the playbook actually worked in their market.",
+        "quote_id": "Sebagai fasilitator kohort regional kami, Andry bukan sekadar menyampaikan materi — ia mendampingi setiap founder hingga playbook itu benar-benar berjalan di pasar mereka.",
+        "name": "Programme Lead",
+        "name_id": "Penanggung Jawab Program",
+        "role": "Gerakan UMKM Jualan Online",
+        "role_id": "Gerakan UMKM Jualan Online",
+        "avatar": "https://images.unsplash.com/photo-1676989880361-091e12efc056?crop=entropy&cs=srgb&fm=jpg&w=400&q=85",
+        "sort_order": 20,
+    },
+    {
+        "quote": "The merchant onboarding sprint was the smoothest week our team has ever run. 121 merchants live in five days, and the local community has stayed active ever since.",
+        "quote_id": "Sprint onboarding mitra dagang itu menjadi minggu paling mulus yang pernah dijalankan tim kami. 121 mitra aktif dalam lima hari, dan komunitas lokalnya tetap aktif sampai sekarang.",
+        "name": "Channel Partner",
+        "name_id": "Mitra Channel",
+        "role": "Bukalapak × GrabFood — South Sulawesi",
+        "role_id": "Bukalapak × GrabFood — Sulawesi Selatan",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+        "sort_order": 30,
+    },
 ]
 
 
@@ -643,6 +707,7 @@ async def on_startup():
     await db.users.create_index("email", unique=True)
     await db.login_attempts.create_index("identifier")
     await db.case_studies.create_index("id", unique=True)
+    await db.testimonials.create_index("id", unique=True)
 
     # Admin seeding (idempotent — keep hash in sync with .env)
     existing = await db.users.find_one({"email": ADMIN_EMAIL})
@@ -706,6 +771,12 @@ async def on_startup():
                 prof_missing["stats"] = updated_stats
         if prof_missing:
             await db.profile.update_one({"_id": "site"}, {"$set": prof_missing})
+
+    # Testimonial seeding — only insert defaults if empty (admin-managed afterwards)
+    if await db.testimonials.count_documents({}) == 0:
+        await db.testimonials.insert_many(
+            [{"id": str(uuid.uuid4())[:8], **t} for t in DEFAULT_TESTIMONIALS]
+        )
 
 
 @app.on_event("shutdown")
@@ -847,6 +918,16 @@ async def download_cv():
     return FileResponse(pdf_path, media_type="application/pdf", filename="Andry_Ridwan_CV.pdf")
 
 
+@api_router.get("/testimonials", response_model=List[Testimonial])
+async def list_testimonials_public():
+    docs = (
+        await db.testimonials.find({}, {"_id": 0})
+        .sort([("sort_order", 1)])
+        .to_list(500)
+    )
+    return docs
+
+
 # ---------------- Admin routes ----------------
 admin_router = APIRouter(prefix="/api/admin")
 
@@ -954,6 +1035,55 @@ async def admin_delete_contact(cid: str, _: dict = Depends(get_current_user)):
     res = await db.contact_submissions.delete_one({"id": cid})
     if res.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Submission not found")
+    return {"ok": True}
+
+
+# ---- Testimonials (admin) ----
+@admin_router.get("/testimonials", response_model=List[Testimonial])
+async def admin_list_testimonials(_: dict = Depends(get_current_user)):
+    return (
+        await db.testimonials.find({}, {"_id": 0})
+        .sort([("sort_order", 1)])
+        .to_list(500)
+    )
+
+
+@admin_router.post("/testimonials", response_model=Testimonial, status_code=201)
+async def admin_create_testimonial(
+    payload: TestimonialCreate, _: dict = Depends(get_current_user)
+):
+    new_id = str(uuid.uuid4())[:8]
+    doc = payload.model_dump()
+    doc["id"] = new_id
+    if not doc.get("sort_order"):
+        last = await db.testimonials.find_one({}, sort=[("sort_order", -1)])
+        doc["sort_order"] = ((last or {}).get("sort_order", 0)) + 10
+    await db.testimonials.insert_one(doc)
+    saved = await db.testimonials.find_one({"id": new_id}, {"_id": 0})
+    return saved
+
+
+@admin_router.put("/testimonials/{tid}", response_model=Testimonial)
+async def admin_update_testimonial(
+    tid: str,
+    payload: TestimonialUpdate,
+    _: dict = Depends(get_current_user),
+):
+    existing = await db.testimonials.find_one({"id": tid})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Testimonial not found")
+    data = {k: v for k, v in payload.model_dump().items() if v is not None}
+    if data:
+        await db.testimonials.update_one({"id": tid}, {"$set": data})
+    saved = await db.testimonials.find_one({"id": tid}, {"_id": 0})
+    return saved
+
+
+@admin_router.delete("/testimonials/{tid}")
+async def admin_delete_testimonial(tid: str, _: dict = Depends(get_current_user)):
+    res = await db.testimonials.delete_one({"id": tid})
+    if res.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Testimonial not found")
     return {"ok": True}
 
 
