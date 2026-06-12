@@ -1,45 +1,52 @@
-# Andry Ridwan — Senior BD Portfolio
+# Andry Ridwan Portfolio — PRD
 
-## Problem Statement
-Professional, interactive portfolio for a senior Business Development specialist with work gallery, category filters, contact form, CV download — plus a self-serve admin panel.
+## Original Problem Statement
+> Continue building my website from GitHub; focus on the admin page. Make the testimonial/endorsement section editable by the admin.
 
-## User Identity (live)
-- Name: Andry Ridwan
-- Title: Business Development & SME Growth Mentor
-- Location: Maros · South Sulawesi, Indonesia
-- Email: ndriyconnect@gmail.com  ·  Phone: +62 823 4657 3790
-- Instagram: @andry_ridwan  ·  Company: turikaleprint.space  ·  Google Maps: live
-- Programmes & partners (marquee): Kemenkop RI, Ministry of Manpower, Kominfo, Google Gapura Digital, Bukalapak, GrabFood, Bank Indonesia (Bootcamp), NextDev Academy by Telkomsel (Bootcamp), AIDU EdTech (Co-founded), Turikale Print (Owner)
+Source code pulled from `https://github.com/FizBomber-bot/Porto-Biz-Dev.git`. The empty repo at `BizDevPortoAndry` was a red herring; the actual code lives in `Porto-Biz-Dev`.
 
-## Architecture
-- **Backend** (FastAPI + MongoDB): MongoDB-backed profile + 7 case studies (seeded on startup, idempotent). Auth via JWT in httpOnly cookies (secure + samesite=none). Bcrypt password hashing. Brute-force lockout keyed on email (defends against rotating ingress IPs) with per-IP defense-in-depth.
-- **Frontend** (React + Tailwind + shadcn/ui + lenis + react-query): editorial luxury-minimal single-page portfolio at `/`. Admin SPA at `/admin/login` and `/admin` (protected).
-- **Uploads** mounted at `/api/uploads/*` (StaticFiles). CV PDF served at `/api/cv`.
+## Stack & Architecture
+- **Backend**: FastAPI + Motor (MongoDB) — bilingual content, cookie-based JWT (httpOnly access + refresh), bcrypt, brute-force lockout, image/CV uploads.
+- **Frontend**: React 19 + Tailwind + react-query + sonner + lucide-react. Auth via `withCredentials: true` (cookies); no localStorage tokens.
+- **Bilingual (EN / ID)** content across profile, case studies, and now testimonials.
 
-## Public Endpoints (unchanged contract)
-GET /api/profile · /api/categories · /api/case-studies?category= · /api/case-studies/{id} · /api/cv · POST /api/contact
+## What's Implemented (incremental — 2026-06-12)
+### Existing on GitHub (ported in)
+- Public site: Hero, ClientMarquee, NowRunning, About, Services, Gallery, Experience, **Testimonials**, Contact, Footer
+- Admin dashboard tabs: Photos & CV, Profile, Case Studies, Messages
+- Auth: `POST /api/auth/login`, `/logout`, `/me`, `/refresh`
+- CV download endpoint, image uploads
 
-## Admin Endpoints (cookie auth)
-POST /api/auth/login · POST /api/auth/logout · GET /api/auth/me · POST /api/auth/refresh
-GET/PUT /api/admin/profile
-GET/POST /api/admin/case-studies · PUT/DELETE /api/admin/case-studies/{id}
-POST /api/admin/upload/image (multipart) · POST /api/admin/upload/cv (multipart)
-GET/DELETE /api/admin/contacts[/{id}]
+### NEW in this session
+- **Testimonials are now admin-editable end-to-end**:
+  - Backend models `TestimonialBase/Create/Update/Testimonial` with bilingual fields (`quote/quote_id`, `name/name_id`, `role/role_id`, `avatar`, `sort_order`).
+  - Public route: `GET /api/testimonials` (sorted by `sort_order`).
+  - Admin routes: `GET/POST/PUT/DELETE /api/admin/testimonials(/{id})`.
+  - Startup seed of 3 bilingual testimonials only when the collection is empty.
+  - Mongo index on `testimonials.id`.
+- **Admin UI**: new "Testimonials" tab in `AdminDashboard.jsx` with list cards, full bilingual form dialog (EN + ID for quote/name/role), avatar URL + upload, sort_order, delete confirmation modal.
+- **Public Testimonials component** now fetches from `GET /api/testimonials` and falls back to the static `@/data/site` array. Avatar frame doubled from `h-14 w-14` (56 px) to `h-28 w-28` (**112 px** — the user-requested 2× size). Verified via bounding box in the testing agent.
 
-## Admin Dashboard (`/admin`)
-Four tabs:
-1. Photos & CV — hero portrait upload, CV PDF upload, per-case-study cover image upload
-2. Profile — name/title/location/email/phone/socials/intro, bio paragraphs, headline stats
-3. Case Studies — list/edit/create/delete; full field editor (title, subtitle, summary, challenge, approach[], outcomes[], metrics[], tags[], year, client, category, sort_order, cover_image)
-4. Messages — inbound contact submissions with delete
+## Test Results (iteration_4)
+- Backend: **16/16 PASS** — `/app/backend/tests/test_testimonials.py` covers auth, public list, admin CRUD, 401 guards, 404 paths, regression.
+- Frontend: **12/12 PASS** — public site, 112 × 112 avatar assertion, carousel cycling, full admin login → tab → create → edit → delete → logout.
 
-## Tests
-- /app/backend/tests/test_portfolio_api.py — 28 tests, 28/28 passing after lockout fix
-- /app/test_reports/iteration_2.json — full report
+## Test Credentials
+- Email: `admin@example.com`
+- Password: `admin123`
+(seeded from `/app/backend/.env`; documented in `/app/memory/test_credentials.md`).
 
-## Backlog / Next
-- P1: Email notifications on new contact submission (Resend / SendGrid)
-- P1: Admin editing for Services / Experience / Testimonials (still defaults in data/site.js)
-- P2: Per-case-study deep-link URLs (/work/:id) + SEO meta
-- P2: Password change UI for admin (currently env-driven)
-- P2: Analytics + lead-source capture on contact form
+## Known / Backlog
+- **P2 (non-blocking)**: A few components (Hero portrait, case study cover image, etc.) render `<img src={maybeEmpty} />` unconditionally, producing an `An empty string ('') was passed to the src attribute` warning when content is missing. Pre-existing in the imported repo; not introduced by this session's work.
+- **P2**: Older test files (`test_portfolio_api.py`, `test_bilingual.py`) reference an obsolete admin credential pair (`ndriyconnect@gmail.com / TurikalePrint2026!`) from a different deployment. Update their constants before reusing them.
+- **P3**: Two harmless 401 console errors on first paint of `/admin/login` come from the `/api/auth/me` probe — could be silenced by skipping the probe on the login route.
+
+## File Map (key edits this session)
+- `/app/backend/server.py` — Testimonial models, default data, startup seed, public + admin routes.
+- `/app/frontend/src/lib/api.js` — `fetchTestimonials`, `adminListTestimonials`, `adminCreateTestimonial`, `adminUpdateTestimonial`, `adminDeleteTestimonial`.
+- `/app/frontend/src/components/site/Testimonials.jsx` — API-backed, 2× avatar.
+- `/app/frontend/src/pages/admin/AdminDashboard.jsx` — new `TestimonialsTab` + `TestimonialFormDialog` + `ConfirmDialog`, tab added to `TABS`.
+
+## Next Action Items
+- (Optional) Quick guard on `<img src>` empty strings across imported components.
+- (Optional) Auto-translate untouched ID fields when EN is updated, to keep the bilingual UX in sync.
